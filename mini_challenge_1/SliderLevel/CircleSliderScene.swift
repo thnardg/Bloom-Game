@@ -24,7 +24,7 @@ class CircleSliderScene: SKScene {
         slider = UISlider(frame: CGRect(x: 0, y: 0, width: 300, height: 20))
         // Slider horizontal: slider.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height - 50)
         slider.center = CGPoint(x: view.frame.size.width - 60, y: view.frame.size.height / 2)
-        slider.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2) // Rotaciona o slider em 90º
+        slider.transform = CGAffineTransform(rotationAngle: CGFloat.pi / -2) // Rotaciona o slider em 90º
         slider.minimumValue = 10
         slider.maximumValue = 100
         slider.value = 55 // Meio do slider
