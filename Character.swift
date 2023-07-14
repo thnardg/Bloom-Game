@@ -6,4 +6,8 @@
 //
 
 import Foundation
-import
+import SpriteKit
+
+class Character: SKNode{
+    
+}
