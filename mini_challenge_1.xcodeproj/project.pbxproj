@@ -20,6 +20,7 @@
 		2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */; };
 		2F3CE9922A61BC55004F5FF0 /* CircleSliderScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */; };
 		2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */; };
+		B32B4AAD2A61C19D00031DA0 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AAC2A61C19D00031DA0 /* Character.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSliderScene.swift; sourceTree = "<group>"; };
 		2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CircleSliderScene.sks; sourceTree = "<group>"; };
 		2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CircleGlowScene.sks; sourceTree = "<group>"; };
+		B32B4AAC2A61C19D00031DA0 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		2F3CE9832A61BAFF004F5FF0 /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				B32B4AAC2A61C19D00031DA0 /* Character.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			files = (
 				2F3281902A61B89C00456E61 /* GameScene.swift in Sources */,
 				2F3CE9892A61BBD2004F5FF0 /* TextScene.swift in Sources */,
+				B32B4AAD2A61C19D00031DA0 /* Character.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
