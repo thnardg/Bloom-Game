@@ -10,11 +10,12 @@ import GameplayKit
 class TextScene: SKScene {
     
         private var label: SKLabelNode!
+        var lastPhrase = false
         
         override func didMove(to view: SKView) {
 
             label = SKLabelNode(fontNamed: "Futura")
-            label.text = "Você é um grão flutuando no espaço" // Separar os textos em outro arquivo
+            label.text = "Você é um grão flutuando no espaço. No vazio você vê uma luz. O que ela quer te dizer?" // Separar os textos em outro arquivo
             label.fontColor = SKColor.white
             label.position = CGPoint(x: frame.midX, y: frame.midY)
             addChild(label)
@@ -32,8 +33,10 @@ class TextScene: SKScene {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     let circleGlowScene = SKScene(fileNamed: "CircleGlowScene")
-        self.view?.presentScene(circleGlowScene)
+        if lastPhrase == true {
+            let circleGlowScene = SKScene(fileNamed: "CircleGlowScene")
+            self.view?.presentScene(circleGlowScene)
+        }
     }
 }
 
