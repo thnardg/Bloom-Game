@@ -10,12 +10,13 @@ import GameplayKit
 class TextScene: SKScene {
     
         private var label: SKLabelNode!
-        var lastPhrase = false
+        var lastPhrase = true
+        let cutsceneText = ["Você é um grão", "No vazio você vê uma luz", "O que ela quer te dizer?"]
         
         override func didMove(to view: SKView) {
 
             label = SKLabelNode(fontNamed: "Futura")
-            label.text = "Você é um grão flutuando no espaço. No vazio você vê uma luz. O que ela quer te dizer?" // Separar os textos em outro arquivo
+            label.text = cutsceneText.first // Separar os textos em outro arquivo
             label.fontColor = SKColor.white
             label.position = CGPoint(x: frame.midX, y: frame.midY)
             addChild(label)
@@ -30,7 +31,7 @@ class TextScene: SKScene {
             let fadeSequence = SKAction.sequence([waitAction, fadeInAction])
             label.run(fadeSequence)
         }
-
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if lastPhrase == true {
