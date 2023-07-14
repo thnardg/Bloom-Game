@@ -38,7 +38,7 @@
 		2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSliderScene.swift; sourceTree = "<group>"; };
 		2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CircleSliderScene.sks; sourceTree = "<group>"; };
 		2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CircleGlowScene.sks; sourceTree = "<group>"; };
-		B32B4AAE2A61C68C00031DA0 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = SOURCE_ROOT; };
+		B32B4AAE2A61C68C00031DA0 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Character.swift; path = mini_challenge_1/Character/Character.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
