@@ -148,7 +148,7 @@
 		2F3CE9852A61BB16004F5FF0 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
-				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
+				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */
 			);
 			path = HUD;
 			sourceTree = "<group>";
