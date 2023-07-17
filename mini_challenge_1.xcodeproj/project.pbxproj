@@ -20,8 +20,7 @@
 		2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */; };
 		2F3CE9922A61BC55004F5FF0 /* CircleSliderScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */; };
 		2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */; };
-		2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /*
-            GameHUD.swift */; };
+		2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */; };
 		2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */; };
 		2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F52A61E1410093EDC5 /* VisualEffects.swift */; };
 		2FF878F82A61E1540093EDC5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F72A61E1540093EDC5 /* Components.swift */; };
@@ -144,7 +143,6 @@
 		2F3CE9852A61BB16004F5FF0 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
-				B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */,
 				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
 			);
 			path = HUD;
