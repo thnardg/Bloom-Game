@@ -25,10 +25,6 @@
 		2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F52A61E1410093EDC5 /* VisualEffects.swift */; };
 		2FF878F82A61E1540093EDC5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F72A61E1540093EDC5 /* Components.swift */; };
 		B32B4AAF2A61C68C00031DA0 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AAE2A61C68C00031DA0 /* Character.swift */; };
-		B32B4AB32A61E43C00031DA0 /* Level01Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AB22A61E43C00031DA0 /* Level01Scene.swift */; };
-		B32B4AB52A61E45500031DA0 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AB42A61E45500031DA0 /* VisualEffects.swift */; };
-		B32B4AB72A61E47800031DA0 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AB62A61E47800031DA0 /* Components.swift */; };
-		B32B4AB92A61E48A00031DA0 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AB82A61E48A00031DA0 /* GameHUD.swift */; };
 		B32B4AC62A65AA4500031DA0 /* SkButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */; };
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
 		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
@@ -54,10 +50,6 @@
 		2FF878F52A61E1410093EDC5 /* VisualEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
 		2FF878F72A61E1540093EDC5 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		B32B4AAE2A61C68C00031DA0 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Character.swift; path = mini_challenge_1/Character/Character.swift; sourceTree = SOURCE_ROOT; };
-		B32B4AB22A61E43C00031DA0 /* Level01Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level01Scene.swift; sourceTree = "<group>"; };
-		B32B4AB42A61E45500031DA0 /* VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
-		B32B4AB62A61E47800031DA0 /* Components.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
-		B32B4AB82A61E48A00031DA0 /* GameHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHUD.swift; sourceTree = "<group>"; };
 		B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkButtonNode.swift; sourceTree = "<group>"; };
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
 		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
@@ -148,7 +140,7 @@
 		2F3CE9852A61BB16004F5FF0 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
-				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */
+				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
 			);
 			path = HUD;
 			sourceTree = "<group>";
@@ -266,15 +258,11 @@
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
 				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
-				B32B4AB32A61E43C00031DA0 /* Level01Scene.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */,
-				B32B4AB92A61E48A00031DA0 /* GameHUD.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
 				B32B4AC62A65AA4500031DA0 /* SkButtonNode.swift in Sources */,
-				B32B4AB72A61E47800031DA0 /* Components.swift in Sources */,
 				B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */,
 				2F3CE98E2A61BC27004F5FF0 /* CircleGlowScene.swift in Sources */,
-				B32B4AB52A61E45500031DA0 /* VisualEffects.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
