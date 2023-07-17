@@ -10,7 +10,7 @@ import GameplayKit
 class TextScene: SKScene {
     
         private var label: SKLabelNode!
-        var lastPhrase = false
+        var lastPhrase = true
         
         override func didMove(to view: SKView) {
 
