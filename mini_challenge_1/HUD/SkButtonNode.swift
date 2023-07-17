@@ -11,7 +11,6 @@ class SkButtonNode:  SKNode {
         self.label = label
         
         super.init()
-//        self.isUserInteractionEnabled = true
         
         if let image = image {
             addChild(image)
