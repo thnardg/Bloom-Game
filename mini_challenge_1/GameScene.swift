@@ -20,6 +20,7 @@ class GameScene: SKScene {
         addChild(label)
     }
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
      let textScene = SKScene(fileNamed: "TextScene")
         self.view?.presentScene(textScene)
