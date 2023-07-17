@@ -20,7 +20,8 @@
 		2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */; };
 		2F3CE9922A61BC55004F5FF0 /* CircleSliderScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */; };
 		2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */; };
-		2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */; };
+		2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /*
+            GameHUD.swift */; };
 		2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */; };
 		2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F52A61E1410093EDC5 /* VisualEffects.swift */; };
 		2FF878F82A61E1540093EDC5 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F72A61E1540093EDC5 /* Components.swift */; };
@@ -28,6 +29,7 @@
 		B32B4AC62A65AA4500031DA0 /* SkButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */; };
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
 		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
+		B32B4ACE2A65D26A00031DA0 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4ACD2A65D26A00031DA0 /* Preview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,7 @@
 		B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkButtonNode.swift; sourceTree = "<group>"; };
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
 		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
+		B32B4ACD2A65D26A00031DA0 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,7 @@
 		2F32817D2A61B89B00456E61 = {
 			isa = PBXGroup;
 			children = (
+				B32B4ACD2A65D26A00031DA0 /* Preview.swift */,
 				2F3281882A61B89C00456E61 /* mini_challenge_1 */,
 				2F3281962A61B89C00456E61 /* Assets.xcassets */,
 				2F3281872A61B89C00456E61 /* Products */,
@@ -140,6 +144,7 @@
 		2F3CE9852A61BB16004F5FF0 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
+				B32B4AC52A65AA4500031DA0 /* SkButtonNode.swift */,
 				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
 			);
 			path = HUD;
@@ -258,6 +263,7 @@
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
 				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
+				B32B4ACE2A65D26A00031DA0 /* Preview.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* CircleSliderScene.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
 				B32B4AC62A65AA4500031DA0 /* SkButtonNode.swift in Sources */,
@@ -409,7 +415,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NK77GDR8W7;
+				DEVELOPMENT_TEAM = KV78S9S54R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -437,7 +443,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = NK77GDR8W7;
+				DEVELOPMENT_TEAM = KV78S9S54R;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
