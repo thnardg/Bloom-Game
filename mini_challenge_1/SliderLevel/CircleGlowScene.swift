@@ -40,10 +40,10 @@ class CircleGlowScene: SKScene {
         
         circle.run(repeatForever)
     }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
      let circleSliderScene = SKScene(fileNamed: "CircleSliderScene")
         self.view?.presentScene(circleSliderScene)
     }
 }
-
