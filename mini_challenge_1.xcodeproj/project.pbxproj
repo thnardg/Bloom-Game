@@ -169,10 +169,10 @@
 		2F3CE98C2A61BC0E004F5FF0 /* SliderLevel */ = {
 			isa = PBXGroup;
 			children = (
-				2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */,
 				2F3CE98D2A61BC27004F5FF0 /* CircleGlowScene.swift */,
-				2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */,
+				2F3CE9932A61BC6C004F5FF0 /* CircleGlowScene.sks */,
 				2F3CE98F2A61BC36004F5FF0 /* CircleSliderScene.swift */,
+				2F3CE9912A61BC55004F5FF0 /* CircleSliderScene.sks */,
 			);
 			path = SliderLevel;
 			sourceTree = "<group>";
