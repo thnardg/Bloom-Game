@@ -9,11 +9,10 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    
     private var label: SKLabelNode!
     
     override func didMove(to view: SKView) {
-        
-        
         label = SKLabelNode(fontNamed: "Futura")
         label.text = "tela inicial"
         label.fontColor = SKColor.white

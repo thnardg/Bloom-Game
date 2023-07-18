@@ -84,7 +84,7 @@ class CircleSliderScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     let gameScene = SKScene(fileNamed: "gameScene")
+     let gameScene = SKScene(fileNamed: "GameScene")
         self.view?.presentScene(gameScene)
         slider.removeFromSuperview()
     }
