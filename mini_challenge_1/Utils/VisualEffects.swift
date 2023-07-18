@@ -14,7 +14,7 @@ extension SKSpriteNode {
         effectNode.shouldRasterize = true
         addChild(effectNode)
         let effect = SKSpriteNode(texture: texture)
-        effect.color = .cyan // Mudar para .self.color
+        effect.color = .white
         effect.size = self.size
         effect.colorBlendFactor = 1
         effectNode.addChild(effect)
