@@ -8,21 +8,6 @@
 import SpriteKit
 import GameplayKit
 
-// Cria um efeito de brilho para ser aplicado em qualquer SKSpriteNode. Mudar para a pasta utils?
-extension SKSpriteNode {
-    func addGlow(radius: Float = 30) {
-        let effectNode = SKEffectNode()
-        effectNode.shouldRasterize = true
-        addChild(effectNode)
-        let effect = SKSpriteNode(texture: texture)
-        effect.color = .cyan // Mudar para .self.color
-        effect.size = self.size
-        effect.colorBlendFactor = 1
-        effectNode.addChild(effect)
-        effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
-    }
-}
-
 class CircleGlowScene: SKScene {
     
     override func didMove(to view: SKView) {
