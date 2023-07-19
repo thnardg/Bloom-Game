@@ -21,6 +21,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     
     // defining state machine
     var state: GKStateMachine?
+    let shape = SKSpriteNode(color: .white, size: CGSize(width: 50, height: 100))
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         createMoveButtons() // self-explanatory
@@ -30,6 +31,9 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
             addChild(camera) // adding camera to scene
         }
         self.addChild(player) // adding player to scene
+        
+        addChild(shape)
+        
     }
     
     func createMoveButtons() { // creating and customizing the move buttons
@@ -63,8 +67,10 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         state?.update(deltaTime: currentTime) // calling the character's state machine update func
         
+        shape.position = player.position
+        
         if let camera = cameraNode{ // safe unwrapping the camera node
-        camera.run(.move(to: player.position, duration: 0.5))
+            camera.run(.group([.moveTo(x: player.position.x, duration: 0.5), .moveTo(y: player.position.y, duration: 0)]))
             
             // fixing buttons to the camera
         moveLeftButton?.position.x = camera.position.x - 300
@@ -124,7 +130,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     
     func didBegin(_ contact: SKPhysicsContact) { // on contact detection
         if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
-            player.jumped = 0 // resetting the jump count so that the player can jump again
+            player.jumped = 1 // resetting the jump count so that the player can jump again
         }
     }
 }
