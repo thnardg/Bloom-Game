@@ -10,7 +10,18 @@ class JumpState: GKState{
     }
     
     override func didEnter(from previousState: GKState?) {
-
+        let direction = (player.xScale == -1 ? (player.speed ) * -10 : (player.speed ) * 10)
+        let height = (player.size.height * 0.88) * 2
+        
+        print(player.size.height)
+        
+        if player.jumped <= player.jumpLimit {
+            if player.jumped == 2{
+                player.physicsBody?.isResting = true
+            }
+            player.physicsBody?.applyImpulse(CGVector(dx: direction, dy: height))
+            player.jumped += 1
+        }
     }
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass{
@@ -21,14 +32,6 @@ class JumpState: GKState{
         }
     }
     override func update(deltaTime seconds: TimeInterval) {
-        
-        let direction = (player.xScale == -1 ? (player.speed ) * -10 : (player.speed ) * 10)
-        let height = (player.size.height ) * 1
-        
-        if player.jumped <= player.jumpLimit {
-            player.physicsBody?.applyImpulse(CGVector(dx: direction, dy: height))
-            player.jumped += 1
-        }
         
     }
 }
