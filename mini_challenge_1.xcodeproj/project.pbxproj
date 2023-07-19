@@ -151,8 +151,8 @@
 		2F3CE9862A61BB1C004F5FF0 /* Level01 */ = {
 			isa = PBXGroup;
 			children = (
-				2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */,
 				B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */,
+				2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */,
 			);
 			path = Level01;
 			sourceTree = "<group>";
