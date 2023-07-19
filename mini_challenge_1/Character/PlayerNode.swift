@@ -16,13 +16,13 @@ class PlayerNode: SKSpriteNode {
                         SKTexture(imageNamed: "im8")
     ]
     var jumpLimit = 2
-    var jumped = 0
+    var jumped = 1
     var animationFrameTime = 0.6
     var state: GKStateMachine?
     
     init() {
         let texture = SKTexture(imageNamed: "im1")
-        let size = CGSize(width: 70, height: 150)
+        let size = CGSize(width: 50, height: 100)
         let speed = 5.0
         super.init(texture: texture, color: .clear, size: size)
         self.speed = speed

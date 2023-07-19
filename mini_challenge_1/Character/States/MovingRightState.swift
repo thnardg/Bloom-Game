@@ -21,7 +21,14 @@ class MovingRightState: GKState{
         
     }
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return true
+        switch stateClass{
+        case is IdleState.Type:
+            return true
+        case is JumpState.Type:
+            return true
+        default:
+            return false
+        }
     }
     override func update(deltaTime seconds: TimeInterval) {
         let run = SKAction.run {
