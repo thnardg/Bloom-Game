@@ -7,10 +7,9 @@
 
 import Foundation
 import SpriteKit
+import GameplayKit
 
-class Level01Scene: SKScene {
-    var character: SKSpriteNode!
-    
+class Level01Scene: GameScene, SKPhysicsContactDelegate {
     var moveLeftButton: SkButtonNode!
     var moveRightButton: SkButtonNode!
     var jumpButton: SkButtonNode!
@@ -20,13 +19,17 @@ class Level01Scene: SKScene {
     var isMovingRight = false
     var cameraNode: SKCameraNode!
     
+    
+    var state: GKStateMachine?
+    
     override func didMove(to view: SKView) {
         createMoveButtons()
         cameraNode = SKCameraNode()
         self.camera = cameraNode
         addChild(cameraNode)
+        self.addChild(player)
         
-        character = childNode(withName: "player") as? SKSpriteNode
+//        character = childNode(withName: "player") as? SKSpriteNode
         
     }
     
@@ -48,31 +51,41 @@ class Level01Scene: SKScene {
     }
     
     func jumpCharacter() {
-        character.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
+        player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
     }
     
     
     override func update(_ currentTime: TimeInterval) {
-        let characterSpeed: CGFloat = 5.0
-        
-        if isMovingLeft {
-            character.position.x -= characterSpeed
-        } else if isMovingRight {
-            character.position.x += characterSpeed
-        }
+//        let characterSpeed: CGFloat = 5.0
+//
+//        if isMovingLeft {
+//            character.position.x -= characterSpeed
+//        } else if isMovingRight {
+//            character.position.x += characterSpeed
+//        }
+        state?.update(deltaTime: currentTime)
         
         if let camera = cameraNode {
-                camera.position = character.position
+                camera.position = player.position
         }
         
-        moveLeftButton.position.x = character.position.x - 300
-        moveLeftButton.position.y = character.position.y - 100
-        moveRightButton.position.x = character.position.x - 200
-        moveRightButton.position.y = character.position.y - 100
-        jumpButton.position.x = character.position.x  + 300
-        jumpButton.position.y = character.position.y - 100
-        returnButton.position.x = character.position.x - 0
-        returnButton.position.y = character.position.y + 150
+        moveLeftButton.position.x = player.position.x - 300
+        moveLeftButton.position.y = player.position.y - 100
+        moveRightButton.position.x = player.position.x - 200
+        moveRightButton.position.y = player.position.y - 100
+        jumpButton.position.x = player.position.x  + 300
+        jumpButton.position.y = player.position.y - 100
+        returnButton.position.x = player.position.x - 0
+        returnButton.position.y = player.position.y + 150
+    }
+    
+    override func sceneDidLoad() {
+        super.sceneDidLoad()
+        
+        physicsWorld.contactDelegate = self
+        
+        state = GKStateMachine(states: [DeadState(gameScene: self), IdleState(gameScene: self), JumpState(gameScene: self), MovingLeftState(gameScene: self), MovingRightState(gameScene: self)])
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -80,16 +93,19 @@ class Level01Scene: SKScene {
         
         let touchLocation = touch.location(in: self)
         
-        if moveLeftButton.contains(touchLocation) {
-            isMovingLeft = true
-           
-            character.xScale = -1
-        } else if moveRightButton.contains(touchLocation) {
-            isMovingRight = true
-          
-            character.xScale = 1
+        if moveLeftButton.contains(touchLocation) { // if clicking left button
+            
+            state?.enter(MovingLeftState.self)
+            player.xScale = -1
+            
+        } else if moveRightButton.contains(touchLocation) { // if clicking right button
+            
+            state?.enter(MovingRightState.self)
+            player.xScale = 1
+            
         } else if jumpButton.contains(touchLocation) {
-            jumpCharacter()
+            state?.enter(JumpState.self)
+//            jumpCharacter()
             
         } else if returnButton.contains(touchLocation){
             let gameScene = SKScene(fileNamed: "GameScene")
@@ -104,15 +120,23 @@ class Level01Scene: SKScene {
         
         let touchLocation = touch.location(in: self)
         
-        if moveLeftButton.contains(touchLocation) {
-            isMovingLeft = false
-            character.removeAllActions()
-            
-        } else if moveRightButton.contains(touchLocation) {
-            isMovingRight = false
-            character.removeAllActions()
-        }
+        state?.enter(IdleState.self)
+        
+//        if moveLeftButton.contains(touchLocation) {
+//            isMovingLeft = false
+//            player.removeAllActions()
+//
+//        } else if moveRightButton.contains(touchLocation) {
+//            isMovingRight = false
+//            player.removeAllActions()
+//        }
 
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
+            player.jumped = 0
+        }
     }
     
 }
