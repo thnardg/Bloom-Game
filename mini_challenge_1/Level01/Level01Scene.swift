@@ -9,134 +9,122 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class Level01Scene: GameScene, SKPhysicsContactDelegate {
-    var moveLeftButton: SkButtonNode!
-    var moveRightButton: SkButtonNode!
-    var jumpButton: SkButtonNode!
-    var returnButton: SkButtonNode!
+class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer level
+    // defining buttons
+    var moveLeftButton: SkButtonNode?
+    var moveRightButton: SkButtonNode?
+    var jumpButton: SkButtonNode?
+    var returnButton: SkButtonNode?
     
-    var isMovingLeft = false
-    var isMovingRight = false
-    var cameraNode: SKCameraNode!
+    // defining level camera
+    var cameraNode: SKCameraNode?
     
-    
+    // defining state machine
     var state: GKStateMachine?
     
-    override func didMove(to view: SKView) {
-        createMoveButtons()
-        cameraNode = SKCameraNode()
-        self.camera = cameraNode
-        addChild(cameraNode)
-        self.addChild(player)
-        
-//        character = childNode(withName: "player") as? SKSpriteNode
-        
+    override func didMove(to view: SKView) { // loaded when reaching the level
+        createMoveButtons() // self-explanatory
+        cameraNode = SKCameraNode() // defining custom camera as level camera
+        self.camera = cameraNode // defining custom camera as level camera
+        if let camera = cameraNode{
+            addChild(camera) // adding camera to scene
+        }
+        self.addChild(player) // adding player to scene
     }
     
-    func createMoveButtons() {
-        returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "return"))
+    func createMoveButtons() { // creating and customizing the move buttons
+        returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "return")) // creating return button (returns to game start)
        
-        addChild(returnButton)
-        
-        
-        jumpButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Up"))
-       
-        addChild(jumpButton)
-        
-        moveLeftButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Left"))
-        addChild(moveLeftButton)
-        
-        moveRightButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Right"))
-        addChild(moveRightButton)
-    }
-    
-    func jumpCharacter() {
-        player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-//        let characterSpeed: CGFloat = 5.0
-//
-//        if isMovingLeft {
-//            character.position.x -= characterSpeed
-//        } else if isMovingRight {
-//            character.position.x += characterSpeed
-//        }
-        state?.update(deltaTime: currentTime)
-        
-        if let camera = cameraNode {
-                camera.position = player.position
+        if let button = returnButton{
+            addChild(button) // adding return button to scene's node tree
         }
         
-        moveLeftButton.position.x = player.position.x - 300
-        moveLeftButton.position.y = player.position.y - 100
-        moveRightButton.position.x = player.position.x - 200
-        moveRightButton.position.y = player.position.y - 100
-        jumpButton.position.x = player.position.x  + 300
-        jumpButton.position.y = player.position.y - 100
-        returnButton.position.x = player.position.x - 0
-        returnButton.position.y = player.position.y + 150
+        
+        jumpButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Up")) // creating jump button for the player character
+       
+        if let button = jumpButton{
+            addChild(button) // adding it to the scene's node tree
+        }
+        
+        moveLeftButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Left")) // creating the move left button for the player character
+        
+        if let button = moveLeftButton{
+            addChild(button) // adding it to the scene's node tree
+        }
+        
+        moveRightButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Right")) // creating the move right button for the player character
+        
+        if let button = moveRightButton{
+            addChild(button) // adding it to the scene's node tree
+        }
+    }
+    
+    
+    override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
+        state?.update(deltaTime: currentTime) // calling the character's state machine update func
+        
+        if let camera = cameraNode{ // safe unwrapping the camera node
+        camera.run(.move(to: player.position, duration: 0.5))
+            
+            // fixing buttons to the camera
+        moveLeftButton?.position.x = camera.position.x - 300
+        moveLeftButton?.position.y = camera.position.y - 100
+        moveRightButton?.position.x = camera.position.x - 200
+        moveRightButton?.position.y = camera.position.y - 100
+        jumpButton?.position.x = camera.position.x  + 300
+        jumpButton?.position.y = camera.position.y - 100
+        returnButton?.position.x = camera.position.x - 0
+        returnButton?.position.y = camera.position.y + 150
+        }
     }
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
         
-        physicsWorld.contactDelegate = self
+        physicsWorld.contactDelegate = self // setting the world physics
         
-        state = GKStateMachine(states: [DeadState(gameScene: self), IdleState(gameScene: self), JumpState(gameScene: self), MovingLeftState(gameScene: self), MovingRightState(gameScene: self)])
-        
+        state = GKStateMachine(states: [DeadState(gameScene: self), IdleState(gameScene: self), JumpState(gameScene: self), MovingLeftState(gameScene: self), MovingRightState(gameScene: self)]) // defining states for the character
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
-        let touchLocation = touch.location(in: self)
+        let touchLocation = touch.location(in: self) // defining touch position
         
-        if moveLeftButton.contains(touchLocation) { // if clicking left button
+        // safe unwrapping button nodes
+        guard let moveLeftButton = moveLeftButton else { return }
+        guard let moveRightButton = moveRightButton else { return }
+        guard let jumpButton = jumpButton else { return }
+        guard let returnButton = returnButton else { return }
             
-            state?.enter(MovingLeftState.self)
-            player.xScale = -1
+        
+            if moveLeftButton.contains(touchLocation) { // if clicking left button
+            
+            state?.enter(MovingLeftState.self) // changing the player's state to match the button pressed
+            player.xScale = -1 // making the player face the desired direction
             
         } else if moveRightButton.contains(touchLocation) { // if clicking right button
             
-            state?.enter(MovingRightState.self)
-            player.xScale = 1
+            state?.enter(MovingRightState.self) // changing the player's state to match the button pressed
+            player.xScale = 1 // making the player face the desired direction
             
-        } else if jumpButton.contains(touchLocation) {
-            state?.enter(JumpState.self)
-//            jumpCharacter()
+        } else if jumpButton.contains(touchLocation) { // if clicking the jump button
+            state?.enter(JumpState.self) // changing the player's state to match the button pressed
             
-        } else if returnButton.contains(touchLocation){
+        } else if returnButton.contains(touchLocation){ // if clicking the return button
             let gameScene = SKScene(fileNamed: "GameScene")
-               self.view?.presentScene(gameScene)
+               self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
     }
-    
-    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        state?.enter(IdleState.self) // changing player character's state to idle when ending touch
         
-        let touchLocation = touch.location(in: self)
-        
-        state?.enter(IdleState.self)
-        
-//        if moveLeftButton.contains(touchLocation) {
-//            isMovingLeft = false
-//            player.removeAllActions()
-//
-//        } else if moveRightButton.contains(touchLocation) {
-//            isMovingRight = false
-//            player.removeAllActions()
-//        }
-
     }
     
-    func didBegin(_ contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) { // on contact detection
         if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
-            player.jumped = 0
+            player.jumped = 0 // resetting the jump count so that the player can jump again
         }
     }
-    
 }
