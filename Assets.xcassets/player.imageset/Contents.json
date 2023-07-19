@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Mapa 2.png",
+      "filename" : "Subtractpersonagem.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Mapa 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Mapa.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
