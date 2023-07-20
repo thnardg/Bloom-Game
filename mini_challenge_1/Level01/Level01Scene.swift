@@ -21,7 +21,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     
     // defining state machine
     var state: GKStateMachine?
-    let shape = SKSpriteNode(color: .white, size: CGSize(width: 50, height: 100))
+//    let shape = SKSpriteNode(color: .white, size: CGSize(width: 50, height: 100)) // debugging
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         createMoveButtons() // self-explanatory
@@ -32,7 +32,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
         }
         self.addChild(player) // adding player to scene
         
-        addChild(shape)
+//        addChild(shape) // debugging
         
     }
     
@@ -67,7 +67,8 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         state?.update(deltaTime: currentTime) // calling the character's state machine update func
         
-        shape.position = player.position
+//        shape.position = player.position // debugging
+//        print(state?.currentState)
         
         if let camera = cameraNode{ // safe unwrapping the camera node
             camera.run(.group([.moveTo(x: player.position.x, duration: 0.5), .moveTo(y: player.position.y, duration: 0)]))
