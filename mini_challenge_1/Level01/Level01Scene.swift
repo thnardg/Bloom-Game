@@ -36,7 +36,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
         
     }
     
-    func createMoveButtons() { // creating and customizing the move buttons
+    func createMoveButtons() { // creating and customizing move buttons
         returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "return")) // creating return button (returns to game start)
        
         if let button = returnButton{
@@ -74,13 +74,13 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
             
             // fixing buttons to the camera
         moveLeftButton?.position.x = camera.position.x - 300
-        moveLeftButton?.position.y = camera.position.y - 100
+        moveLeftButton?.position.y = player.position.y - 100
         moveRightButton?.position.x = camera.position.x - 200
-        moveRightButton?.position.y = camera.position.y - 100
+        moveRightButton?.position.y = player.position.y - 100
         jumpButton?.position.x = camera.position.x  + 300
-        jumpButton?.position.y = camera.position.y - 100
+        jumpButton?.position.y = player.position.y - 100
         returnButton?.position.x = camera.position.x - 0
-        returnButton?.position.y = camera.position.y + 150
+        returnButton?.position.y = player.position.y + 150
         }
     }
     
@@ -102,9 +102,10 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
         guard let moveRightButton = moveRightButton else { return }
         guard let jumpButton = jumpButton else { return }
         guard let returnButton = returnButton else { return }
-            
         
-            if moveLeftButton.contains(touchLocation) { // if clicking left button
+        
+        
+        if moveLeftButton.contains(touchLocation) { // if clicking left button
             
             state?.enter(MovingLeftState.self) // changing the player's state to match the button pressed
             player.xScale = -1 // making the player face the desired direction

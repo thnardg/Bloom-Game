@@ -23,6 +23,7 @@ class JumpState: GKState{
             player.jumped += 1
         }
     }
+    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass{
         case is IdleState.Type:
