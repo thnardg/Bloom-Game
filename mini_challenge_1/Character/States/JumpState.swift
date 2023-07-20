@@ -13,8 +13,6 @@ class JumpState: GKState{
         let direction = (player.xScale == -1 ? (player.speed ) * -10 : (player.speed ) * 10)
         let height = (player.size.height * 0.88) * 2
         
-        print(player.size.height)
-        
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
                 player.physicsBody?.isResting = true
@@ -26,8 +24,8 @@ class JumpState: GKState{
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         switch stateClass{
-        case is IdleState.Type:
-            return true
+//        case is IdleState.Type:
+//            return true
         default:
             return true
         }
