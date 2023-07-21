@@ -20,7 +20,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     var isMovingLeft = false
     var isMovingRight = false
     
-    //var hud = Hud()
+   
     
 
     let joystickBack = SKSpriteNode(imageNamed: "JoyBack")
@@ -34,12 +34,8 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     var velocityY: CGFloat = 0.0
     
     var joystickTouch: UITouch? // Optional UITouch to store the initial joystick touch
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
+  
+    //var hud = Hud()
     
     // defining level camera
     var cameraNode: SKCameraNode?

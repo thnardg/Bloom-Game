@@ -16,6 +16,7 @@ class Hud:GameScene{
     var isMovingRight = false
     
     //var level01scene = Level01Scene()
+    var level01scene = Level01Scene()
     var hud = Hud()
     
     func controles(){
@@ -78,4 +79,5 @@ class Hud:GameScene{
         }
     }
 }
+
 */
