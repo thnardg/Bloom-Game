@@ -17,7 +17,7 @@ class JumpState: GKState{
             if player.jumped == 2{
                 player.physicsBody?.isResting = true
             }
-            player.physicsBody?.applyImpulse(CGVector(dx: direction, dy: height))
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: height))
             player.jumped += 1
         }
     }
