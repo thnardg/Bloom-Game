@@ -30,6 +30,7 @@
 		31022FBB2A68621400AB5828 /* MovingRightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB62A68621400AB5828 /* MovingRightState.swift */; };
 		31022FBC2A68621400AB5828 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB72A68621400AB5828 /* DeadState.swift */; };
 		31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */; };
+		6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */; };
 		B32B4AAF2A61C68C00031DA0 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */; };
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
 		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
@@ -61,6 +62,7 @@
 		31022FB62A68621400AB5828 /* MovingRightState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingRightState.swift; sourceTree = "<group>"; };
 		31022FB72A68621400AB5828 /* DeadState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
 		31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
+		6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelTileSet.sks; sourceTree = "<group>"; };
 		B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerNode.swift; path = mini_challenge_1/Character/PlayerNode.swift; sourceTree = SOURCE_ROOT; };
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
 		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */,
 				2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */,
+				6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */,
 			);
 			path = Level01;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				2F32819A2A61B89C00456E61 /* LaunchScreen.storyboard in Resources */,
 				2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */,
 				2F3CE98B2A61BBDB004F5FF0 /* TextScene.sks in Resources */,
+				6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */,
 				B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */,
 				2F3CE9922A61BC55004F5FF0 /* CircleSliderScene.sks in Resources */,
 			);
