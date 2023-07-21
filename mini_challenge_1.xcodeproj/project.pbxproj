@@ -35,6 +35,7 @@
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
 		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
 		B32B4ACE2A65D26A00031DA0 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4ACD2A65D26A00031DA0 /* Preview.swift */; };
+		B35DBDF92A6B1E9A0082F6A7 /* BotoesMovimentacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
 		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
 		B32B4ACD2A65D26A00031DA0 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
+		B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotoesMovimentacao.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			children = (
 				B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */,
 				2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */,
+				B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */,
 				6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */,
 			);
 			path = Level01;
@@ -282,6 +285,7 @@
 			files = (
 				31022FBA2A68621400AB5828 /* MovingLeftState.swift in Sources */,
 				2F3281902A61B89C00456E61 /* GameScene.swift in Sources */,
+				B35DBDF92A6B1E9A0082F6A7 /* BotoesMovimentacao.swift in Sources */,
 				2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */,
 				2FF878F82A61E1540093EDC5 /* Components.swift in Sources */,
 				2F3CE9892A61BBD2004F5FF0 /* TextScene.swift in Sources */,
