@@ -35,7 +35,6 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
         }
         self.addChild(player) // adding player to scene
         
-//        addChild(shape) // debugging
 
     }
     
@@ -72,7 +71,17 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     }
     
     func jumpCharacter() {
-        player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
+        //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
+        let direction = (player.xScale == -1 ? (player.speed ) * -10 : (player.speed ) * 10)
+        let height = (player.size.height * 0.88) * 2
+        
+        if player.jumped <= player.jumpLimit {
+            if player.jumped == 2{
+                player.physicsBody?.isResting = true
+            }
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: height))
+            player.jumped += 1
+        }
     }
     
     
@@ -89,7 +98,7 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
         
 
         if let camera = cameraNode{ // safe unwrapping the camera node
-            camera.run(.group([.moveTo(x: player.position.x, duration: 0.5), .moveTo(y: player.position.y, duration: 0)]))
+            camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
             
             // fixing buttons to the camera
             moveLeftButton?.position.x = camera.position.x - 300
@@ -112,6 +121,11 @@ class Level01Scene: GameScene, SKPhysicsContactDelegate { // first platformer le
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // safe unwrapping button nodes
+        guard let moveLeftButton = moveLeftButton else { return }
+        guard let moveRightButton = moveRightButton else { return }
+        guard let jumpButton = jumpButton else { return }
+        guard let returnButton = returnButton else { return }
         //see the first touche
         guard let touch = touches.first else { return }
         
