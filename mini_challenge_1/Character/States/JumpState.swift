@@ -10,7 +10,7 @@ class JumpState: GKState{
     }
     
     override func didEnter(from previousState: GKState?) {
-        let direction = (player.xScale == -1 ? (player.speed ) * -10 : (player.speed ) * 10)
+       
         let height = (player.size.height * 0.88) * 2
         
         if player.jumped <= player.jumpLimit {
