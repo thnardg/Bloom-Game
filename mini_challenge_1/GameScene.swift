@@ -15,7 +15,10 @@ class GameScene: SKScene {
         
         self.backgroundColor = .black
 
+        // Música intro:
         SoundDesign.shared.playBackgroundMusic(filename: "intro-music.mp3")
+        
+        
         let nome = SKLabelNode(text: "[NOME DO JOGO]")
         let iniciar = SKLabelNode(text: "Toque para Iniciar")
         nome.fontName = "Helvetica-Bold"

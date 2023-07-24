@@ -3,8 +3,8 @@ import SpriteKit
 class BreathingFlowerScene: SKScene {
     let shapeGroup = SKNode()
     let sliderSound = SKAudioNode(fileNamed: "radio.mp3")
-    let audioWaveUp = SKSpriteNode(imageNamed: "audiowave")
-    let audioWaveDown = SKSpriteNode(imageNamed: "audiowave")
+    let audioWaveUp = SKSpriteNode(imageNamed: "highwave")
+    let audioWaveDown = SKSpriteNode(imageNamed: "lowwave")
     
     var shape: [SKSpriteNode] = []
     var slider: UISlider!
@@ -14,7 +14,8 @@ class BreathingFlowerScene: SKScene {
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
         self.addChild(sliderSound)
-        SoundDesign.shared.fadeOutMusic(duration: 2.0) {
+        // Fade-out da música inicial e fade-in da música da fase 1:
+         SoundDesign.shared.fadeOutMusic(duration: 2.0) {
             SoundDesign.shared.fadeInMusic(filename: "medo.mp3", duration: 3.0)
         }
         

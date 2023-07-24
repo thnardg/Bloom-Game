@@ -5,6 +5,8 @@ class CircleGlowScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.backgroundColor = .black
+        
+        // Efeito sonoro de tempestade:
         SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
 
         let circle = SKSpriteNode(imageNamed: "O1") // Node da forma inicial
