@@ -115,7 +115,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            
        } else {
            isUsingJoystick = false
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime)))
+           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 2)))
        }
         
        // If the joystick is being used, update the player's position
@@ -126,11 +126,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            }
            player.run(.sequence([.wait(forDuration: player.animationFrameTime), run]))
            
-           
-           
            if xAxisValue < 0{
                player.xScale = -1
-               
+               print(isUsingJoystick)
            }
            if xAxisValue > 0{
                player.xScale = 1
@@ -163,7 +161,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         
         
         
