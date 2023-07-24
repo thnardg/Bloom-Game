@@ -43,7 +43,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         //to hide the joystick
         jumpButton.isHidden = true
-       
+        
     }
     
     
