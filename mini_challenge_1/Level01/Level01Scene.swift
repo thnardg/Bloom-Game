@@ -14,10 +14,13 @@ import GameController
 
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
+    
+    var comoJogar:Int = UserDefaults.standard.integer(forKey: "Data")
     // defining buttons
     var virtualController: GCVirtualController?
     var jumpButton: SkButtonNode!
     var returnButton: SkButtonNode!
+    
     var playerPosx: CGFloat = 0
     
     var isUsingJoystick = false
@@ -26,6 +29,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     var cameraNode: SKCameraNode?
     
     override func didMove(to view: SKView) { // loaded when reaching the level
+        
+        if comoJogar != 1{
+           print("foi")
+            
+        }
         
         connectVirtualController()
         createButtons()
@@ -45,7 +53,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         jumpButton.isHidden = true
        
     }
-    
+    ////////////////////
+    func infoToPlay(){
+        let howJump:SKNode!
+        
+        
+        comoJogar = 1
+        UserDefaults.standard.set(comoJogar, forKey: "Data")
+    }
     
     
     
@@ -115,7 +130,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            
        } else {
            isUsingJoystick = false
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 2)))
+           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)))
        }
         
        // If the joystick is being used, update the player's position
@@ -141,14 +156,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         if let camera = cameraNode{ // safe unwrapping the camera node
             camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
             
-            
             jumpButton?.position.x = camera.position.x  + 280
             jumpButton?.position.y = player.position.y - 50
             returnButton?.position.x = camera.position.x - 350
             returnButton?.position.y = player.position.y + 150
-            
-            
-            
         }
     }
     

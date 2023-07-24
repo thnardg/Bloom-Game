@@ -26,7 +26,7 @@ class SettingScene: SKScene {
     func createButtons(){
         
         //return Button
-        returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Return")) // creating return button (returns to game start)
+        returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "Return")) // creating return button (returns to game start)
         
         returnButton.position = CGPoint(x: -350, y: 150)
         
@@ -36,7 +36,7 @@ class SettingScene: SKScene {
         
         
         //sfx Button
-        sfxButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "")) // creating return button (returns to game start)
+        sfxButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "")) // creating return button (returns to game start)
         
         sfxButton.position = CGPoint(x: -250, y: 50)
         
@@ -44,14 +44,14 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let sfxText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 50, height: 100)), label: .init(text: "SFX"))
+        let sfxText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 100)), label: .init(text: "SFX"))
         
         sfxText.position = CGPoint(x: -200, y: 50)
         addChild(sfxText)
         
         
         //music Button
-        musicButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "")) // creating return button (returns to game start)
+        musicButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "")) // creating return button (returns to game start)
         
         musicButton.position = CGPoint(x: 0, y: 50)
         
@@ -59,14 +59,14 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let musicText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 50, height: 100)), label: .init(text: "Music"))
+        let musicText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 100)), label: .init(text: "Music"))
         
         musicText.position = CGPoint(x: 60, y: 50)
         addChild(musicText)
         
         
         //reset Button
-        resetButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "")) // creating return button (returns to game start)
+        resetButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "")) // creating return button (returns to game start)
         
         resetButton.position = CGPoint(x: -250, y: -30)
         
@@ -74,14 +74,14 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let resetText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 50, height: 50)), label: .init(text: "Reset History")) // creating return button (returns to game start)
+        let resetText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 25)), label: .init(text: "Reset History")) // creating return button (returns to game start)
         
         resetText.position = CGPoint(x: -153, y: -30)
         addChild(resetText)
         
         
         //
-        informationButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Info")) // creating return button (returns to game start)
+        informationButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "Info")) // creating return button (returns to game start)
         
         informationButton.position = CGPoint(x: 580, y: 250)
         
@@ -89,7 +89,7 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        returnMenuButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Return Menu")) // creating return button (returns to game start)
+        returnMenuButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "Return Menu")) // creating return button (returns to game start)
         
         returnMenuButton.position = CGPoint(x: -350, y: -150)
         
@@ -102,16 +102,16 @@ class SettingScene: SKScene {
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
+        
+        
+        if returnMenuButton.contains(touchLocation){ // if clicking the return menu button
+            let gameScene = SKScene(fileNamed: "GameScene")
+               self.view?.presentScene(gameScene) // taking the player back to the start of the game
+        }
         if returnButton.contains(touchLocation){ // if clicking the return button
             let gameScene = SKScene(fileNamed: "Level01Scene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
-        
-        if returnMenuButton.contains(touchLocation){ // if clicking the return button
-            let gameScene = SKScene(fileNamed: "GameScene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
-        }
-        
     }
         
 }
