@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct ContentView: View{
-    var scene = Level01Scene()
+    var scene = SettingScene()
     
     var body: some View{
         SpriteView(scene: scene)
