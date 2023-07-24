@@ -9,6 +9,7 @@ class EndingTextScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        // Músicas e efeitos pra concluir o jogo:
         SoundDesign.shared.fadeOutMusic(duration: 1.0) {
             SoundDesign.shared.fadeInMusic(filename: "happiness.mp3", duration: 2.0)
         }
