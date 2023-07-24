@@ -1,20 +1,18 @@
-//
-//  TextScene.swift
-//  spritekitanimation
-//
-//  Created by Thayna Rodrigues on 13/07/23.
-//
 import SpriteKit
 import GameplayKit
 
-class TextScene: SKScene {
+class IntroTextScene: SKScene {
     
     private var label: SKLabelNode!
     private var cutsceneText = ["Você é um grão", "No vazio você vê uma luz", "O que ela quer te dizer?"]
     private var currentTextIndex = 0
     
     override func didMove(to view: SKView) {
-        label = SKLabelNode(fontNamed: "Futura")
+        
+        self.backgroundColor = .black
+
+        label = SKLabelNode(fontNamed: "Helvetica-Bold")
+        label.fontSize = 18
         label.text = cutsceneText[currentTextIndex]
         label.fontColor = SKColor.white
         label.position = CGPoint(x: frame.midX, y: frame.midY)
@@ -60,4 +58,3 @@ class TextScene: SKScene {
             }
     }
 }
-
