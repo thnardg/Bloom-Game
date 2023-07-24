@@ -38,7 +38,7 @@
 		B35DBDF92A6B1E9A0082F6A7 /* BotoesMovimentacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */; };
 		B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */; };
 		B35DBDFE2A6CB1DB0082F6A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDFD2A6CB1DB0082F6A7 /* ContentView.swift */; };
-		B35DBE002A6CCE620082F6A7 /* SettingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B35DBDFF2A6CCE620082F6A7 /* SettingScene.sks */; };
+		B35DBE022A6D9E740082F6A7 /* SettingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B35DBE012A6D9E740082F6A7 /* SettingScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,7 +74,8 @@
 		B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotoesMovimentacao.swift; sourceTree = "<group>"; };
 		B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScene.swift; sourceTree = "<group>"; };
 		B35DBDFD2A6CB1DB0082F6A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B35DBDFF2A6CCE620082F6A7 /* SettingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingScene.sks; sourceTree = "<group>"; };
+		B35DBE012A6D9E740082F6A7 /* SettingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingScene.sks; sourceTree = "<group>"; };
+		B35DBE032A6DEC400082F6A7 /* mini_challenge_1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mini_challenge_1.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +110,7 @@
 		2F3281882A61B89C00456E61 /* mini_challenge_1 */ = {
 			isa = PBXGroup;
 			children = (
+				B35DBE032A6DEC400082F6A7 /* mini_challenge_1.entitlements */,
 				2F32818B2A61B89C00456E61 /* GameScene.sks */,
 				2F32818F2A61B89C00456E61 /* GameScene.swift */,
 				B35DBDFA2A6B21720082F6A7 /* SettingScene */,
@@ -165,6 +167,7 @@
 		2F3CE9852A61BB16004F5FF0 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
+				31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */,
 				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
 			);
 			path = HUD;
@@ -186,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				2FF878F72A61E1540093EDC5 /* Components.swift */,
-				31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -218,7 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */,
-				B35DBDFF2A6CCE620082F6A7 /* SettingScene.sks */,
+				B35DBE012A6D9E740082F6A7 /* SettingScene.sks */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -290,7 +292,7 @@
 				6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */,
 				B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */,
 				2F3CE9922A61BC55004F5FF0 /* CircleSliderScene.sks in Resources */,
-				B35DBE002A6CCE620082F6A7 /* SettingScene.sks in Resources */,
+				B35DBE022A6D9E740082F6A7 /* SettingScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +469,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KV78S9S54R;
@@ -495,6 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KV78S9S54R;
