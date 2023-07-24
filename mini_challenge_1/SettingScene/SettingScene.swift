@@ -16,6 +16,7 @@ class SettingScene: SKScene {
     var musicButton: SkButtonNode!
     var resetButton: SkButtonNode!
     var informationButton: SkButtonNode!
+    var returnMenuButton: SkButtonNode!
     
     override func didMove(to view: SKView) {
         createButtons()
@@ -87,6 +88,14 @@ class SettingScene: SKScene {
         if let button = informationButton{
             addChild(button) // adding return button to scene's node tree
         }
+        
+        returnMenuButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 50, height: 50)), label: .init(text: "Return Menu")) // creating return button (returns to game start)
+        
+        returnMenuButton.position = CGPoint(x: -350, y: -150)
+        
+        if let button = returnMenuButton{
+            addChild(button) // adding return button to scene's node tree
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,6 +106,12 @@ class SettingScene: SKScene {
             let gameScene = SKScene(fileNamed: "Level01Scene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
+        
+        if returnMenuButton.contains(touchLocation){ // if clicking the return button
+            let gameScene = SKScene(fileNamed: "GameScene")
+               self.view?.presentScene(gameScene) // taking the player back to the start of the game
+        }
+        
     }
         
 }
