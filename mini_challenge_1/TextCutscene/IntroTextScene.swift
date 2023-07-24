@@ -8,6 +8,7 @@ class IntroTextScene: SKScene {
     private var currentTextIndex = 0
     
     override func didMove(to view: SKView) {
+//        UserDefaults.resetDefaults()
         
         self.backgroundColor = .black
 
