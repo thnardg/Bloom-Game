@@ -47,10 +47,8 @@
 		B32B4AAF2A61C68C00031DA0 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */; };
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
 		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
-		B32B4ACE2A65D26A00031DA0 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4ACD2A65D26A00031DA0 /* Preview.swift */; };
 		B35DBDF92A6B1E9A0082F6A7 /* BotoesMovimentacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */; };
 		B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */; };
-		B35DBDFE2A6CB1DB0082F6A7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDFD2A6CB1DB0082F6A7 /* ContentView.swift */; };
 		B35DBE022A6D9E740082F6A7 /* SettingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B35DBE012A6D9E740082F6A7 /* SettingScene.sks */; };
 /* End PBXBuildFile section */
 
@@ -96,10 +94,8 @@
 		B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerNode.swift; path = mini_challenge_1/Character/PlayerNode.swift; sourceTree = SOURCE_ROOT; };
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
 		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
-		B32B4ACD2A65D26A00031DA0 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotoesMovimentacao.swift; sourceTree = "<group>"; };
 		B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScene.swift; sourceTree = "<group>"; };
-		B35DBDFD2A6CB1DB0082F6A7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B35DBE012A6D9E740082F6A7 /* SettingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingScene.sks; sourceTree = "<group>"; };
 		B35DBE032A6DEC400082F6A7 /* mini_challenge_1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mini_challenge_1.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +114,6 @@
 		2F32817D2A61B89B00456E61 = {
 			isa = PBXGroup;
 			children = (
-				B32B4ACD2A65D26A00031DA0 /* Preview.swift */,
 				2F3281882A61B89C00456E61 /* mini_challenge_1 */,
 				2F3281962A61B89C00456E61 /* Assets.xcassets */,
 				2F3281872A61B89C00456E61 /* Products */,
@@ -210,7 +205,6 @@
 			children = (
 				B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */,
 				2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */,
-				B35DBDFD2A6CB1DB0082F6A7 /* ContentView.swift */,
 				B35DBDF82A6B1E9A0082F6A7 /* BotoesMovimentacao.swift */,
 				6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */,
 			);
@@ -373,10 +367,8 @@
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
 				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
 				31022FB92A68621400AB5828 /* JumpState.swift in Sources */,
-				B35DBDFE2A6CB1DB0082F6A7 /* ContentView.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
 				2FB5FA992A6EF0A5003DA0E1 /* YellowCircleScene.swift in Sources */,
-				B32B4ACE2A65D26A00031DA0 /* Preview.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* BreathingFlowerScene.swift in Sources */,
 				31022FBC2A68621400AB5828 /* DeadState.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
