@@ -6,12 +6,14 @@ class HeadphoneScene: SKScene {
         // Cor do background.
         self.backgroundColor = .black
         
+        // Node Headphone:
         let headphone = SKSpriteNode(imageNamed: "headphone")
         headphone.size = CGSize(width: 60, height: 60)
         headphone.alpha = 0
         headphone.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 50)
         self.addChild(headphone)
         
+        // Texto Headphone:
         let avisoHeadphones = SKLabelNode(text: "Esse jogo fica melhor com fones de ouvido")
         avisoHeadphones.fontName = "Helvetica-Bold"
         avisoHeadphones.fontSize = 18

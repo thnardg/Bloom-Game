@@ -28,6 +28,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     // defining level camera
     var cameraNode: SKCameraNode?
     
+    var doubleJumpNode = DoubleJumpNode(CGPoint(x: 19598.795, y: 717))
+    
     override func didMove(to view: SKView) { // loaded when reaching the level
         
         if comoJogar != 1{
@@ -39,13 +41,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         createButtons()
         
         
-        
         cameraNode = SKCameraNode() // defining custom camera as level camera
         self.camera = cameraNode // defining custom camera as level camera
         if let camera = cameraNode{
             addChild(camera) // adding camera to scene
         }
         self.addChild(player) // adding player to scene
+        self.addChild(doubleJumpNode) // adding the node to scene
         
         
         
@@ -160,6 +162,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             jumpButton?.position.y = player.position.y - 50
             returnButton?.position.x = camera.position.x - 350
             returnButton?.position.y = player.position.y + 150
+
+            
+            if doubleJumpNode.hasAcquired {
+                doubleJumpNode.removeFromParent()
+            }
+
         }
     }
     
@@ -199,6 +207,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func didBegin(_ contact: SKPhysicsContact) { // on contact detection
         if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
             player.jumped = 1 // resetting the jump count so that the player can jump again
+        }
+        
+        if contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "doubleJump"{
+            player.jumpLimit = 2 // increasing the limit
+            doubleJumpNode.hasAcquired = true // setting the double jump state to acquired
         }
     }
 }
