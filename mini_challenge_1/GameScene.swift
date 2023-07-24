@@ -1,10 +1,3 @@
-//
-//  GameScene.swift
-//  spritekitanimation
-//
-//  Created by Thayna Rodrigues on 11/07/23.
-//
-
 import SpriteKit
 import GameplayKit
 
@@ -12,9 +5,7 @@ class GameScene: SKScene {
     
     var tileMap: SKTileMapNode!
     var tileSet: SKTileSet!
-    
-    private var label: SKLabelNode!
-    
+        
     override func didMove(to view: SKView) {
         
         tileSet = SKTileSet(named: "LevelTileSet")
@@ -22,16 +13,36 @@ class GameScene: SKScene {
         tileMap.position = CGPoint(x: 0, y: 0)
         addChild(tileMap)
         
-        label = SKLabelNode(fontNamed: "Futura")
-        label.text = "tela inicial"
-        label.fontColor = SKColor.white
-        label.position = CGPoint(x: frame.midX, y: frame.midY)
-        addChild(label)
+        self.backgroundColor = .black
+
+        // Música intro:
+        SoundDesign.shared.playBackgroundMusic(filename: "intro-music.mp3")
+        
+        
+        let nome = SKLabelNode(text: "[NOME DO JOGO]")
+        let iniciar = SKLabelNode(text: "Toque para Iniciar")
+        nome.fontName = "Helvetica-Bold"
+        nome.fontSize = 20
+        nome.fontColor = SKColor.white
+        nome.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        self.addChild(nome)
+        nome.addChild(iniciar)
+        iniciar.fontColor = SKColor.white
+        iniciar.fontName = "Helvetica-bold"
+        iniciar.fontSize = 16
+        iniciar.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 60)
+        
+        let fadeInAction = SKAction.fadeIn(withDuration: 2.0)
+        let fadeOutAction = SKAction.fadeOut(withDuration: 2.0)
+        let sequenceAction = SKAction.sequence([fadeInAction, SKAction.wait(forDuration: 0.5), fadeOutAction])
+        
+        // Animação:
+        iniciar.run(SKAction.repeatForever(sequenceAction))
     }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     let textScene = SKScene(fileNamed: "TextScene")
-        self.view?.presentScene(textScene)
+     let headphoneScene = SKScene(fileNamed: "HeadphoneScene")
+        self.view?.presentScene(headphoneScene)
     }
 }

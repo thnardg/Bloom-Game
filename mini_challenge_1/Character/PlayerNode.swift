@@ -6,6 +6,8 @@ import SpriteKit
 var player = PlayerNode()
 
 class PlayerNode: SKSpriteNode {
+    let keyJump = "usr_dbJump"
+    
     let textureSheet = [SKTexture(imageNamed: "im1"),
                         SKTexture(imageNamed: "im2"),
                         SKTexture(imageNamed: "im3"),
@@ -15,7 +17,14 @@ class PlayerNode: SKSpriteNode {
                         SKTexture(imageNamed: "im7"),
                         SKTexture(imageNamed: "im8")
     ]
-    var jumpLimit = 2
+    var jumpLimit: Int {
+        get{
+            UserDefaults.standard.integer(forKey: keyJump)
+        }
+        set{
+            UserDefaults.standard.set(newValue, forKey: keyJump)
+        }
+    }
     var jumped = 1
     var animationFrameTime = 0.6
     var state: GKStateMachine?
@@ -26,6 +35,9 @@ class PlayerNode: SKSpriteNode {
         let speed = 5.0
         super.init(texture: texture, color: .clear, size: size)
         self.speed = speed
+        if self.jumpLimit == 0{
+            self.jumpLimit = 1
+        }
         
         configurePhysicsBody()
     }
