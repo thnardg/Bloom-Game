@@ -6,3 +6,6 @@
 //
 
 import Foundation
+
+var musicIsOn: Bool = true
+var sfx: Bool = true
