@@ -13,8 +13,6 @@ import SpriteKit
 
 class SettingScene: SKScene {
     
-    
-    
     var returnButton: SkButtonNode!
     var sfxButton: SkButtonNode!
     var musicButton: SkButtonNode!
@@ -133,7 +131,8 @@ class SettingScene: SKScene {
         
         if resetButton.contains(touchLocation){
             UserDefaults.resetDefaults()
-            alreadyPlayed.toggle()
+            let gameScene = SKScene(fileNamed: "GameScene")
+               self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
         
         if sfxButton.contains(touchLocation){
@@ -154,6 +153,7 @@ class SettingScene: SKScene {
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
         if returnButton.contains(touchLocation){ // if clicking the return button
+            isReturningToScene = true
             let gameScene = SKScene(fileNamed: "Level01Scene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
