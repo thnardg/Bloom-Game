@@ -38,7 +38,7 @@ class SoundDesign {
         
         do {
             soundEffectPlayer = try AVAudioPlayer(contentsOf: sound)
-            soundEffectPlayer?.numberOfLoops = 0
+            soundEffectPlayer?.numberOfLoops = -1
             soundEffectPlayer?.volume = 0.1 // Volume em 50%
             soundEffectPlayer?.prepareToPlay() // Deixa o som preparado para tocar. Diminui possíveis delays
             soundEffectPlayer?.play()
