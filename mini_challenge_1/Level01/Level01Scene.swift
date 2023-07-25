@@ -67,14 +67,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         jumpButton.isHidden = true
         
     }
-    ////////////////////
-    func infoToPlay(){
-        let howJump:SKNode!
-        
-        
-        comoJogar = 1
-        UserDefaults.standard.set(comoJogar, forKey: "Data")
-    }
+   
     
     
     
@@ -143,10 +136,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) > joystickThreshold{
            isUsingJoystick = true
-           
+           player.removeAction(forKey: "pulse")
+           player.run(.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)])), withKey: "pulse")
        } else {
-           isUsingJoystick = false
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)))
+           player.removeAction(forKey: "walk")
+          player.run(.repeatForever(.animate(with: (player.textureSheet),timePerFrame: (xAxisValue * player.speed) / 1.5)), withKey: "walk")
        }
         
        // If the joystick is being used, update the player's position
