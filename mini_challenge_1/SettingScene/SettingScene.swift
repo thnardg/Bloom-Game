@@ -120,6 +120,7 @@ class SettingScene: SKScene {
 
         if musicButton.contains(touchLocation){
             musicIsOn.toggle()
+     
             print("apertou my friend")
             print(musicIsOn)
             
@@ -137,7 +138,7 @@ class SettingScene: SKScene {
         
         if sfxButton.contains(touchLocation){
             sfx.toggle()
-            
+        
             if sfx == true{
                 SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
             }else{

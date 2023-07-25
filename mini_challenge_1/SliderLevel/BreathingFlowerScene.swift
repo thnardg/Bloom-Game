@@ -143,7 +143,9 @@ class BreathingFlowerScene: SKScene {
                 
                 // Próxima cena:
                 alreadyPlayed = true
+              
                 UserDefaults.standard.set(alreadyPlayed, forKey: "Data")
+               
                 
                 
                 let level01 = SKScene(fileNamed: "Level01Scene")
