@@ -125,9 +125,9 @@ class SettingScene: SKScene {
             print(musicIsOn)
             
             if musicIsOn == true{
-                SoundDesign.shared.playBackgroundMusic(filename: "medo.mp3")
+                SoundDesign.shared.unmuteMusic()
             }else{
-                SoundDesign.shared.stopBackgroundMusic()
+                SoundDesign.shared.muteMusic()
             }
         }
         
@@ -140,9 +140,9 @@ class SettingScene: SKScene {
             sfx.toggle()
         
             if sfx == true{
-                SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
+                SoundDesign.shared.unmuteSoundEffet()
             }else{
-                SoundDesign.shared.stopSoundEffect()
+                SoundDesign.shared.muteSoundEffect()
             }
         }
         
