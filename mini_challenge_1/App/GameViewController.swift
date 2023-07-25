@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.resetDefaults()
+//        UserDefaults.resetDefaults()
         
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
