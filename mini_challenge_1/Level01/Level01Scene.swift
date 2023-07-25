@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
+var isReturningToScene = false
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     
@@ -34,7 +34,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         if comoJogar != 1{
            print("foi")
-            
+        }
+        
+        if isReturningToScene == false{
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+            }
+        } else {
+            isReturningToScene = false
         }
         
         connectVirtualController()
@@ -43,11 +50,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         cameraNode = SKCameraNode() // defining custom camera as level camera
         self.camera = cameraNode // defining custom camera as level camera
+        cameraNode?.position = player.position
         if let camera = cameraNode{
             addChild(camera) // adding camera to scene
         }
+        
         self.addChild(player) // adding player to scene
         self.addChild(doubleJumpNode) // adding the node to scene
+        self.addChild(checkpoint) // adding checkpoints to scene
         
         
         
@@ -111,6 +121,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
+        
+        print(player.position)
         
       
         guard let controller = virtualController?.controller else {
@@ -205,13 +217,24 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     
     func didBegin(_ contact: SKPhysicsContact) { // on contact detection
-        if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
-            player.jumped = 1 // resetting the jump count so that the player can jump again
-        }
-        
-        if contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "doubleJump"{
-            player.jumpLimit = 2 // increasing the limit
-            doubleJumpNode.hasAcquired = true // setting the double jump state to acquired
+        // Sort the node names alphabetically to create a unique identifier for the contact
+        let nodeNames = [contact.bodyA.node?.name, contact.bodyB.node?.name].compactMap { $0 }.sorted()
+        let contactIdentifier = "\(nodeNames[0])-\(nodeNames[1])"
+        print(contactIdentifier)
+
+        // Handle the unique contact events
+        switch contactIdentifier {
+        case "checkpoint-player":
+            checkpoint.updateCheckpoint()
+            checkpoint.removeFromParent()
+            addChild(checkpoint)
+        case "ground-player":
+            player.jumped = 1
+        case "doubleJump-player":
+            doubleJumpNode.hasAcquired = true
+            player.jumpLimit = 2
+        default:
+            break
         }
     }
 }
