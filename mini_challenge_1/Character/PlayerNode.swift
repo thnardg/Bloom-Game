@@ -6,6 +6,7 @@ import SpriteKit
 var player = PlayerNode()
 
 class PlayerNode: SKSpriteNode {
+    let key = "usr_checkpoint"
     let keyJump = "usr_dbJump"
     
     let textureSheet = [SKTexture(imageNamed: "im1"),
@@ -27,7 +28,15 @@ class PlayerNode: SKSpriteNode {
     }
     var jumped = 1
     var animationFrameTime = 0.6
-    var state: GKStateMachine?
+    var playerCheckpoint: CGPoint?
+    {
+        get{
+            retrieve()
+        }
+        set{
+            save(newValue ?? CGPoint(x: 0, y: 0))
+        }
+    }
     
     init() {
         let texture = SKTexture(imageNamed: "im1")
@@ -60,4 +69,18 @@ class PlayerNode: SKSpriteNode {
         physicsBody = body
         name = "player"
     }
+    
+    func save(_ CGPoint: CGPoint){
+        if let encodedData = try? JSONEncoder().encode(CGPoint) {
+            UserDefaults.standard.set(encodedData, forKey: key)
+        }
+    }
+    
+    func retrieve() -> CGPoint{
+        if let data = UserDefaults.standard.data(forKey: key){
+            guard let savedItems = try? JSONDecoder().decode(CGPoint.self, from: data) else {return CGPoint(x: 0, y: 0)}
+            return savedItems
+        }
+        else {return CGPoint(x: 0, y: 0)}
+        }
 }

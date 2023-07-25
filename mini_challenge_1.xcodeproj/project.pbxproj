@@ -42,6 +42,7 @@
 		31022FBA2A68621400AB5828 /* MovingLeftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB52A68621400AB5828 /* MovingLeftState.swift */; };
 		31022FBB2A68621400AB5828 /* MovingRightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB62A68621400AB5828 /* MovingRightState.swift */; };
 		31022FBC2A68621400AB5828 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB72A68621400AB5828 /* DeadState.swift */; };
+		31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31028D562A70264C005F8BA9 /* Checkpoints.swift */; };
 		310C27762A6EFEF400E7C4EE /* DoubleJumpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */; };
 		310C27782A6F046D00E7C4EE /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */; };
 		31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */; };
@@ -93,6 +94,7 @@
 		31022FB52A68621400AB5828 /* MovingLeftState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingLeftState.swift; sourceTree = "<group>"; };
 		31022FB62A68621400AB5828 /* MovingRightState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingRightState.swift; sourceTree = "<group>"; };
 		31022FB72A68621400AB5828 /* DeadState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
+		31028D562A70264C005F8BA9 /* Checkpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoints.swift; sourceTree = "<group>"; };
 		310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleJumpNode.swift; sourceTree = "<group>"; };
 		310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				2FB5FA962A6EEF77003DA0E1 /* SoundDesign.swift */,
 				310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */,
 				310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */,
+				31028D562A70264C005F8BA9 /* Checkpoints.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				B32B4AAF2A61C68C00031DA0 /* PlayerNode.swift in Sources */,
 				31022FBB2A68621400AB5828 /* MovingRightState.swift in Sources */,
 				2FB5FAA12A6EF1A9003DA0E1 /* HeadphoneScene.swift in Sources */,
+				31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */,
 				B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */,
 				310C27782A6F046D00E7C4EE /* UserDefaultsExtension.swift in Sources */,
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
@@ -540,7 +544,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -569,7 +573,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
