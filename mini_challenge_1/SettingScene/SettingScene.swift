@@ -32,8 +32,8 @@ class SettingScene: SKScene {
         
         //return Button
 
-        returnButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 25, height: 25)), label: .init(text: "Voltar ao jogo")) // creating return button (returns to game start)
-
+        returnButton = SkButtonNode(image: SKSpriteNode(imageNamed: "pause"), label: SKLabelNode()) // creating return button (returns to game start)
+        returnButton.image?.size = CGSize(width: 30, height: 30)
         
         returnButton.position = CGPoint(x: -350, y: 150)
         
@@ -128,6 +128,11 @@ class SettingScene: SKScene {
             }else{
                 SoundDesign.shared.stopBackgroundMusic()
             }
+        }
+        
+        if resetButton.contains(touchLocation){
+            UserDefaults.resetDefaults()
+            alreadyPlayed.toggle()
         }
         
         if sfxButton.contains(touchLocation){
