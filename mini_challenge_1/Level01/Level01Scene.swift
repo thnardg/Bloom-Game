@@ -121,14 +121,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        
-        print(player.position)
-        
       
         guard let controller = virtualController?.controller else {
            return
        }
-        
 
        // Check if the player is using the virtual joystick
        let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
@@ -163,7 +159,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                player.xScale = 1
               
            }
-           
        }
         
 
@@ -175,11 +170,39 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             returnButton?.position.x = camera.position.x - 350
             returnButton?.position.y = player.position.y + 150
 
+        }
+        
+        if doubleJumpNode.hasAcquired {
+            doubleJumpNode.removeFromParent()
+        }
+        
+        if player.position.y < -1280 {
+            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750))
+            blackScreen.alpha = 0
+            blackScreen.zPosition = 1
+            player.addChild(blackScreen)
             
-            if doubleJumpNode.hasAcquired {
-                doubleJumpNode.removeFromParent()
+            let fadeInBlack = SKAction.fadeIn(withDuration: 3)
+            let fadeOutBlack = SKAction.fadeOut(withDuration: 3)
+            let removeBlackScreen = SKAction.run{
+                blackScreen.removeFromParent()
             }
-
+            
+            let respawn = SKAction.run {
+                if let playerCheckpoint = player.playerCheckpoint{
+                    player.position = playerCheckpoint
+                    self.camera?.position = playerCheckpoint
+                    player.physicsBody?.isResting = true
+                } else {
+                    player.position = CGPoint(x: 0, y: -200)
+                    self.camera?.position = player.position
+                    player.physicsBody?.isResting = true
+                }
+            }
+            
+            let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
+            
+            blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
         }
     }
     
@@ -192,12 +215,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
-        
-        
-        
-        
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
