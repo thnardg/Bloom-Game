@@ -18,7 +18,7 @@ class SettingScene: SKScene {
     var musicButton: SkButtonNode!
     var resetButton: SkButtonNode!
     var informationButton: SkButtonNode!
-    var returnMenuButton: SkButtonNode!
+    var exitButton: SkButtonNode!
     
     
     override func didMove(to view: SKView) {
@@ -113,13 +113,13 @@ class SettingScene: SKScene {
         }
         
 
-        returnMenuButton = SkButtonNode(image: SKSpriteNode(imageNamed: "menu"), label: SKLabelNode()) // creating return button (returns to game start)
+        exitButton = SkButtonNode(image: SKSpriteNode(imageNamed: "exit"), label: SKLabelNode()) // creating return button (returns to game start)
             
-        returnMenuButton.image?.size = CGSize(width: 30, height: 30)
+        exitButton.image?.size = CGSize(width: 30, height: 30)
         
-        returnMenuButton.position = CGPoint(x: -350, y: -150)
+        exitButton.position = CGPoint(x: -350, y: -150)
         
-        if let button = returnMenuButton{
+        if let button = exitButton{
             addChild(button) // adding return button to scene's node tree
         }
     }
@@ -182,12 +182,8 @@ class SettingScene: SKScene {
             }
         }
         
-        if returnMenuButton.contains(touchLocation){// if clicking the return menu button
-            SoundDesign.shared.stopBackgroundMusic()
-            SoundDesign.shared.stopSoundEffect()
-
-            let gameScene = SKScene(fileNamed: "GameScene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
+        if exitButton.contains(touchLocation){// if clicking the return menu button
+            exit(0)
         }
         if returnButton.contains(touchLocation){ // if clicking the return button
             isReturningToScene = true
