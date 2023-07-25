@@ -25,6 +25,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var isUsingJoystick = false
     
+    
+    
     // defining level camera
     var cameraNode: SKCameraNode?
     
@@ -116,6 +118,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         controller.connect()
         virtualController = controller
         
+        
     }
     
     
@@ -125,9 +128,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         guard let controller = virtualController?.controller else {
            return
        }
+       
 
        // Check if the player is using the virtual joystick
-       let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+       var xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+        
+        
       
         let moveSpeed = xAxisValue * player.speed
         
