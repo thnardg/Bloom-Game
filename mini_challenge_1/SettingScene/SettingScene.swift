@@ -169,6 +169,7 @@ class SettingScene: SKScene {
                 CGPoint(x: 15690.629, y: 1062.86)
             ]
             checkpoint.position = checkpoint.locations.first!
+//            Level01Scene.addChild(checkpoint)
             let gameScene = SKScene(fileNamed: "GameScene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
         }
