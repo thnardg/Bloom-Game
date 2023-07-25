@@ -140,7 +140,12 @@ class BreathingFlowerScene: SKScene {
             let endSequence = SKAction.sequence([.rotate(toAngle: CGFloat.pi / 2, duration: 1.0), .wait(forDuration: 0.5), SKAction.scale(by: 100, duration: 3.0)])
             
             shapeGroup.run(endSequence, completion: {
+                
                 // Próxima cena:
+                alreadyPlayed = true
+                UserDefaults.standard.set(alreadyPlayed, forKey: "Data")
+                
+                
                 let level01 = SKScene(fileNamed: "Level01Scene")
                 self.view?.presentScene(level01)
             })
