@@ -20,7 +20,11 @@ class PlayerNode: SKSpriteNode {
     ]
     var jumpLimit: Int {
         get{
-            UserDefaults.standard.integer(forKey: keyJump)
+            if UserDefaults.standard.integer(forKey: keyJump) == 0{
+                return 1
+            } else {
+                return UserDefaults.standard.integer(forKey: keyJump)
+            }
         }
         set{
             UserDefaults.standard.set(newValue, forKey: keyJump)
@@ -47,6 +51,7 @@ class PlayerNode: SKSpriteNode {
         if self.jumpLimit == 0{
             self.jumpLimit = 1
         }
+        
         
         configurePhysicsBody()
     }

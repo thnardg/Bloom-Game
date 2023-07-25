@@ -71,8 +71,8 @@ class Checkpoint: SKSpriteNode{ // create checkpoint node
         else {return [
             CGPoint(x: 295, y: -237),
             CGPoint(x: 8573.809, y: -117.389),
-            CGPoint(x: 12725.969, y: -219.999),
-            CGPoint(x: 15690.629, y: -1062.86)
+            CGPoint(x: 12725.969, y: 219.999),
+            CGPoint(x: 15690.629, y: 1062.86)
         ]}
     }
 }
