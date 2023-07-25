@@ -22,6 +22,8 @@ class SoundDesign {
             backgroundMusicPlayer?.volume = 0.5 // Volume em 50%
             backgroundMusicPlayer?.play() // Inicia a música
             
+            
+            
         } catch {
             print("Erro ao reproduzir a música de fundo: \(error.localizedDescription)")
         }
