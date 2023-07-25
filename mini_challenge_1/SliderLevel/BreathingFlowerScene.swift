@@ -15,6 +15,7 @@ class BreathingFlowerScene: SKScene {
         self.backgroundColor = .black
         self.addChild(sliderSound)
         // Fade-out da música inicial e fade-in da música da fase 1:
+        sliderSound.run(.changeVolume(to: 0.1, duration: 0))
          SoundDesign.shared.fadeOutMusic(duration: 2.0) {
             SoundDesign.shared.fadeInMusic(filename: "medo.mp3", duration: 3.0)
         }
