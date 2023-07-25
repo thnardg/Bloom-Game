@@ -19,7 +19,7 @@ class SoundDesign {
         do {
             backgroundMusicPlayer = try AVAudioPlayer(contentsOf: music) // Inicializa o reprodutor com o URL do arquivo de música
             backgroundMusicPlayer?.numberOfLoops = -1 // Coloca a música em loop infinito
-            backgroundMusicPlayer?.volume = 0.5 // Volume em 50%
+            backgroundMusicPlayer?.volume = 0.03 // Volume em 3%
             backgroundMusicPlayer?.play() // Inicia a música
             
             
@@ -38,8 +38,8 @@ class SoundDesign {
         
         do {
             soundEffectPlayer = try AVAudioPlayer(contentsOf: sound)
-            soundEffectPlayer?.numberOfLoops = 0
-            soundEffectPlayer?.volume = 0.5 // Volume em 50%
+            soundEffectPlayer?.numberOfLoops = -1
+            soundEffectPlayer?.volume = 0.05 // Volume em 5%
             soundEffectPlayer?.prepareToPlay() // Deixa o som preparado para tocar. Diminui possíveis delays
             soundEffectPlayer?.play()
         } catch {
@@ -59,7 +59,7 @@ class SoundDesign {
             backgroundMusicPlayer?.numberOfLoops = -1
             backgroundMusicPlayer?.volume = 0
             backgroundMusicPlayer?.play()
-            backgroundMusicPlayer?.setVolume(0.5, fadeDuration: duration) // Determina o volume do fade-in e a duração
+            backgroundMusicPlayer?.setVolume(0.03, fadeDuration: duration) // Determina o volume do fade-in e a duração
             
         } catch {
             print("Erro ao reproduzir a música de fundo: \(error.localizedDescription)")
@@ -82,6 +82,22 @@ class SoundDesign {
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { // Obriga a próxima ação esperar a conclusão do fade-out.
             completion?()
         }
+    }
+    
+    func muteMusic() {
+        backgroundMusicPlayer?.volume = 0
+    }
+    
+    func muteSoundEffect() {
+        soundEffectPlayer?.volume = 0
+    }
+    
+    func unmuteMusic() {
+        backgroundMusicPlayer?.volume = 0.03
+    }
+    
+    func unmuteSoundEffet() {
+        soundEffectPlayer?.volume = 0.05
     }
     
     func stopSoundEffect() {

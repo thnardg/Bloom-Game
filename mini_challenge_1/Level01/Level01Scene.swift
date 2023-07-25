@@ -11,7 +11,7 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
+var isReturningToScene = false
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     
@@ -34,7 +34,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         if comoJogar != 1{
            print("foi")
-            
+        }
+        
+        if isReturningToScene == false{
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+            }
+        } else {
+            isReturningToScene = false
         }
         
         connectVirtualController()
@@ -43,17 +50,20 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         cameraNode = SKCameraNode() // defining custom camera as level camera
         self.camera = cameraNode // defining custom camera as level camera
+        cameraNode?.position = player.position
         if let camera = cameraNode{
             addChild(camera) // adding camera to scene
         }
+        
         self.addChild(player) // adding player to scene
         self.addChild(doubleJumpNode) // adding the node to scene
+        self.addChild(checkpoint) // adding checkpoints to scene
         
         
         
         //to hide the joystick
         jumpButton.isHidden = true
-       
+        
     }
     ////////////////////
     func infoToPlay(){
@@ -111,12 +121,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        
       
         guard let controller = virtualController?.controller else {
            return
        }
-        
 
        // Check if the player is using the virtual joystick
        let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
@@ -129,11 +137,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) > joystickThreshold{
            isUsingJoystick = true
-           
+           player.removeAction(forKey: "pulse")
+           player.run(.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)])), withKey: "pulse")
        } else {
            isUsingJoystick = false
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)))
+           player.removeAction(forKey: "walk")
+           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: (xAxisValue * player.speed) / 1.5)), withKey: "walk")
        }
+        
+        print(isUsingJoystick)
         
        // If the joystick is being used, update the player's position
        if isUsingJoystick {
@@ -145,13 +157,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            
            if xAxisValue < 0{
                player.xScale = -1
-               print(isUsingJoystick)
+               
            }
            if xAxisValue > 0{
                player.xScale = 1
               
            }
-           
        }
         
 
@@ -163,11 +174,39 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             returnButton?.position.x = camera.position.x - 350
             returnButton?.position.y = player.position.y + 150
 
+        }
+        
+        if doubleJumpNode.hasAcquired {
+            doubleJumpNode.removeFromParent()
+        }
+        
+        if player.position.y < -1280 {
+            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750))
+            blackScreen.alpha = 0
+            blackScreen.zPosition = 1
+            player.addChild(blackScreen)
             
-            if doubleJumpNode.hasAcquired {
-                doubleJumpNode.removeFromParent()
+            let fadeInBlack = SKAction.fadeIn(withDuration: 3)
+            let fadeOutBlack = SKAction.fadeOut(withDuration: 3)
+            let removeBlackScreen = SKAction.run{
+                blackScreen.removeFromParent()
             }
-
+            
+            let respawn = SKAction.run {
+                if let playerCheckpoint = player.playerCheckpoint{
+                    player.position = playerCheckpoint
+                    self.camera?.position = playerCheckpoint
+                    player.physicsBody?.isResting = true
+                } else {
+                    player.position = CGPoint(x: 0, y: -200)
+                    self.camera?.position = player.position
+                    player.physicsBody?.isResting = true
+                }
+            }
+            
+            let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
+            
+            blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
         }
     }
     
@@ -180,12 +219,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        
-        
-        
-        
-        
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
@@ -205,13 +238,24 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     
     func didBegin(_ contact: SKPhysicsContact) { // on contact detection
-        if contact.bodyA.node?.name == "ground" && contact.bodyB.node?.name == "player"{
-            player.jumped = 1 // resetting the jump count so that the player can jump again
-        }
-        
-        if contact.bodyA.node?.name == "player" && contact.bodyB.node?.name == "doubleJump"{
-            player.jumpLimit = 2 // increasing the limit
-            doubleJumpNode.hasAcquired = true // setting the double jump state to acquired
+        // Sort the node names alphabetically to create a unique identifier for the contact
+        let nodeNames = [contact.bodyA.node?.name, contact.bodyB.node?.name].compactMap { $0 }.sorted()
+        let contactIdentifier = "\(nodeNames[0])-\(nodeNames[1])"
+        print(contactIdentifier)
+
+        // Handle the unique contact events
+        switch contactIdentifier {
+        case "checkpoint-player":
+            checkpoint.updateCheckpoint()
+            checkpoint.removeFromParent()
+            addChild(checkpoint)
+        case "ground-player":
+            player.jumped = 1
+        case "doubleJump-player":
+            doubleJumpNode.hasAcquired = true
+            player.jumpLimit = 2
+        default:
+            break
         }
     }
 }

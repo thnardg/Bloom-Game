@@ -36,15 +36,8 @@ class HeadphoneScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if alreadyPlayed == true {
-            let introTextScene = SKScene(fileNamed: "Level01Scene")
-            self.view?.presentScene(introTextScene)
-            SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
-            SoundDesign.shared.playBackgroundMusic(filename: "medo.mp3")
-            
-        }else{
+
             let introTextScene = SKScene(fileNamed: "IntroTextScene")
             self.view?.presentScene(introTextScene)
-        }
     }
 }
