@@ -138,7 +138,7 @@ class BreathingFlowerScene: SKScene {
             shape[3].run(SKAction.moveTo(x: -60, duration: 1.0))
             
             // Rotaciona a flor pra posição final:
-            let endSequence = SKAction.sequence([.rotate(toAngle: CGFloat.pi / 2, duration: 1.0), .wait(forDuration: 0.5), SKAction.scale(by: 100, duration: 3.0)])
+            let endSequence = SKAction.sequence([.rotate(toAngle: CGFloat.pi / 2, duration: 1.0), .wait(forDuration: 0.5), .scale(by: 1.1, duration: 1.0), .scale(by: 0.95, duration: 1.0), .fadeOut(withDuration: 0.8)])
             
             shapeGroup.run(endSequence, completion: {
                
