@@ -25,6 +25,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var isUsingJoystick = false
     
+    
+    
+    var moveSpeed:Double = 0.0
+    
+    
+    
     // defining level camera
     var cameraNode: SKCameraNode?
     
@@ -65,14 +71,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         jumpButton.isHidden = true
         
     }
-    ////////////////////
-    func infoToPlay(){
-        let howJump:SKNode!
-        
-        
-        comoJogar = 1
-        UserDefaults.standard.set(comoJogar, forKey: "Data")
-    }
+   
     
     
     
@@ -116,6 +115,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         controller.connect()
         virtualController = controller
         
+        
     }
     
     
@@ -125,11 +125,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         guard let controller = virtualController?.controller else {
            return
        }
+       
 
        // Check if the player is using the virtual joystick
-       let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+        let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+        
+        
       
-        let moveSpeed = xAxisValue * player.speed
+        moveSpeed = xAxisValue * player.speed
         
 
        let joystickThreshold: CGFloat = 0.1 // Define a threshold value to consider the joystick is being used
@@ -137,27 +140,23 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) > joystickThreshold{
            isUsingJoystick = true
-           player.removeAction(forKey: "pulse")
-           player.run(.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)])), withKey: "pulse")
+           
        } else {
            isUsingJoystick = false
-           player.removeAction(forKey: "walk")
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: (xAxisValue * player.speed) / 1.5)), withKey: "walk")
+           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)))
        }
-        
-        print(isUsingJoystick)
         
        // If the joystick is being used, update the player's position
        if isUsingJoystick {
            
            let run = SKAction.run {
-               player.position.x += moveSpeed
+               player.position.x += self.moveSpeed
            }
            player.run(.sequence([.wait(forDuration: player.animationFrameTime), run]))
            
            if xAxisValue < 0{
                player.xScale = -1
-               
+               print(isUsingJoystick)
            }
            if xAxisValue > 0{
                player.xScale = 1
