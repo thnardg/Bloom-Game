@@ -22,31 +22,34 @@ class InfoScene: SKScene {
             // Texto dos créditos
             let textoCreditos = """
             
+               [NOME DO JOGO]
+
+                iOS Developers:
             
-            Esse jogo foi desenvolvido como atividade no Apple Developer Academy
-            UCB, sob mentoria de Antônio Santos e Felipe Carvalho com Coordenação
-            Pedagógica de Jair Barbosa.
+                  -  Enrique Carvalho
+                  -  Jairo Pereira
+                  -  Lucas Nascimento
+                  -  Thayná Rodrigues
 
             
+                Designer:
+            
+                  -  Maria Clara Guimarães
             
             
-                               
+                Esse jogo foi desenvolvido como atividade no Apple Developer
+                Academy / UCB, sob mentoria de Antônio Santos e Felipe Carvalho
+                e Coordenação de Jair Barbosa.
             
-                                                                    Créditos
             
-                    
-
-                                        Enrique Carvalho                 IOS Developer
-                                        Jairo Pereira                        IOS Developer
-                                        Lucas Nascimento               IOS Developer
-                                        Thayná Rodrigues               IOS Developer
-                                        Maria Clara Guimarães       Designer / IOS Developer
+                -
+                        
             """
 
             // Crie o nó de texto
-            let labelNode = SKLabelNode(fontNamed: "Arial")
+            let labelNode = SKLabelNode(fontNamed: "Sora")
             labelNode.text = textoCreditos
-            labelNode.fontSize = 20
+            labelNode.fontSize = 15
             labelNode.fontColor = SKColor.white
             labelNode.horizontalAlignmentMode = .center
             labelNode.verticalAlignmentMode = .top

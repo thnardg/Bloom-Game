@@ -24,14 +24,14 @@ class GameScene: SKScene {
         
         let nome = SKLabelNode(text: "[NOME DO JOGO]")
         let iniciar = SKLabelNode(text: "Toque para Iniciar")
-        nome.fontName = "Helvetica-Bold"
+        nome.fontName = "UbuntuMono-Regular"
         nome.fontSize = 20
         nome.fontColor = SKColor.white
         nome.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         self.addChild(nome)
         nome.addChild(iniciar)
         iniciar.fontColor = SKColor.white
-        iniciar.fontName = "Helvetica-bold"
+        iniciar.fontName = "Sora"
         iniciar.fontSize = 16
         iniciar.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 60)
         

@@ -18,7 +18,8 @@ class SkButtonNode:  SKNode {
         }
                 
         if let label = label {
-            label.fontSize = 25
+            label.fontName = "Sora"
+            label.fontSize = 20
             label.position = CGPoint(x: 0, y: -10)
             image?.addChild(label)
         }
