@@ -118,6 +118,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
+    func cameraBounds() {
+        let leftBoundary = -379.833
+        
+        if let camera = cameraNode{
+            if player.position.x < leftBoundary{
+                cameraNode?.position.x = -383.317
+            } else {
+                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
+            }
+        }
+    }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
@@ -142,7 +153,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
        } else {
            isUsingJoystick = false
            player.removeAction(forKey: "walk")
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: (xAxisValue * player.speed) / 1.5)), withKey: "walk")
+           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
        }
         
         print(isUsingJoystick)
@@ -167,7 +178,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
 
         if let camera = cameraNode{ // safe unwrapping the camera node
-            camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
+            cameraBounds()
+//            camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
+            print(player.position)
             
             jumpButton?.position.x = camera.position.x  + 280
             jumpButton?.position.y = player.position.y - 50
@@ -180,11 +193,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             doubleJumpNode.removeFromParent()
         }
         
+        // Death
         if player.position.y < -1280 {
-            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750))
-            blackScreen.alpha = 0
-            blackScreen.zPosition = 1
-            player.addChild(blackScreen)
+            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
+            blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
+            blackScreen.zPosition = 1 // putting it "on top" of the characeter
+            player.addChild(blackScreen) // adding it as a child to player
             
             let fadeInBlack = SKAction.fadeIn(withDuration: 3)
             let fadeOutBlack = SKAction.fadeOut(withDuration: 3)
@@ -192,7 +206,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 blackScreen.removeFromParent()
             }
             
-            let respawn = SKAction.run {
+            let respawn = SKAction.run { // defining the respawn action
                 if let playerCheckpoint = player.playerCheckpoint{
                     player.position = playerCheckpoint
                     self.camera?.position = playerCheckpoint
