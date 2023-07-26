@@ -19,7 +19,7 @@ class EndingTextScene: SKScene {
         
         self.backgroundColor = .black
 
-        label = SKLabelNode(fontNamed: "Helvetica-Bold")
+        label = SKLabelNode(fontNamed: "Sora")
         label.fontSize = 18
         label.text = cutsceneText[currentTextIndex]
         label.fontColor = SKColor.white
