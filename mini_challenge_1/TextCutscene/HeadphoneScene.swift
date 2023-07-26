@@ -30,13 +30,18 @@ class HeadphoneScene: SKScene {
         headphone.run(sequenceAction)
         avisoHeadphones.run(sequenceAction, completion: {
             // Próxima cena:
-            let introTextScene = SKScene(fileNamed: "IntroTextScene")
+            let introTextScene = SKScene(fileNamed: player.playerCheckpoint != CGPoint(x: 0.0, y: 0.0) ? "Level01Scene" : "IntroTextScene")
             self.view?.presentScene(introTextScene)
         })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            let introTextScene = SKScene(fileNamed: "IntroTextScene")
+
+        let introTextScene = SKScene(fileNamed: player.playerCheckpoint != CGPoint(x: 0.0, y: 0.0) ? "Level01Scene" : "IntroTextScene")
             self.view?.presentScene(introTextScene)
+        SoundDesign.shared.stopSoundEffect()
+        SoundDesign.shared.stopBackgroundMusic()
+        SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
+        SoundDesign.shared.fadeInMusic(filename: "medo.mp3", duration: 3.0)
     }
 }

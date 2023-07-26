@@ -9,3 +9,4 @@ import Foundation
 
 var musicIsOn: Bool = true
 var sfx: Bool = true
+var alreadyPlayed: Bool = UserDefaults.standard.bool(forKey: "Data")

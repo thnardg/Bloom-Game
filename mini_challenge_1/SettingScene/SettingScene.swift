@@ -30,7 +30,9 @@ class SettingScene: SKScene {
         
         //return Button
 
+
         returnButton = SkButtonNode(image: SKSpriteNode(imageNamed: "return"), label: SKLabelNode()) // creating return button (returns to game start)
+
         returnButton.image?.size = CGSize(width: 30, height: 30)
         
         returnButton.position = CGPoint(x: -350, y: 150)
@@ -158,6 +160,7 @@ class SettingScene: SKScene {
         }
         
         if resetButton.contains(touchLocation){
+
             SoundDesign.shared.stopSoundEffect()
             SoundDesign.shared.stopBackgroundMusic()
             UserDefaults.resetDefaults()
@@ -169,8 +172,10 @@ class SettingScene: SKScene {
                 CGPoint(x: 15690.629, y: 1062.86)
             ]
             checkpoint.position = checkpoint.locations.first!
+//            Level01Scene.addChild(checkpoint)
             let gameScene = SKScene(fileNamed: "GameScene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+
         }
         
         if sfxButton.contains(touchLocation){
