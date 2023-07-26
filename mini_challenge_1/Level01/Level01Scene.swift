@@ -25,7 +25,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var isUsingJoystick = false
     
-    
+     let rainEmitter = SKEmitterNode(fileNamed: "Rain.sks")!
     
     var moveSpeed:Double = 0.0
     
@@ -61,6 +61,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             addChild(camera) // adding camera to scene
         }
         
+        self.addChild(rainEmitter)
+        //rainEmitter.position.y = self.frame.maxY
+        
+        //adding raing to the scene
+        rainEmitter.particlePositionRange.dx = self.frame.width * 3
+        
+        
         self.addChild(player) // adding player to scene
         self.addChild(doubleJumpNode) // adding the node to scene
         self.addChild(checkpoint) // adding checkpoints to scene
@@ -69,6 +76,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         //to hide the joystick
         jumpButton.isHidden = true
+        
         
     }
    
@@ -131,6 +139,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
+        
+        //rain settings
+        rainEmitter.position.x = player.position.x
+        rainEmitter.position.y = player.position.y + 190
+        
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
       
         guard let controller = virtualController?.controller else {
