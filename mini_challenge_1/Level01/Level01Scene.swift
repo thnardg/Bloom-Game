@@ -284,5 +284,3 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
 }
-
-
