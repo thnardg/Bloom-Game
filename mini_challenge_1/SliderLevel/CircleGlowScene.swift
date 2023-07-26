@@ -8,6 +8,8 @@ class CircleGlowScene: SKScene {
         
         // Efeito sonoro de tempestade:
         SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
+        
+        
 
         let circle = SKSpriteNode(imageNamed: "O1") // Node da forma inicial
         circle.size = CGSize(width: 150, height: 150)
