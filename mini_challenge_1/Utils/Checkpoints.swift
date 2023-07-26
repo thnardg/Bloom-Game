@@ -17,7 +17,7 @@ class Checkpoint: SKSpriteNode{ // create checkpoint node
     var locations: [CGPoint] // locations where checkpoints will appear, initialized in retrieve()'s first run
     
     init() { // initializing the node
-        let color: UIColor = .red // defining one's color
+        let color: UIColor = .clear // defining one's color
         let size = CGSize(width: 50, height: 200) // its size
         
         locations = [] // initializing an empty array for locations

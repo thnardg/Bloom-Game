@@ -34,7 +34,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     // defining level camera
     var cameraNode: SKCameraNode?
     
-    var doubleJumpNode = DoubleJumpNode(CGPoint(x: 19598.795, y: 717))
+    var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         
@@ -131,12 +131,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func cameraBounds() {
-        let leftBoundary = -337.317
+        let leftBoundary = 63.308
         
         if let camera = cameraNode{
             if player.position.x < leftBoundary{
-                cameraNode?.position.x = -337.317
-                returnButton.position.x = -687.317
+                cameraNode?.position.x = 63.308
+                cameraNode?.position.y = player.position.y
+                returnButton.position.x = -286.692
             } else {
                 camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
                 returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0)]))
@@ -146,65 +147,67 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
+        /// Camera position setup
+        cameraBounds()
         
-        //rain settings
+        
+        ///rain settings
         rainEmitter.position.x = player.position.x
         rainEmitter.position.y = player.position.y + 190
         
+        /// Controller Settings
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-      
         guard let controller = virtualController?.controller else {
            return
        }
-       
 
        // Check if the player is using the virtual joystick
         let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-        
-        
       
         moveSpeed = xAxisValue * player.speed
-        
 
        let joystickThreshold: CGFloat = 0.1 // Define a threshold value to consider the joystick is being used
 
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) > joystickThreshold{
            isUsingJoystick = true
-           
+//           player.removeAction(forKey: "idle")
+//           player.run(.repeatForever(.sequence([.scale(to: 1.2, duration: 1), .scale(to: 0.8, duration: 1)])), withKey: "idle")
        } else {
            isUsingJoystick = false
-
-           player.removeAction(forKey: "walk")
+//           player.scale(to: CGSize(width: 50, height: 100))
+//           player.removeAction(forKey: "walk")
            player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
-
+           
        }
         
+        /// Controller
        // If the joystick is being used, update the player's position
        if isUsingJoystick {
-           
            let run = SKAction.run {
                player.position.x += self.moveSpeed
            }
+           
            player.run(.sequence([.wait(forDuration: player.animationFrameTime), run]))
+//           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
            
            if xAxisValue < 0{
                player.xScale = -1
-               print(isUsingJoystick)
+//               print(isUsingJoystick)
            }
            if xAxisValue > 0{
                player.xScale = 1
-              
            }
-       }
+       } ///End of controller settings
         
-            cameraBounds()
         
+        /// Double Jump removal if acquired
         if doubleJumpNode.hasAcquired {
             doubleJumpNode.removeFromParent()
         }
         
-        // Death
+        
+        /// Death
         if player.position.y < -1280 {
             let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
             blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
@@ -232,7 +235,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
             
             blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
-        }
+        } /// End of Death settings
     }
     
     override func sceneDidLoad() {
