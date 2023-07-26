@@ -9,7 +9,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         
         tileSet = SKTileSet(named: "LevelTileSet")
-        tileMap = SKTileMapNode(tileSet: tileSet, columns: 1, rows: 1, tileSize: CGSize(width: 118, height: 118))
+        tileMap = SKTileMapNode(tileSet: tileSet, columns: 1, rows: 1, tileSize: CGSize(width: 100, height: 100))
         tileMap.position = CGPoint(x: 0, y: 0)
         addChild(tileMap)
         
