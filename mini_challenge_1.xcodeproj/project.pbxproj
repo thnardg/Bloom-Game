@@ -570,7 +570,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -600,7 +600,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
