@@ -51,15 +51,19 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
         
         connectVirtualController()
-        createButtons()
+        
         
         
         cameraNode = SKCameraNode() // defining custom camera as level camera
-        self.camera = cameraNode // defining custom camera as level camera
+        
         cameraNode?.position = player.position
         if let camera = cameraNode{
-            addChild(camera) // adding camera to scene
+            camera.name = "cameraNode"
+            self.addChild(camera) // adding camera to scene
         }
+        self.camera = cameraNode // defining custom camera as level camera
+        
+        createButtons()
         
         self.addChild(rainEmitter)
         //rainEmitter.position.y = self.frame.maxY
@@ -76,8 +80,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         //to hide the joystick
         jumpButton.isHidden = true
-        
-        
     }
    
     
@@ -86,9 +88,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func createButtons(){
       
         returnButton = SkButtonNode(image: SKSpriteNode(imageNamed: "pause"), label: SKLabelNode()) // creating return button (returns to game start)
-        
         returnButton.image?.size = CGSize(width: 30, height: 30)
+        
         if let button = returnButton{
+            button.position.x = player.position.x - 350
+            button.position.y = player.position.y + 150
             addChild(button) // adding return button to scene's node tree
         }
         
@@ -127,13 +131,16 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func cameraBounds() {
-        let leftBoundary = -379.833
+        let leftBoundary = -337.317
         
         if let camera = cameraNode{
             if player.position.x < leftBoundary{
-                cameraNode?.position.x = -383.317
+                cameraNode?.position.x = -337.317
+                returnButton.position.x = -687.317
             } else {
                 camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
+                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0)]))
+                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y - 50, duration: 0)]))
             }
         }
     }
@@ -191,18 +198,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            }
        }
         
-
-        if let camera = cameraNode{ // safe unwrapping the camera node
             cameraBounds()
-//            camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
-            print(player.position)
-            
-            jumpButton?.position.x = camera.position.x  + 280
-            jumpButton?.position.y = player.position.y - 50
-            returnButton?.position.x = camera.position.x - 350
-            returnButton?.position.y = player.position.y + 150
-
-        }
         
         if doubleJumpNode.hasAcquired {
             doubleJumpNode.removeFromParent()
