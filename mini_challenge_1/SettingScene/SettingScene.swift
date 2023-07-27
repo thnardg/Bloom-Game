@@ -166,10 +166,10 @@ class SettingScene: SKScene {
             UserDefaults.resetDefaults()
             checkpoint.removeFromParent()
             checkpoint.locations = [
-                CGPoint(x: 295, y: -237),
-                CGPoint(x: 8573.809, y: -117.389),
-                CGPoint(x: 12725.969, y: 219.999),
-                CGPoint(x: 15690.629, y: 1062.86)
+                CGPoint(x: 556.577, y: -364.928),
+                CGPoint(x: 7575, y: -265.93),
+                CGPoint(x: 10077.53, y: -175.077),
+                CGPoint(x: 16824.793, y: 427.281)
             ]
             checkpoint.position = checkpoint.locations.first!
 //            Level01Scene.addChild(checkpoint)
