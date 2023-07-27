@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  mini_challenge_1
+
+  Created by Enrique Carvalho on 27/07/23.
+  
+*/
+"Name" = "Bloom";
+"Start" = "Appuyez pour commencer";
+"Headphone" = "Ce jeu est meilleur avec des écouteurs";
+"Grain" = "Tu es un grain";
+"Light" = "Dans le vide, tu vois une lumière";
+"Tell" = "Qu'est-ce qu'elle veut te dire ?";
+"SFX" = "Effets sonores";
+"Music" = "Musique";
+"Reset" = "Recommencer le jeu";
+"Overcome" = "Tu as surmonté tes peurs";
+"Voice" = "De qui est cette voix ?";
+"Credits" = "
+            
+               Bloom
+
+                Développeurs iOS:
+            
+                  -  Enrique Carvalho
+                  -  Jairo Pereira
+                  -  Lucas Nascimento
+                  -  Thayná Rodrigues
+
+            
+                Designer:
+            
+                  -  Maria Clara Guimarães
+            
+            
+                Ce jeu a été développé comme activité à l'Apple Developer Academy / UCB,
+                sous la direction d'Antônio Santos et Felipe Carvalho
+                et la coordination de Jair Barbosa.      
+            ";

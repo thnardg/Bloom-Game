@@ -14,7 +14,7 @@ class HeadphoneScene: SKScene {
         self.addChild(headphone)
         
         // Texto Headphone:
-        let avisoHeadphones = SKLabelNode(text: "Esse jogo fica melhor com fones de ouvido")
+        let avisoHeadphones = SKLabelNode(text: NSLocalizedString("Headphone", comment: ""))
         avisoHeadphones.fontName = "Sora"
         avisoHeadphones.fontSize = 18
         avisoHeadphones.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 50)

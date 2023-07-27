@@ -22,8 +22,8 @@ class GameScene: SKScene {
         
         
         
-        let nome = SKLabelNode(text: "[NOME DO JOGO]")
-        let iniciar = SKLabelNode(text: "Toque para Iniciar")
+        let nome = SKLabelNode(text: NSLocalizedString("Name", comment: ""))
+        let iniciar = SKLabelNode(text: NSLocalizedString("Start", comment: ""))
         nome.fontName = "UbuntuMono-Regular"
         nome.fontSize = 20
         nome.fontColor = SKColor.white

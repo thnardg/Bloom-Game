@@ -4,7 +4,7 @@ import GameplayKit
 class EndingTextScene: SKScene {
     
     private var label: SKLabelNode!
-    private var cutsceneText = ["Você superou o seu medo", "De quem é essa voz?"]
+    private var cutsceneText = [NSLocalizedString("Overcome", comment: ""), NSLocalizedString("Voice", comment: "")]
     private var currentTextIndex = 0
     
     override func didMove(to view: SKView) {

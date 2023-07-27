@@ -167,6 +167,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 cameraNode?.position.x = 63.308
                 cameraNode?.position.y = player.position.y
                 returnButton.position.x = -286.692
+                returnButton.position.y = player.position.y + 150
             } else {
                 camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
                 returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0)]))
