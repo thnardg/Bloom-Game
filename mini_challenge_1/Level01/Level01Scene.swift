@@ -31,70 +31,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var moveSpeed:Double = 0.0
     
-    
-    
     // defining level camera
     var cameraNode: SKCameraNode?
     
     var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
-    override func didMove(to view: SKView) { // loaded when reaching the level
-        
-        if comoJogar != 1{
-           print("foi")
-        }
-        
-        if isReturningToScene == false{
-            if let playerCheckpoint = player.playerCheckpoint{
-                player.position = playerCheckpoint
-            }
-        } else {
-            isReturningToScene = false
-        }
-        
-        connectVirtualController()
-        
-        
-        
-        cameraNode = SKCameraNode() // defining custom camera as level camera
-        
-        cameraNode?.position = player.position
-        if let camera = cameraNode{
-            camera.name = "cameraNode"
-            self.addChild(camera) // adding camera to scene
-        }
-        self.camera = cameraNode // defining custom camera as level camera
-        
-        createButtons()
-        
-        self.addChild(rainEmitter)
-        //rainEmitter.position.y = self.frame.maxY
-        
-        //adding raing to the scene
-        rainEmitter.particlePositionRange.dx = self.frame.width * 3
-        
-        
-        self.addChild(player) // adding player to scene
-        self.addChild(doubleJumpNode) // adding the node to scene
-        self.addChild(checkpoint) // adding checkpoints to scene
-        
-        
-        //to hide the joystick
-        jumpButton.isHidden = true
-        
-        // Adicionar o efeito sonoro de trovão:
-        self.addChild(thunder)
-        let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
-        let waitAction = SKAction.wait(forDuration: 5.0)
-        let sequenceAction = SKAction.sequence([changeVolumeAction, waitAction])
-        let repeatAction = SKAction.repeat(sequenceAction, count: 6)
-                
-        thunder.run(repeatAction)
-    }
-   
     
-    
-    
+    // All Functions
+        
+        
     func createButtons(){
       
         returnButton = SkButtonNode(image: SKSpriteNode(imageNamed: "pause"), label: SKLabelNode()) // creating return button (returns to game start)
@@ -154,6 +99,155 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y - 50, duration: 0)]))
             }
         }
+    }
+    
+    //effects
+    
+    func createLine(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
+        let pathToDraw = CGMutablePath()
+        pathToDraw.move(to: pointA)
+        pathToDraw.addLine(to: pointB)
+        let line = SKShapeNode()
+        line.path = pathToDraw
+        line.glowWidth = 1
+        line.strokeColor = .white
+        return line
+    }
+    func genrateLightningPath(startingFrom: CGPoint, angle: CGFloat, isBranch: Bool) -> [SKShapeNode] {
+        var strikePath: [SKShapeNode] = []
+        var startPoint = startingFrom
+        var endPoint = startPoint
+        let numberOfLines = isBranch ? 50 : 120
+        
+        var idx = 0
+        while idx < numberOfLines {
+            strikePath.append(createLine(pointA: startPoint, pointB: endPoint))
+            startPoint = endPoint
+            let r = CGFloat(10)
+            endPoint.y -= r * cos(angle) + CGFloat.random(in: -10 ... 10)
+            endPoint.x += r * sin(angle) + CGFloat.random(in: -10 ... 10)
+            
+            if Int.random(in: 0 ... 100) == 1 {
+                let branchingStartPoint = endPoint
+                
+                let branchingAngle = CGFloat.random(in: -CGFloat.pi / 4 ... CGFloat.pi / 4) // the angle to make the branching look natural
+                
+                strikePath.append(contentsOf: genrateLightningPath(startingFrom: branchingStartPoint, angle: branchingAngle, isBranch: true))
+            }
+            idx += 1
+        }
+        return strikePath
+    }
+    
+    func lightningStrike(throughPath: [SKShapeNode], maxFlickeringTimes: Int) {
+       
+        let fadeTime = TimeInterval(CGFloat.random(in: 0.005 ... 0.03))
+        let waitAction = SKAction.wait(forDuration: 0.05)
+        let reduceAlphaAction = SKAction.fadeAlpha(to: 0.0, duration: fadeTime)
+        let increaseAlphaAction = SKAction.fadeAlpha(to: 1.0, duration: fadeTime)
+        let flickerSeq = [waitAction, reduceAlphaAction, increaseAlphaAction]
+        
+        var seq: [SKAction] = []
+        let numberOfFlashes = Int.random(in: 1 ... maxFlickeringTimes)
+        
+        for _ in 1 ... numberOfFlashes {
+            seq.append(contentsOf: flickerSeq)
+        }
+        for line in throughPath {
+            seq.append(SKAction.fadeAlpha(to: 0, duration: 0.25))
+            seq.append(SKAction.removeFromParent())
+            line.run(SKAction.sequence(seq))
+            self.addChild(line)
+        }
+    }
+    
+    func flashTheScreen(nTimes: Int) {
+        let lightUpScreenAction = SKAction.run { self.backgroundColor = UIColor.gray }
+        let waitAction = SKAction.wait(forDuration: 0.05)
+        let dimScreenAction = SKAction.run { self.backgroundColor = .darkGray}
+        
+        var flashActionSeq: [SKAction] = []
+        for _ in 1 ... nTimes + 1 {
+            flashActionSeq.append(contentsOf: [lightUpScreenAction, waitAction, dimScreenAction, waitAction])
+        }
+        self.run(SKAction.sequence(flashActionSeq))
+    }
+    
+    func lightning(){
+        let random = Int.random(in: -1 ... 1)
+        let path = genrateLightningPath(startingFrom: CGPoint(x: player.position.x + CGFloat(random), y: player.position.y + 100), angle: CGFloat(100), isBranch: true )
+        lightningStrike(throughPath: path, maxFlickeringTimes: 3)
+        
+        flashTheScreen(nTimes: 4)
+        
+    }
+    
+    override func didMove(to view: SKView) { // loaded when reaching the level
+        
+        if comoJogar != 1{
+            print("foi")
+        }
+        
+        if isReturningToScene == false{
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+            }
+        } else {
+            isReturningToScene = false
+        }
+        
+        connectVirtualController()
+        
+        
+        
+        cameraNode = SKCameraNode() // defining custom camera as level camera
+        
+        cameraNode?.position = player.position
+        if let camera = cameraNode{
+            camera.name = "cameraNode"
+            self.addChild(camera) // adding camera to scene
+        }
+        self.camera = cameraNode // defining custom camera as level camera
+        
+        createButtons()
+        
+        //to hide the joystick
+        jumpButton.isHidden = true
+        
+        
+        //adding rain to the scene
+        rainEmitter.particlePositionRange.dx = self.frame.width * 3
+        
+        
+        
+        
+        
+        
+        self.addChild(rainEmitter) //adding rain to scene
+        self.addChild(player) // adding player to scene
+        self.addChild(doubleJumpNode) // adding the node to scene
+        self.addChild(checkpoint) // adding checkpoints to scene
+        
+        
+        
+        
+        
+        // Adicionar o efeito sonoro de trovão:
+        self.addChild(thunder)
+        let lightningAction = SKAction.run {
+            print("powwwwwww")
+            self.lightning()
+        }
+        let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
+        let waitAction = SKAction.wait(forDuration: 0.5)
+        let sequenceAction = SKAction.sequence([changeVolumeAction, lightningAction, waitAction])
+        let repeatAction = SKAction.repeat(sequenceAction, count: 6)
+
+        thunder.run(repeatAction)
+        
+        //
+        
+        
     }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
@@ -257,6 +351,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       
+        
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
@@ -273,7 +369,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         playerPosx = CGFloat(0)
     }
-    
     
     func didBegin(_ contact: SKPhysicsContact) { // on contact detection
         // Sort the node names alphabetically to create a unique identifier for the contact
