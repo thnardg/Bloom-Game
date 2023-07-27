@@ -15,7 +15,6 @@ var isReturningToScene = false
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     
-    var comoJogar:Int = UserDefaults.standard.integer(forKey: "Data")
     // defining buttons
     var virtualController: GCVirtualController?
     var jumpButton: SkButtonNode!
@@ -39,9 +38,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         
-        if comoJogar != 1{
-            print("foi")
-        }
         
         if isReturningToScene == false{
             if let playerCheckpoint = player.playerCheckpoint{
