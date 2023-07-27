@@ -48,6 +48,7 @@
 		31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31028D562A70264C005F8BA9 /* Checkpoints.swift */; };
 		310C27762A6EFEF400E7C4EE /* DoubleJumpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */; };
 		310C27782A6F046D00E7C4EE /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */; };
+		316EA1D82A72E99B009761C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 316EA1DA2A72E99B009761C3 /* Localizable.strings */; };
 		31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */; };
 		6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */; };
 		B32896DE2A70B749005FB1CE /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32896DC2A70B749005FB1CE /* Rain.sks */; };
@@ -106,6 +107,11 @@
 		31028D562A70264C005F8BA9 /* Checkpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoints.swift; sourceTree = "<group>"; };
 		310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleJumpNode.swift; sourceTree = "<group>"; };
 		310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		314DBEEE2A73003E0065E671 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		314DBEEF2A7301820065E671 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		314DBEF02A7302440065E671 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		316EA1D92A72E99B009761C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		316EA1DC2A72EBDD009761C3 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButtonNode.swift; sourceTree = "<group>"; };
 		6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelTileSet.sks; sourceTree = "<group>"; };
 		B32896DC2A70B749005FB1CE /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
@@ -144,6 +150,7 @@
 		2F32817D2A61B89B00456E61 = {
 			isa = PBXGroup;
 			children = (
+				316EA1DA2A72E99B009761C3 /* Localizable.strings */,
 				2F3281882A61B89C00456E61 /* mini_challenge_1 */,
 				2F3281962A61B89C00456E61 /* Assets.xcassets */,
 				2F3281872A61B89C00456E61 /* Products */,
@@ -343,11 +350,15 @@
 			};
 			buildConfigurationList = 2F3281812A61B89B00456E61 /* Build configuration list for PBXProject "mini_challenge_1" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
+				es,
+				fr,
+				it,
 			);
 			mainGroup = 2F32817D2A61B89B00456E61;
 			productRefGroup = 2F3281872A61B89C00456E61 /* Products */;
@@ -374,6 +385,7 @@
 				2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */,
 				2F3CE98B2A61BBDB004F5FF0 /* IntroTextScene.sks in Resources */,
 				6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */,
+				316EA1D82A72E99B009761C3 /* Localizable.strings in Resources */,
 				B32896DE2A70B749005FB1CE /* Rain.sks in Resources */,
 				2FB5FAA62A6EF5B6003DA0E1 /* happiness.mp3 in Resources */,
 				2FB5FAAC2A6EF61A003DA0E1 /* intro-music.mp3 in Resources */,
@@ -449,6 +461,18 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		316EA1DA2A72E99B009761C3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				316EA1D92A72E99B009761C3 /* en */,
+				316EA1DC2A72EBDD009761C3 /* pt-BR */,
+				314DBEEE2A73003E0065E671 /* es */,
+				314DBEEF2A7301820065E671 /* fr */,
+				314DBEF02A7302440065E671 /* it */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -456,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -516,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
