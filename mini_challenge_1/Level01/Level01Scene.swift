@@ -21,6 +21,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     var jumpButton: SkButtonNode!
     var returnButton: SkButtonNode!
     
+    let thunder = SKAudioNode(fileNamed: "thunder.mp3") // Trovões
+    
     var playerPosx: CGFloat = 0
     
     var isUsingJoystick = false
@@ -77,9 +79,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         self.addChild(checkpoint) // adding checkpoints to scene
         
         
-        
         //to hide the joystick
         jumpButton.isHidden = true
+        
+        // Adicionar o efeito sonoro de trovão:
+        self.addChild(thunder)
+        let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
+        let waitAction = SKAction.wait(forDuration: 5.0)
+        let sequenceAction = SKAction.sequence([changeVolumeAction, waitAction])
+        let repeatAction = SKAction.repeat(sequenceAction, count: 6)
+                
+        thunder.run(repeatAction)
     }
    
     
