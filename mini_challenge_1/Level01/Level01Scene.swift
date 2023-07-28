@@ -35,9 +35,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
-    
+    var canJump = true
     override func didMove(to view: SKView) { // loaded when reaching the level
-        
+        //dont let the player to move
+        if player.playerCheckpoint == CGPoint(x: 0.0, y: 0.0){
+            setValueFalseForSomeSeconds()
+        }else{
+            connectVirtualController()
+        }
         
         if isReturningToScene == false{
             if let playerCheckpoint = player.playerCheckpoint{
@@ -47,7 +52,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             isReturningToScene = false
         }
         
-        connectVirtualController()
+        //connectVirtualController()
         
         
         
@@ -121,7 +126,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     
     // All Functions
-        
+    func setValueFalseForSomeSeconds() {//this function is for block the player to run or walk for 5 seconds
+        //it is for the time to the ball goes out of the screen
+            canJump = false //he cant jump too
+            Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
+                //after 5 seconds everything works like its to be
+                self?.canJump = true
+                self?.connectVirtualController()
+            }
+        }
         
     func createButtons(){
       
@@ -201,18 +214,19 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         rainEmitter.position.y = player.position.y + 190
         
         /// Controller Settings
-        playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
+        playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
         guard let controller = virtualController?.controller else {
            return
        }
 
        // Check if the player is using the virtual joystick
         let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-      
         moveSpeed = xAxisValue * player.speed
+        
 
        let joystickThreshold: CGFloat = 0.1 // Define a threshold value to consider the joystick is being used
 
+        
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) > joystickThreshold{
            isUsingJoystick = true
@@ -223,6 +237,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
 //           player.scale(to: CGSize(width: 50, height: 100))
 //           player.removeAction(forKey: "walk")
            player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
+           
            
        }
         
@@ -298,7 +313,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         let touchLocation = touch.location(in: self)
         
         if jumpButton.contains(touchLocation) {
-            jumpCharacter()
+            if canJump{
+                jumpCharacter()
+            }
         }
         
         else if returnButton.contains(touchLocation){ // if clicking the return button
