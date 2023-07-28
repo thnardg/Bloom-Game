@@ -110,11 +110,7 @@ extension SKScene{
         // Adicionar o efeito sonoro de trovão:
         
         self.addChild(thunder)
-        /*
-           let lightningAction = SKAction.run {
-               self.lightning()
-           }
-         */
+       
         
            let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
 

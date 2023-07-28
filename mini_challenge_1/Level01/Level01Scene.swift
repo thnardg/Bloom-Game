@@ -45,7 +45,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
         }
     
-    var nextLevel = NextLevel(CGPoint(x: 700, y: -300))
+//    var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
+    var nextLevel = NextLevel(CGPoint(x: 274, y: -415))
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         
@@ -216,6 +217,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
+        print(player.position)
         
         
         ///rain settings
@@ -360,6 +362,19 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             doubleJumpNode.hasAcquired = true
             player.jumpLimit = 2
         case "nextLevel-player":
+            SoundDesign.shared.stopSoundEffect()
+            SoundDesign.shared.stopBackgroundMusic()
+            UserDefaults.resetDefaults()
+            checkpoint.removeFromParent()
+            checkpoint.locations = [
+                CGPoint(x: 556.577, y: -364.928),
+                CGPoint(x: 7575, y: -265.93),
+                CGPoint(x: 10077.53, y: -175.077),
+                CGPoint(x: 16824.793, y: 427.281)
+            ]
+            virtualController?.disconnect()
+            checkpoint.position = checkpoint.locations.first!
+            
             let gameScene = SKScene(fileNamed: "EndingTextScene")
                self.view?.presentScene(gameScene) // taking the player to the next scene
         default:
