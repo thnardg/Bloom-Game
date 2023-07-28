@@ -39,7 +39,23 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func didMove(to view: SKView) { // loaded when reaching the level
         //dont let the player to move
         if player.playerCheckpoint == CGPoint(x: 0.0, y: 0.0){
-            setValueFalseForSomeSeconds()
+            setValueFalseForSomeSeconds() //calling the function that stops the player movimentation for 5 seconds
+            
+            //making the light animation
+            let light = SKSpriteNode(imageNamed: "O2")
+            light.size = CGSize(width: 50, height: 50)
+            light.position = CGPoint(x: 50, y: -300)
+            addChild(light)
+            
+            let path = CGMutablePath()
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addQuadCurve(to: CGPoint(x: 750, y: 400), control: CGPoint(x: 500, y: -100))
+            let moveAction1 = SKAction.moveBy(x: 50, y: -30, duration: 3)
+            let moveAction = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 4)
+            let remove = SKAction.removeFromParent()
+            let sequence = SKAction.sequence([moveAction1, moveAction, remove])
+            light.run(sequence)
+            
         }else{
             connectVirtualController()
         }
@@ -88,19 +104,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         
         
-        let light = SKSpriteNode(imageNamed: "O2")
-        light.size = CGSize(width: 50, height: 50)
-        light.position = CGPoint(x: 50, y: -300)
-        addChild(light)
         
-        let path = CGMutablePath()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addQuadCurve(to: CGPoint(x: 750, y: 400), control: CGPoint(x: 500, y: -100))
-        let moveAction1 = SKAction.moveBy(x: 50, y: -30, duration: 3)
-        let moveAction = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 4)
-        let remove = SKAction.removeFromParent()
-        let sequence = SKAction.sequence([moveAction1, moveAction, remove])
-        light.run(sequence)
         
         
         // Adicionar o efeito sonoro de trovão:
