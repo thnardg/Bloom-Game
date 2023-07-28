@@ -47,7 +47,7 @@
 		31022FBC2A68621400AB5828 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB72A68621400AB5828 /* DeadState.swift */; };
 		31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31028D562A70264C005F8BA9 /* Checkpoints.swift */; };
 		310C27762A6EFEF400E7C4EE /* DoubleJumpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */; };
-		310C27782A6F046D00E7C4EE /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */; };
+		310C27782A6F046D00E7C4EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27772A6F046D00E7C4EE /* Extensions.swift */; };
 		316EA1D82A72E99B009761C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 316EA1DA2A72E99B009761C3 /* Localizable.strings */; };
 		31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */; };
 		6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6E1A7FC42A6B011D005E410F /* LevelTileSet.sks */; };
@@ -106,7 +106,7 @@
 		31022FB72A68621400AB5828 /* DeadState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
 		31028D562A70264C005F8BA9 /* Checkpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoints.swift; sourceTree = "<group>"; };
 		310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleJumpNode.swift; sourceTree = "<group>"; };
-		310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
+		310C27772A6F046D00E7C4EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		314DBEEE2A73003E0065E671 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		314DBEEF2A7301820065E671 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		314DBEF02A7302440065E671 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 				B32B4AC92A65B86100031DA0 /* Movimentation.swift */,
 				2FB5FA962A6EEF77003DA0E1 /* SoundDesign.swift */,
 				310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */,
-				310C27772A6F046D00E7C4EE /* UserDefaultsExtension.swift */,
+				310C27772A6F046D00E7C4EE /* Extensions.swift */,
 				31028D562A70264C005F8BA9 /* Checkpoints.swift */,
 			);
 			path = Utils;
@@ -424,7 +424,7 @@
 				2FB5FAA12A6EF1A9003DA0E1 /* HeadphoneScene.swift in Sources */,
 				31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */,
 				B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */,
-				310C27782A6F046D00E7C4EE /* UserDefaultsExtension.swift in Sources */,
+				310C27782A6F046D00E7C4EE /* Extensions.swift in Sources */,
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
 				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
 				31022FB92A68621400AB5828 /* JumpState.swift in Sources */,
