@@ -58,6 +58,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             
         }else{
             connectVirtualController()
+            
         }
         
         if isReturningToScene == false{
@@ -214,8 +215,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         
         ///rain settings
-        rainEmitter.position.x = player.position.x
-        rainEmitter.position.y = player.position.y + 190
+        rainEmitter.position.x = camera?.position.x ?? player.position.x
+        rainEmitter.position.y = (camera?.position.y ?? player.position.y) + 190
         
         /// Controller Settings
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
