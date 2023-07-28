@@ -14,6 +14,7 @@ import GameController
 var isReturningToScene = false
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
+    let onboardingKey = "usr_onboarding"
     
     // defining buttons
     var virtualController: GCVirtualController?
@@ -36,30 +37,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
     var canJump = true
-    override func didMove(to view: SKView) { // loaded when reaching the level
-        //dont let the player to move
-        if player.playerCheckpoint == CGPoint(x: 0.0, y: 0.0){
-            setValueFalseForSomeSeconds() //calling the function that stops the player movimentation for 5 seconds
-            
-            //making the light animation
-            let light = SKSpriteNode(imageNamed: "O2")
-            light.size = CGSize(width: 50, height: 50)
-            light.position = CGPoint(x: 50, y: -300)
-            addChild(light)
-            
-            let path = CGMutablePath()
-            path.move(to: CGPoint(x: 0, y: 0))
-            path.addQuadCurve(to: CGPoint(x: 750, y: 400), control: CGPoint(x: 500, y: -100))
-            let moveAction1 = SKAction.moveBy(x: 50, y: -30, duration: 3)
-            let moveAction = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 4)
-            let remove = SKAction.removeFromParent()
-            let sequence = SKAction.sequence([moveAction1, moveAction, remove])
-            light.run(sequence)
-            
-        }else{
-            connectVirtualController()
-            
+    
+    var notOnboarding: Bool{
+            get{
+                UserDefaults.standard.bool(forKey: onboardingKey)
+            }
+            set{
+                UserDefaults.standard.setValue(newValue, forKey: onboardingKey)
+            }
         }
+    
+    override func didMove(to view: SKView) { // loaded when reaching the level
         
         if isReturningToScene == false{
             if let playerCheckpoint = player.playerCheckpoint{
@@ -84,13 +72,18 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         createButtons()
         
-        //to hide the joystick
+        if !notOnboarding{
+            onboarding()
+        } else {
+            connectVirtualController()
+        }
+
+        //to hide the jump button
         jumpButton.isHidden = true
         
         
         //adding rain to the scene
         rainEmitter.particlePositionRange.dx = self.frame.width * 3
-        
         
         
         
@@ -128,6 +121,36 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
+    func onboarding(){
+        let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: ""))
+        onboarding.position = CGPoint(x: 0, y: frame.maxY - 80)
+        onboarding.fontName = "Sora"
+        onboarding.fontSize = 14
+        onboarding.alpha = 0
+        cameraNode?.addChild(onboarding)
+        
+        let waitAction = SKAction.wait(forDuration: 7)
+        let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)])
+        
+        onboarding.run((.sequence([waitAction, fadeInOutAction])))
+        
+        setValueFalseForSomeSeconds() //calling the function that stops the player movimentation for 5 seconds
+        
+        //making the light animation
+        let light = SKSpriteNode(imageNamed: "O2")
+        light.size = CGSize(width: 50, height: 50)
+        light.position = CGPoint(x: 50, y: -300)
+        addChild(light)
+        
+        let path = CGMutablePath()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addQuadCurve(to: CGPoint(x: 750, y: 400), control: CGPoint(x: 500, y: -100))
+        let moveAction1 = SKAction.moveBy(x: 50, y: -30, duration: 3)
+        let moveAction = SKAction.follow(path, asOffset: true, orientToPath: false, duration: 4)
+        let remove = SKAction.removeFromParent()
+        let sequence = SKAction.sequence([moveAction1, moveAction, remove])
+        light.run(sequence)
+    }
     
     
     // All Functions
@@ -155,6 +178,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         jumpButton = SkButtonNode(image: .init(color: .blue, size: CGSize(width: 500, height: 500)), label: .init(text: "Up")) // creating jump button for the player character
         
         if let button = jumpButton{
+            button.position.x = player.position.x + 280
+            button.position.y = player.position.y
             addChild(button) // adding it to the scene's node tree
         }
         
@@ -195,10 +220,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 cameraNode?.position.y = player.position.y
                 returnButton.position.x = -286.692
                 returnButton.position.y = player.position.y + 150
+                jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50)
             } else {
-                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0)]))
-                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0)]))
-                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y - 50, duration: 0)]))
+                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 4)]))
+                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 4)]))
+                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 4)]))
             }
         }
     }
@@ -342,6 +368,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Handle the unique contact events
         switch contactIdentifier {
         case "checkpoint-player":
+            if checkpoint.locations.first == CGPoint(x: 556.577, y: -364.928){
+                notOnboarding = true
+                print("nao vai amis")
+            }
             checkpoint.updateCheckpoint()
             checkpoint.removeFromParent()
             addChild(checkpoint)
