@@ -45,8 +45,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
         }
     
-//    var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
-    var nextLevel = NextLevel(CGPoint(x: 274, y: -415))
+        var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
+
     
     override func didMove(to view: SKView) { // loaded when reaching the level
         
@@ -332,6 +332,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         else if returnButton.contains(touchLocation){ // if clicking the return button
             let gameScene = SKScene(fileNamed: "SettingScene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+            
         }
     }
     
@@ -374,6 +375,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             ]
             virtualController?.disconnect()
             checkpoint.position = checkpoint.locations.first!
+            player.removeFromParent()
             
             let gameScene = SKScene(fileNamed: "EndingTextScene")
                self.view?.presentScene(gameScene) // taking the player to the next scene
