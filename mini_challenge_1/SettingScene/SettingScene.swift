@@ -202,11 +202,13 @@ class SettingScene: SKScene {
             isReturningToScene = true
             let gameScene = SKScene(fileNamed: "Level01Scene")
                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+            
         }
 
         if informationButton.contains(touchLocation){
             let gameScene = SKScene(fileNamed: "InfoScene")
             self.view?.presentScene(gameScene)
+            
         }
     }
     
