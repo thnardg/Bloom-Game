@@ -210,8 +210,30 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     //effects
     
-    
-    
+    func getDoubleJump(){
+            doubleJumpNode.hasAcquired = true
+    //        notOnboarding = true
+            player.jumpLimit = 2
+            let label = SKLabelNode(text: NSLocalizedString("DJump", comment: ""))
+            label.position = CGPoint(x: 16824.793, y: 470)
+            label.fontName = "Sora"
+            label.fontSize = 14
+            label.alpha = 0
+            let labelBg = SKSpriteNode(texture: SKTexture(imageNamed: "LabelBg"))
+            labelBg.size = CGSize(width: label.frame.size.width + 20, height: label.frame.size.height + 10)
+            labelBg.position = CGPoint(x: label.position.x, y: 475)
+            labelBg.zPosition = -1
+            labelBg.alpha = 0
+            
+            self.addChild(labelBg)
+            self.addChild(label)
+            
+            let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)])
+            
+            label.run(fadeInOutAction)
+            labelBg.run(fadeInOutAction)
+            
+        }
     
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
@@ -274,8 +296,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         /// Double Jump removal if acquired
         if doubleJumpNode.hasAcquired {
-            doubleJumpNode.removeFromParent()
-        }
+                    let action = SKAction.run {
+                        self.doubleJumpNode.removeFromParent()
+                    }
+                    if doubleJumpNode.hasAcquired{
+                        self.doubleJumpNode.removeFromParent()
+                    } else {
+                        doubleJumpNode.run(.sequence([.fadeOut(withDuration: 0.5), action]))
+                    }
+                }
         
         
         /// Death
@@ -360,8 +389,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         case "ground-player":
             player.jumped = 1
         case "doubleJump-player":
-            doubleJumpNode.hasAcquired = true
-            player.jumpLimit = 2
+            getDoubleJump()
         case "nextLevel-player":
             SoundDesign.shared.stopSoundEffect()
             SoundDesign.shared.stopBackgroundMusic()

@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   mini_challenge_1
 
@@ -11,7 +11,6 @@
 "Grain" = "Você é um grão";
 "Light" = "No vazio você vê uma luz";
 "Tell" = "O que ela quer te dizer?";
-"Onboarding" = "Toque no lado direito para pular";
 "SFX" = "Efeitos";
 "Music" = "Música";
 "Reset" = "Reiniciar Jogo";
@@ -41,7 +40,7 @@
             
                 Agradecimentos:
             
-                Musicas and SFX
+                Musicas e SFX
                   -  Tense Sad Piano por Ashot Danielyan no Pixabay
                   -  Middle East por AlexiAction no Pixabay
                   -  Artificial Emotions por TimKulig no Pixabay
@@ -57,3 +56,5 @@
                   -
                   -
             ";
+"Onboarding" = "Toque no lado direito para pular";
+"DJump" = "Toque 2x para pular mais alto";
