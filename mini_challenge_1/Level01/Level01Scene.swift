@@ -45,6 +45,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
         }
     
+    var nextLevel = NextLevel(CGPoint(x: 700, y: -300))
+    
     override func didMove(to view: SKView) { // loaded when reaching the level
         
         if isReturningToScene == false{
@@ -91,6 +93,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         self.addChild(player) // adding player to scene
         self.addChild(doubleJumpNode) // adding the node to scene
         self.addChild(checkpoint) // adding checkpoints to scene
+        self.addChild(nextLevel) // adding next level light
         
 
         
@@ -356,6 +359,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         case "doubleJump-player":
             doubleJumpNode.hasAcquired = true
             player.jumpLimit = 2
+        case "nextLevel-player":
+            let gameScene = SKScene(fileNamed: "EndingTextScene")
+               self.view?.presentScene(gameScene) // taking the player to the next scene
         default:
             break
         }
