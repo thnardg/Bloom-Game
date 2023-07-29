@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   mini_challenge_1
 
@@ -54,3 +54,5 @@
                   -
                   -
             ";
+"Onboarding" = "Toca a la derecha para saltar";
+"DJump" = "Haz doble toque para saltar más alto";

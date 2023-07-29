@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   mini_challenge_1
 
@@ -56,3 +56,5 @@
                   -
                   -
             ";
+"Onboarding" = "Tap on the right to jump";
+"DJump" = "Double tap to jump higher";

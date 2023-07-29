@@ -25,7 +25,7 @@ extension SKSpriteNode {
 }
 
 
-
+//create the storm effects
 extension SKScene{
     func createLine(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
         let pathToDraw = CGMutablePath()
@@ -100,21 +100,19 @@ extension SKScene{
         self.run(SKAction.sequence(flashActionSeq))
     }
     
+    
+    
     func lightning(){
         let thunder = SKAudioNode(fileNamed: "thunder.mp3") // Trovões
         let random = Int.random(in: -1 ... 1)
-        let path = genrateLightningPath(startingFrom: CGPoint(x: player.position.x + CGFloat(random), y: player.position.y + 100), angle: CGFloat(100), isBranch: true )
+        let path = genrateLightningPath(startingFrom: CGPoint(x: player.position.x + CGFloat(random), y: (camera?.position.y ?? player.position.y) + 230), angle: CGFloat(100), isBranch: true )
         lightningStrike(throughPath: path, maxFlickeringTimes: 3)
         
         flashTheScreen(nTimes: 4)
         // Adicionar o efeito sonoro de trovão:
         
         self.addChild(thunder)
-        /*
-           let lightningAction = SKAction.run {
-               self.lightning()
-           }
-         */
+       
         
            let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
 

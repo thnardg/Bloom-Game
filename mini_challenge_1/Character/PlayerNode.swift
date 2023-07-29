@@ -31,7 +31,7 @@ class PlayerNode: SKSpriteNode {
         }
     }
     var jumped = 1
-    var animationFrameTime = 0.6
+    var animationFrameTime = 2.0
     var playerCheckpoint: CGPoint?
     {
         get{
@@ -44,7 +44,8 @@ class PlayerNode: SKSpriteNode {
     
     init() {
         let texture = SKTexture(imageNamed: "im1")
-        let size = CGSize(width: 50, height: 100)
+        let size = CGSize(width: 100, height: 100)
+//        let size = CGSize(width: 50, height: 100)
         let speed = 5.0
         super.init(texture: texture, color: .orange, size: size)
         self.speed = speed
