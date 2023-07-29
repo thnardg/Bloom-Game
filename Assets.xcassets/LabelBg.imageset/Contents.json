@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PlayerWalk 48x48 7a6.png",
+      "filename" : "LabelBg.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "LabelBg 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "LabelBg 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

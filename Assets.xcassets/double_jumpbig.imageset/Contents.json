@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "PlayerWalk 48x48 3a8.png",
+      "filename" : "double_jumpbig.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "double_jumpbig 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "double_jumpbig 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
