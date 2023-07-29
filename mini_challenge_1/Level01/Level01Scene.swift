@@ -37,13 +37,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     var canJump = true
     
     var notOnboarding: Bool{
-            get{
-                UserDefaults.standard.bool(forKey: onboardingKey)
-            }
-            set{
-                UserDefaults.standard.setValue(newValue, forKey: onboardingKey)
-            }
+        get{
+            UserDefaults.standard.bool(forKey: onboardingKey)
         }
+        set{
+            UserDefaults.standard.setValue(newValue, forKey: onboardingKey)
+        }
+    }
     
         var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
 
