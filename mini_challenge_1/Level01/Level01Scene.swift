@@ -137,13 +137,19 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func firstMove(){
         let move = SKAction.moveTo(x: 150, duration: 25)
-        let moveAction = SKAction.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime))
-        let playerRemoveAction = SKAction.run {
-            player.removeAllActions()
+        let moveAction = SKAction.run{
+            self.moveSpeed = 2
+            self.startWalkingAnimation()
         }
-        
+        let playerRemoveAction = SKAction.run {
+            self.moveSpeed = 0
+            player.removeAllActions()
+            self.stopWalkingAnimation()
+            self.idleAnimation()
+        }
         player.run(.sequence([
-            .group([move, moveAction]), playerRemoveAction]))
+            .group([move, moveAction]), playerRemoveAction]), withKey: "sequence")
+        
     }
     
     
@@ -250,12 +256,49 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             
         }
     
+    func startWalkingAnimation() {
+        player.removeAction(forKey: "idle")
+        player.alpha = 1
+        // Check if the walk animation is already running
+        if player.action(forKey: "walk") == nil {
+            // Create the animation action and run it once
+            let moveAction = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 2.0))
+            moveAction.speed = 0
+            player.run(moveAction, withKey: "walk")
+        }
+    }
+
+    func stopWalkingAnimation() {
+        player.removeAction(forKey: "walk")
+        player.texture = SKTexture(imageNamed: "im3")
+    }
+    
+    func idleAnimation(){
+        stopWalkingAnimation()
+        if player.action(forKey: "idle") == nil {
+            // Create the animation action and run it once
+            let idleAction = SKAction.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)]))
+            player.run(idleAction, withKey: "idle")
+        }
+    }
+
+    func updatePlayerPosition() {
+        // Update the player's position based on the movement speed
+        player.position.x += self.moveSpeed
+
+        // Update the player's facing direction based on moveSpeed
+        if self.moveSpeed < 0 {
+            player.xScale = -1
+        } else if self.moveSpeed > 0 {
+            player.xScale = 1
+        }
+        
+    }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
-        print(player.position)
-        
+//        print(moveSpeed)
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -270,42 +313,30 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
        // Check if the player is using the virtual joystick
         let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
         moveSpeed = xAxisValue * player.speed
-        
+        updatePlayerPosition()
 
-       let joystickThreshold: CGFloat = 0.1 // Define a threshold value to consider the joystick is being used
-
-        
+        if let moveAction = player.action(forKey: "walk"){
+            if moveSpeed < 0{
+                moveSpeed -= moveSpeed * 2
+                moveAction.speed = moveSpeed
+            } else {
+                moveAction.speed = moveSpeed
+            }
+        }
+        print(isUsingJoystick)
        // If the joystick values are beyond the threshold, consider the joystick is being used
-       if abs(xAxisValue) > joystickThreshold{
+       if abs(xAxisValue) != 0{
            isUsingJoystick = true
-//           player.removeAction(forKey: "idle")
-//           player.run(.repeatForever(.sequence([.scale(to: 1.2, duration: 1), .scale(to: 0.8, duration: 1)])), withKey: "idle")
        } else {
            isUsingJoystick = false
-//           player.scale(to: CGSize(width: 50, height: 100))
-//           player.removeAction(forKey: "walk")
-           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
-           
-           
        }
         
         /// Controller
        // If the joystick is being used, update the player's position
        if isUsingJoystick {
-           let run = SKAction.run {
-               player.position.x += self.moveSpeed
-           }
-           
-           player.run(.sequence([.wait(forDuration: player.animationFrameTime), run]))
-//           player.run(.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime / 1.5)), withKey: "walk")
-           
-           if xAxisValue < 0{
-               player.xScale = -1
-//               print(isUsingJoystick)
-           }
-           if xAxisValue > 0{
-               player.xScale = 1
-           }
+           startWalkingAnimation()
+       } else {
+           idleAnimation()
        } ///End of controller settings
         
         

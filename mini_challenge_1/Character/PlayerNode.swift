@@ -31,7 +31,7 @@ class PlayerNode: SKSpriteNode {
         }
     }
     var jumped = 1
-    var animationFrameTime = 0.6
+    var animationFrameTime = 2.0
     var playerCheckpoint: CGPoint?
     {
         get{
