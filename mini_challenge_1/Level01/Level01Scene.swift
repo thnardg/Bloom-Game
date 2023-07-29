@@ -53,6 +53,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         if isReturningToScene == false{
             if let playerCheckpoint = player.playerCheckpoint{
                 player.position = playerCheckpoint
+                if playerCheckpoint == CGPoint(x: 0, y: 0){
+                    player.position = CGPoint(x: -300, y: -414)
+                    firstMove()
+                }
             }
         } else {
             isReturningToScene = false
@@ -131,6 +135,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         light.run(sequence)
     }
     
+    func firstMove(){
+        let move = SKAction.moveTo(x: 150, duration: 25)
+        let moveAction = SKAction.repeatForever(.animate(with: (player.textureSheet), timePerFrame: player.animationFrameTime))
+        let playerRemoveAction = SKAction.run {
+            player.removeAllActions()
+        }
+        
+        player.run(.sequence([
+            .group([move, moveAction]), playerRemoveAction]))
+    }
+    
     
     // All Functions
     func setValueFalseForSomeSeconds() {//this function is for block the player to run or walk for 5 seconds
@@ -201,9 +216,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 returnButton.position.y = player.position.y + 150
                 jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50)
             } else {
-                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 4)]))
-                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 4)]))
-                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 4)]))
+                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
+                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 2)]))
+                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
             }
         }
     }
