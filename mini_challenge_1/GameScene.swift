@@ -15,17 +15,21 @@ class GameScene: SKScene {
         
         self.backgroundColor = .black
 
+        // Imagem de fundo:
+        self.scaleMode = .aspectFill
+        let backgroundImage = SKSpriteNode(imageNamed: "Menu_fundox4.png")
+            backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+            backgroundImage.zPosition = -1
+            addChild(backgroundImage)
+        
         // Música intro:
-        
         SoundDesign.shared.playBackgroundMusic(filename: "intro-music.mp3")
-        
-        
         
         
         let nome = SKLabelNode(text: NSLocalizedString("Name", comment: ""))
         let iniciar = SKLabelNode(text: NSLocalizedString("Start", comment: ""))
         nome.fontName = "UbuntuMono-Regular"
-        nome.fontSize = 20
+        nome.fontSize = 25
         nome.fontColor = SKColor.white
         nome.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         self.addChild(nome)
