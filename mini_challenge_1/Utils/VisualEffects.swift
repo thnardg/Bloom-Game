@@ -25,7 +25,7 @@ extension SKSpriteNode {
 }
 
 
-
+//create the storm effects
 extension SKScene{
     func createLine(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
         let pathToDraw = CGMutablePath()
@@ -99,6 +99,8 @@ extension SKScene{
         }
         self.run(SKAction.sequence(flashActionSeq))
     }
+    
+    
     
     func lightning(){
         let thunder = SKAudioNode(fileNamed: "thunder.mp3") // Trovões
