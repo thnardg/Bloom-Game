@@ -212,6 +212,8 @@ class SettingScene: SKScene {
                     CGPoint(x: 10077.53, y: -175.077),
                     CGPoint(x: 16824.793, y: 427.281)
                 ]
+                checkCount = 0
+                UserDefaults.standard.set(checkCount, forKey: "check")
                 checkpoint.position = checkpoint.locations.first!
                 let gameScene = SKScene(fileNamed: "GameScene")
                 self.view?.presentScene(gameScene) // taking the player back to the start of the game

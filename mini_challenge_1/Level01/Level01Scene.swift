@@ -12,6 +12,7 @@ import GameplayKit
 import GameController
 
 var isReturningToScene = false
+var checkCount = UserDefaults.standard.integer(forKey: "check")
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     let onboardingKey = "usr_onboarding"
@@ -256,6 +257,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         virtualController?.disconnect()
         checkpoint.position = checkpoint.locations.first!
         player.removeFromParent()
+        checkCount = 0
         
         let gameScene = SKScene(fileNamed: "EndingTextScene")
            self.view?.presentScene(gameScene) // taking the player to the next scene
@@ -323,7 +325,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
-        print(player.physicsBody?.mass)
+        
+        print(checkCount)
+
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -449,16 +453,28 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Handle the unique contact events
         switch contactIdentifier {
         case "checkpoint-player":
-            lightning()
+            
             if checkpoint.locations.first == CGPoint(x: 556.577, y: -364.928){
                 notOnboarding = true
             }
             checkpoint.updateCheckpoint()
             checkpoint.removeFromParent()
+            
+            lightning()
+            checkCount += 1
+            UserDefaults.standard.set(checkCount, forKey: "check")
+            
+            if checkCount >= 4{
+                checkpoint.removeFromParent()
+            }else{
+                addChild(checkpoint)
+            }
+            
         case "ground-player":
             player.jumped = 1
         case "doubleJump-player":
             getDoubleJump()
+            checkpoint.removeFromParent()
         case "nextLevel-player":
             prepareToGoToNextScene()
         default:
