@@ -45,64 +45,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
     
-        var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
+    var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
 
     
-    override func didMove(to view: SKView) { // loaded when reaching the level
-        
-        if isReturningToScene == false{
-            if let playerCheckpoint = player.playerCheckpoint{
-                player.position = playerCheckpoint
-                if playerCheckpoint == CGPoint(x: 0, y: 0){
-                    player.position = CGPoint(x: -300, y: -414)
-                    firstMove()
-                }
-            }
-        } else {
-            isReturningToScene = false
-        }
-        
-        //connectVirtualController()
-        
-        
-        
-        cameraNode = SKCameraNode() // defining custom camera as level camera
-        
-        cameraNode?.position = player.position
-        if let camera = cameraNode{
-            camera.name = "cameraNode"
-            self.addChild(camera) // adding camera to scene
-        }
-        self.camera = cameraNode // defining custom camera as level camera
-        
-        createButtons()
-        
-        if !notOnboarding{
-            onboarding()
-        } else {
-            connectVirtualController()
-        }
-
-        //to hide the jump button
-        jumpButton.isHidden = true
-        
-        
-        //adding rain to the scene
-        rainEmitter.particlePositionRange.dx = self.frame.width * 3
-        
-        
-        
-        
-        
-        self.addChild(rainEmitter) //adding rain to scene
-        self.addChild(player) // adding player to scene
-        self.addChild(doubleJumpNode) // adding the node to scene
-        self.addChild(checkpoint) // adding checkpoints to scene
-        self.addChild(nextLevel) // adding next level light
-        
-
-        
-    }
+    
+    
+    
+    
+    
+    // All Functions
     
     func onboarding(){
         let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: ""))
@@ -152,8 +103,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
-    
-    // All Functions
     func setValueFalseForSomeSeconds() {//this function is for block the player to run or walk for 5 seconds
         //it is for the time to the ball goes out of the screen
             canJump = false //he cant jump too
@@ -229,8 +178,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
     
-    //effects
-    
     func getDoubleJump(){
             doubleJumpNode.hasAcquired = true
     //        notOnboarding = true
@@ -295,10 +242,87 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
+    func prepareToGoToNextScene(){
+        SoundDesign.shared.stopSoundEffect()
+        SoundDesign.shared.stopBackgroundMusic()
+        UserDefaults.resetDefaults()
+        checkpoint.removeFromParent()
+        checkpoint.locations = [
+            CGPoint(x: 556.577, y: -364.928),
+            CGPoint(x: 7575, y: -265.93),
+            CGPoint(x: 10077.53, y: -175.077),
+            CGPoint(x: 16824.793, y: 427.281)
+        ]
+        virtualController?.disconnect()
+        checkpoint.position = checkpoint.locations.first!
+        player.removeFromParent()
+        
+        let gameScene = SKScene(fileNamed: "EndingTextScene")
+           self.view?.presentScene(gameScene) // taking the player to the next scene
+    }
+    
+    
+    
+    //main Functions
+    override func didMove(to view: SKView) { // loaded when reaching the level
+        
+        if isReturningToScene == false{
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+                if playerCheckpoint == CGPoint(x: 0, y: 0){
+                    player.position = CGPoint(x: -300, y: -414)
+                    firstMove()
+                }
+            }
+        } else {
+            isReturningToScene = false
+        }
+        
+        
+        
+        
+        
+        cameraNode = SKCameraNode() // defining custom camera as level camera
+        
+        cameraNode?.position = player.position
+        if let camera = cameraNode{
+            camera.name = "cameraNode"
+            self.addChild(camera) // adding camera to scene
+        }
+        self.camera = cameraNode // defining custom camera as level camera
+        
+        createButtons()
+        
+        if !notOnboarding{
+            onboarding()
+        } else {
+            connectVirtualController()
+        }
+
+        //to hide the jump button
+        jumpButton.isHidden = true
+        
+        
+        //adding rain to the scene
+        rainEmitter.particlePositionRange.dx = self.frame.width * 3
+        
+        
+        
+        
+        
+        self.addChild(rainEmitter) //adding rain to scene
+        self.addChild(player) // adding player to scene
+        self.addChild(doubleJumpNode) // adding the node to scene
+        self.addChild(checkpoint) // adding checkpoints to scene
+        self.addChild(nextLevel) // adding next level light
+        
+
+        
+    }
+    
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
-//        print(moveSpeed)
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -310,10 +334,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            return
        }
 
-       // Check if the player is using the virtual joystick
+       // getting the joystick x value
         let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-        moveSpeed = xAxisValue * player.speed
-        updatePlayerPosition()
+        moveSpeed = xAxisValue * player.speed //calculating the speed
+        updatePlayerPosition() //applying the speed to the player
 
         if let moveAction = player.action(forKey: "walk"){
             if moveSpeed < 0{
@@ -323,7 +347,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 moveAction.speed = moveSpeed
             }
         }
-        print(isUsingJoystick)
+
        // If the joystick values are beyond the threshold, consider the joystick is being used
        if abs(xAxisValue) != 0{
            isUsingJoystick = true
@@ -342,15 +366,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         /// Double Jump removal if acquired
         if doubleJumpNode.hasAcquired {
-                    let action = SKAction.run {
-                        self.doubleJumpNode.removeFromParent()
-                    }
-                    if doubleJumpNode.hasAcquired{
-                        self.doubleJumpNode.removeFromParent()
-                    } else {
-                        doubleJumpNode.run(.sequence([.fadeOut(withDuration: 0.5), action]))
-                    }
-                }
+            let action = SKAction.run {
+                self.doubleJumpNode.removeFromParent()
+            }
+            if doubleJumpNode.hasAcquired{
+                self.doubleJumpNode.removeFromParent()
+            } else {
+                doubleJumpNode.run(.sequence([.fadeOut(withDuration: 0.5), action]))
+            }
+        }
         
         
         /// Death
@@ -437,26 +461,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         case "doubleJump-player":
             getDoubleJump()
         case "nextLevel-player":
-            SoundDesign.shared.stopSoundEffect()
-            SoundDesign.shared.stopBackgroundMusic()
-            UserDefaults.resetDefaults()
-            checkpoint.removeFromParent()
-            checkpoint.locations = [
-                CGPoint(x: 556.577, y: -364.928),
-                CGPoint(x: 7575, y: -265.93),
-                CGPoint(x: 10077.53, y: -175.077),
-                CGPoint(x: 16824.793, y: 427.281)
-            ]
-            virtualController?.disconnect()
-            checkpoint.position = checkpoint.locations.first!
-            player.removeFromParent()
-            
-            let gameScene = SKScene(fileNamed: "EndingTextScene")
-               self.view?.presentScene(gameScene) // taking the player to the next scene
+            prepareToGoToNextScene()
         default:
             break
         }
     }
+    
 }
 
 
