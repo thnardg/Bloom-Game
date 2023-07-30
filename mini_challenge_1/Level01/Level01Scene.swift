@@ -157,7 +157,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func jumpCharacter() {
         //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
         
-        let height = (player.size.height * 0.88) * 4
+        let height = (player.size.height * 0.88) * 2
         
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
