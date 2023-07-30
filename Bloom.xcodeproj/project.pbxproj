@@ -62,7 +62,7 @@
 		2F2C56D02A719A4200333EC9 /* Sora-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sora-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2F2C56D12A719A5100333EC9 /* UbuntuMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-Regular.ttf"; sourceTree = "<group>"; };
 		2F2C56D42A719AF000333EC9 /* mini-challenge-1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mini-challenge-1-Info.plist"; sourceTree = SOURCE_ROOT; };
-		2F3281862A61B89C00456E61 /* mini_challenge_1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mini_challenge_1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F3281862A61B89C00456E61 /* Bloom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bloom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F3281892A61B89C00456E61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F32818B2A61B89C00456E61 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		2F32818F2A61B89C00456E61 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		2F3281872A61B89C00456E61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2F3281862A61B89C00456E61 /* mini_challenge_1.app */,
+				2F3281862A61B89C00456E61 /* Bloom.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,9 +293,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2F3281852A61B89B00456E61 /* mini_challenge_1 */ = {
+		2F3281852A61B89B00456E61 /* Bloom */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2F32819D2A61B89C00456E61 /* Build configuration list for PBXNativeTarget "mini_challenge_1" */;
+			buildConfigurationList = 2F32819D2A61B89C00456E61 /* Build configuration list for PBXNativeTarget "Bloom" */;
 			buildPhases = (
 				2F3281822A61B89B00456E61 /* Sources */,
 				2F3281832A61B89B00456E61 /* Frameworks */,
@@ -305,9 +305,9 @@
 			);
 			dependencies = (
 			);
-			name = mini_challenge_1;
+			name = Bloom;
 			productName = mini_challenge_1;
-			productReference = 2F3281862A61B89C00456E61 /* mini_challenge_1.app */;
+			productReference = 2F3281862A61B89C00456E61 /* Bloom.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -325,7 +325,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2F3281812A61B89B00456E61 /* Build configuration list for PBXProject "mini_challenge_1" */;
+			buildConfigurationList = 2F3281812A61B89B00456E61 /* Build configuration list for PBXProject "Bloom" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
@@ -342,7 +342,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F3281852A61B89B00456E61 /* mini_challenge_1 */,
+				2F3281852A61B89B00456E61 /* Bloom */,
 			);
 		};
 /* End PBXProject section */
@@ -627,7 +627,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2F3281812A61B89B00456E61 /* Build configuration list for PBXProject "mini_challenge_1" */ = {
+		2F3281812A61B89B00456E61 /* Build configuration list for PBXProject "Bloom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F32819B2A61B89C00456E61 /* Debug */,
@@ -636,7 +636,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2F32819D2A61B89C00456E61 /* Build configuration list for PBXNativeTarget "mini_challenge_1" */ = {
+		2F32819D2A61B89C00456E61 /* Build configuration list for PBXNativeTarget "Bloom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2F32819E2A61B89C00456E61 /* Debug */,
