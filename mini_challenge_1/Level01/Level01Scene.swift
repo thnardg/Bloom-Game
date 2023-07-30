@@ -138,7 +138,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func jumpCharacter() {
         //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
         
-        let height = (player.size.height * 0.88) * 4
+        let height = (player.size.height * 0.88) * 2
         
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
@@ -217,14 +217,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
 
     func stopWalkingAnimation() {
         player.removeAction(forKey: "walk")
-        player.texture = SKTexture(imageNamed: "im3")
+        player.texture = SKTexture(imageNamed: "Player_Idle_4")
     }
     
     func idleAnimation(){
         stopWalkingAnimation()
         if player.action(forKey: "idle") == nil {
             // Create the animation action and run it once
-            let idleAction = SKAction.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)]))
+            let idleAction = SKAction.repeatForever(.animate(with: player.idleTextureSheet, timePerFrame: 0.5))
             player.run(idleAction, withKey: "idle")
         }
     }
@@ -323,6 +323,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
+        print(player.physicsBody?.mass)
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x

@@ -18,10 +18,21 @@ class PlayerNode: SKSpriteNode {
                         SKTexture(imageNamed: "im7"),
                         SKTexture(imageNamed: "im8")
     ]
+    let idleTextureSheet = [SKTexture(imageNamed: "Player_Idle_1"),
+                            SKTexture(imageNamed: "Player_Idle_2"),
+                            SKTexture(imageNamed: "Player_Idle_3"),
+                            SKTexture(imageNamed: "Player_Idle_4"),
+                            SKTexture(imageNamed: "Player_Idle_5"),
+                            SKTexture(imageNamed: "Player_Idle_6"),
+                            SKTexture(imageNamed: "Player_Idle_7"),
+                            SKTexture(imageNamed: "Player_Idle_8"),
+    ]
+    
+    
     var jumpLimit: Int {
         get{
             if UserDefaults.standard.integer(forKey: keyJump) == 0{
-                return 1
+                return 2
             } else {
                 return UserDefaults.standard.integer(forKey: keyJump)
             }
@@ -43,7 +54,7 @@ class PlayerNode: SKSpriteNode {
     }
     
     init() {
-        let texture = SKTexture(imageNamed: "im1")
+        let texture = SKTexture(imageNamed: "Player_Idle_4")
         let size = CGSize(width: 100, height: 100)
 //        let size = CGSize(width: 50, height: 100)
         let speed = 5.0
@@ -67,6 +78,7 @@ class PlayerNode: SKSpriteNode {
         body.affectedByGravity = true
         body.allowsRotation = false
         
+        body.mass = 0.222222238779068
         
         body.categoryBitMask = 1
         body.collisionBitMask = 2
