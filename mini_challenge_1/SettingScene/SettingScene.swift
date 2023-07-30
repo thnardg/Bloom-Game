@@ -143,23 +143,32 @@ class SettingScene: SKScene {
     }
     
     func createPopup(){
-        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode()) // creating return button (returns to game start)
+        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode(text: "Deseja sair do Jogo?")) // creating return button (returns to game start)
         
         popupBackGround.image?.size = CGSize(width: 1334, height: 750)
         popupBackGround.position = CGPoint(x: 0, y: 0)
         popupBackGround.zPosition = 1
+        popupBackGround.label?.position = CGPoint(x: 0, y: 40)
         self.addChild(popupBackGround)
         
-        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode())
+        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode(text: "Voltar ao jogo"))
         label.image?.position = CGPoint(x: 0, y: 50)
         label.image?.zPosition = 2
         label.image?.size = CGSize(width: 160, height: 17)
+        label.label?.fontColor = .black
+        label.label?.zPosition = 2
+        label.label?.position = CGPoint(x: -50, y: -72)
+        label.label?.fontSize = 18
+        
         addChild(label)
         
-        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode())
+        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode(text: "Sair"))
         confirm.image?.size = CGSize(width: 80.51, height: 27.84)
         confirm.position = CGPoint(x: 80, y: -15)
         confirm.zPosition = 2
+        confirm.label?.zPosition = 2
+        confirm.label?.color = .white
+        confirm.label?.position = CGPoint(x: 1, y: -7)
         addChild(confirm)
         
         cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "cancelPopup"), label: SKLabelNode())
