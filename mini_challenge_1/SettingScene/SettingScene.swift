@@ -154,7 +154,7 @@ class SettingScene: SKScene {
         label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode(text: "Voltar ao jogo"))
         label.image?.position = CGPoint(x: 0, y: 50)
         label.image?.zPosition = 2
-        label.image?.size = CGSize(width: 160, height: 17)
+        label.image?.size = CGSize(width: 160, height: 18)
         label.label?.fontColor = .black
         label.label?.zPosition = 2
         label.label?.position = CGPoint(x: -50, y: -72)
