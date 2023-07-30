@@ -258,6 +258,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         checkpoint.position = checkpoint.locations.first!
         player.removeFromParent()
         checkCount = 0
+        UserDefaults.standard.set(checkCount, forKey: "check")
         
         let gameScene = SKScene(fileNamed: "EndingTextScene")
            self.view?.presentScene(gameScene) // taking the player to the next scene
