@@ -169,6 +169,7 @@ class SettingScene: SKScene {
         confirm.label?.zPosition = 2
         confirm.label?.color = .white
         confirm.label?.position = CGPoint(x: 1, y: -7)
+        confirm.label?.fontSize = 18
         addChild(confirm)
         
         cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "cancelPopup"), label: SKLabelNode())
