@@ -12,8 +12,8 @@
 "Light" = "En el vacío ves una luz";
 "Tell" = "¿Qué quiere decirte?";
 "SFX" = "Efectos de sonido";
-"Music" = "Música ";
-"Reset" = "Reiniciar juego    ";
+"Music" = "Música";
+"Reset" = "Reiniciar juego";
 "Overcome" = "Has superado tus miedos";
 "Voice" = "¿De quién es esa voz?";
 "Credits" = "
@@ -57,6 +57,6 @@
 "Onboarding" = "Toca a la derecha para saltar";
 "DJump" = "Haz doble toque para saltar más alto";
 "Quit" = "Salir del Juego";
-"QuitConfirmation" = "¿Deseas salir del Juego?    ";
+"QuitConfirmation" = "¿Deseas salir del Juego?";
 "Back" = "Volver al juego";
 "QuitConfirmed" = "Salir";
