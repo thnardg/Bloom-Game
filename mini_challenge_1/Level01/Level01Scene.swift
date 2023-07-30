@@ -454,7 +454,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
             checkpoint.updateCheckpoint()
             checkpoint.removeFromParent()
-            //addChild(checkpoint)
         case "ground-player":
             player.jumped = 1
         case "doubleJump-player":

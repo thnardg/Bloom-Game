@@ -22,10 +22,19 @@ class SettingScene: SKScene {
     var exitButton: SkButtonNode!
     
     
+    var isPopupOn = false
+    var confirm: SkButtonNode!
+    var cancel: SkButtonNode!
+    var popupBackGround: SkButtonNode!
+    var label:SKLabelNode!
+    
+    
     override func didMove(to view: SKView) {
         createButtons()
        
     }
+    
+    //all functions
     
     func createButtons(){
         
@@ -133,6 +142,31 @@ class SettingScene: SKScene {
         addChild(exitText)
     }
     
+    func createPopup(){
+        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "popup"), label: SKLabelNode()) // creating return button (returns to game start)
+        
+        popupBackGround.image?.size = CGSize(width: 400, height: 200)
+        popupBackGround.position = CGPoint(x: 0, y: 0)
+        popupBackGround.zPosition = 1
+        self.addChild(popupBackGround)
+        
+        label = SKLabelNode(text: "Tem Certeza?")
+        label.position = CGPoint(x: 0, y: 50)
+        label.zPosition = 2
+        addChild(label)
+        
+        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "reset"), label: SKLabelNode(text: "sim"))
+        confirm.image?.size = CGSize(width: 80, height: 40)
+        confirm.position = CGPoint(x: -80, y: -50)
+        confirm.zPosition = 2
+        addChild(confirm)
+        
+        cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "reset"), label: SKLabelNode(text: "nao"))
+        cancel.image?.size = CGSize(width: 80, height: 40)
+        cancel.position = CGPoint(x: 80, y: -50)
+        cancel.zPosition = 2
+        addChild(cancel)
+    }
     
     ///
     ///
@@ -147,99 +181,91 @@ class SettingScene: SKScene {
         let touchLocation = touch.location(in: self)
         
         
-
-        if musicButton.contains(touchLocation){
-            musicIsOn.toggle()
-     
-            
-            if musicIsOn == true{
-                musicButton.removeFromParent()
-                sfxButton.removeFromParent()
-                createButtons()
-                SoundDesign.shared.unmuteMusic()
+        if isPopupOn == false{
+            if musicButton.contains(touchLocation){
+                musicIsOn.toggle()
                 
-            }else{
-                musicButton.removeFromParent()
-                sfxButton.removeFromParent()
-                createButtons()
-                SoundDesign.shared.muteMusic()
+                
+                if musicIsOn == true{
+                    musicButton.removeFromParent()
+                    sfxButton.removeFromParent()
+                    createButtons()
+                    SoundDesign.shared.unmuteMusic()
+                    
+                }else{
+                    musicButton.removeFromParent()
+                    sfxButton.removeFromParent()
+                    createButtons()
+                    SoundDesign.shared.muteMusic()
+                }
+            }
+            
+            if resetButton.contains(touchLocation){
+                
+                SoundDesign.shared.stopSoundEffect()
+                SoundDesign.shared.stopBackgroundMusic()
+                UserDefaults.resetDefaults()
+                checkpoint.removeFromParent()
+                checkpoint.locations = [
+                    CGPoint(x: 556.577, y: -364.928),
+                    CGPoint(x: 7575, y: -265.93),
+                    CGPoint(x: 10077.53, y: -175.077),
+                    CGPoint(x: 16824.793, y: 427.281)
+                ]
+                checkpoint.position = checkpoint.locations.first!
+                let gameScene = SKScene(fileNamed: "GameScene")
+                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+                
+            }
+            
+            if sfxButton.contains(touchLocation){
+                sfx.toggle()
+                
+                if sfx == true{
+                    musicButton.removeFromParent()
+                    sfxButton.removeFromParent()
+                    createButtons()
+                    SoundDesign.shared.unmuteSoundEffet()
+                }else{
+                    musicButton.removeFromParent()
+                    sfxButton.removeFromParent()
+                    createButtons()
+                    SoundDesign.shared.muteSoundEffect()
+                }
+            }
+            
+            if exitButton.contains(touchLocation){// if clicking the return menu button
+                //exit(0)
+                
+                createPopup()
+                isPopupOn.toggle()
+                
+            }
+            if returnButton.contains(touchLocation){ // if clicking the return button
+                isReturningToScene = true
+                let gameScene = SKScene(fileNamed: "Level01Scene")
+                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+                
+            }
+            
+            if informationButton.contains(touchLocation){
+                let gameScene = SKScene(fileNamed: "InfoScene")
+                self.view?.presentScene(gameScene)
+                
+            }
+        }else{
+            
+            if confirm.contains(touchLocation){
+                exit(0)
+            }
+            if cancel.contains(touchLocation){
+                isPopupOn.toggle()
+                popupBackGround.removeFromParent()
+                label.removeFromParent()
+                confirm.removeFromParent()
+                cancel.removeFromParent()
             }
         }
-        
-        if resetButton.contains(touchLocation){
-
-            SoundDesign.shared.stopSoundEffect()
-            SoundDesign.shared.stopBackgroundMusic()
-            UserDefaults.resetDefaults()
-            checkpoint.removeFromParent()
-            checkpoint.locations = [
-                CGPoint(x: 556.577, y: -364.928),
-                CGPoint(x: 7575, y: -265.93),
-                CGPoint(x: 10077.53, y: -175.077),
-                CGPoint(x: 16824.793, y: 427.281)
-            ]
-            checkpoint.position = checkpoint.locations.first!
-//            Level01Scene.addChild(checkpoint)
-            let gameScene = SKScene(fileNamed: "GameScene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
-
-        }
-        
-        if sfxButton.contains(touchLocation){
-            sfx.toggle()
-        
-            if sfx == true{
-                musicButton.removeFromParent()
-                sfxButton.removeFromParent()
-                createButtons()
-                SoundDesign.shared.unmuteSoundEffet()
-            }else{
-                musicButton.removeFromParent()
-                sfxButton.removeFromParent()
-                createButtons()
-                SoundDesign.shared.muteSoundEffect()
-            }
-        }
-        
-        if exitButton.contains(touchLocation){// if clicking the return menu button
-            exit(0)
-        }
-        if returnButton.contains(touchLocation){ // if clicking the return button
-            isReturningToScene = true
-            let gameScene = SKScene(fileNamed: "Level01Scene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
-            
-        }
-
-        if informationButton.contains(touchLocation){
-            let gameScene = SKScene(fileNamed: "InfoScene")
-            self.view?.presentScene(gameScene)
-            
-        }
-    }
-    
-    
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-        
-    override func update(_ currentTime: TimeInterval) {
-//        if sfx{
-//            sfxButton.removeFromParent()
-//            createButtons()
-//        }else{
-//            sfxButton.removeFromParent()
-//            createButtons()
-//        }
-        
-        
-        
-        
     }
 }
-    
-    
-    
+
