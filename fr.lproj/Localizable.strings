@@ -59,3 +59,7 @@
             ";
 "Onboarding" = "Appuyez à droite pour sauter";
 "DJump" = "Doublez l'appui pour sauter plus haut";
+"Quit" = "Quitter le jeu";
+"QuitConfirmation" = "Voulez-vous quitter le jeu ?";
+"Back" = "Retourner au jeu";
+"QuitConfirmed" = "Quitter";

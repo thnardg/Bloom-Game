@@ -56,3 +56,7 @@
             ";
 "Onboarding" = "Toca a la derecha para saltar";
 "DJump" = "Haz doble toque para saltar más alto";
+"Quit" = "Salir del Juego";
+"QuitConfirmation" = "¿Deseas salir del Juego?";
+"Back" = "Volver al juego";
+"QuitConfirmed" = "Salir";
