@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2F3281852A61B89B00456E61"
-               BuildableName = "mini_challenge_1.app"
-               BlueprintName = "mini_challenge_1"
-               ReferencedContainer = "container:mini_challenge_1.xcodeproj">
+               BuildableName = "Bloom.app"
+               BlueprintName = "Bloom"
+               ReferencedContainer = "container:Bloom.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,7 +33,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = "en"
+      language = "pt-BR"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F3281852A61B89B00456E61"
-            BuildableName = "mini_challenge_1.app"
-            BlueprintName = "mini_challenge_1"
-            ReferencedContainer = "container:mini_challenge_1.xcodeproj">
+            BuildableName = "Bloom.app"
+            BlueprintName = "Bloom"
+            ReferencedContainer = "container:Bloom.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2F3281852A61B89B00456E61"
-            BuildableName = "mini_challenge_1.app"
-            BlueprintName = "mini_challenge_1"
-            ReferencedContainer = "container:mini_challenge_1.xcodeproj">
+            BuildableName = "Bloom.app"
+            BlueprintName = "Bloom"
+            ReferencedContainer = "container:Bloom.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
