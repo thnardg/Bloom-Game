@@ -138,7 +138,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func jumpCharacter() {
         //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
         
-        let height = (player.size.height * 0.88) * 2
+        let height = (player.size.height * 0.88) * 4
         
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
@@ -448,14 +448,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Handle the unique contact events
         switch contactIdentifier {
         case "checkpoint-player":
+            lightning()
             if checkpoint.locations.first == CGPoint(x: 556.577, y: -364.928){
                 notOnboarding = true
-                print("nao vai amis")
             }
             checkpoint.updateCheckpoint()
             checkpoint.removeFromParent()
-            addChild(checkpoint)
-            lightning()
+            //addChild(checkpoint)
         case "ground-player":
             player.jumped = 1
         case "doubleJump-player":
