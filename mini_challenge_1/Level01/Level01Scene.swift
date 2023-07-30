@@ -282,7 +282,33 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            self.view?.presentScene(gameScene) // taking the player to the next scene
     }
     
-    
+    func die(){
+        let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
+        blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
+        blackScreen.zPosition = 1 // putting it "on top" of the characeter
+        cameraNode?.addChild(blackScreen) // adding it as a child to player
+        
+        let fadeInBlack = SKAction.fadeIn(withDuration: 0.5)
+        let fadeOutBlack = SKAction.fadeOut(withDuration: 0.5)
+        let removeBlackScreen = SKAction.run{
+            blackScreen.removeFromParent()
+        }
+        
+        let respawn = SKAction.run { // defining the respawn action
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+                self.cameraNode?.removeAllActions()
+                self.returnButton.removeAllActions()
+                self.returnButton.position = CGPoint(x: player.position.x - 350, y: player.position.y + 150)
+                self.camera?.position = playerCheckpoint
+                player.physicsBody?.isResting = true
+            }
+        }
+        
+        let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
+        
+        blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
+    }
     
     
     //main Functions
@@ -436,32 +462,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         /// Death
         if player.position.y < -1280 {
-            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
-            blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
-            blackScreen.zPosition = 1 // putting it "on top" of the characeter
-            player.addChild(blackScreen) // adding it as a child to player
-            
-            let fadeInBlack = SKAction.fadeIn(withDuration: 3)
-            let fadeOutBlack = SKAction.fadeOut(withDuration: 3)
-            let removeBlackScreen = SKAction.run{
-                blackScreen.removeFromParent()
-            }
-            
-            let respawn = SKAction.run { // defining the respawn action
-                if let playerCheckpoint = player.playerCheckpoint{
-                    player.position = playerCheckpoint
-                    self.camera?.position = playerCheckpoint
-                    player.physicsBody?.isResting = true
-                } else {
-                    player.position = CGPoint(x: 0, y: -200)
-                    self.camera?.position = player.position
-                    player.physicsBody?.isResting = true
-                }
-            }
-            
-            let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
-            
-            blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
+            die()
         } /// End of Death settings
         
         //Variavel atualizando e armazenando a posição da camera

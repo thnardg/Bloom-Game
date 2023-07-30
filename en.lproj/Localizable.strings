@@ -58,3 +58,7 @@
             ";
 "Onboarding" = "Tap on the right to jump";
 "DJump" = "Double tap to jump higher";
+"Quit" = "Quit Game";
+"QuitConfirmation" = "Do you wish to quit the game?";
+"Back" = "Go back";
+"QuitConfirmed" = "Quit";
