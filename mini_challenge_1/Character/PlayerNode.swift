@@ -32,7 +32,7 @@ class PlayerNode: SKSpriteNode {
     var jumpLimit: Int {
         get{
             if UserDefaults.standard.integer(forKey: keyJump) == 0{
-                return 2
+                return 1
             } else {
                 return UserDefaults.standard.integer(forKey: keyJump)
             }
