@@ -135,7 +135,7 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let exitText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 25)), label: .init(text: NSLocalizedString("Sair do Jogo", comment: ""))) // creating return button (returns to game start)
+        let exitText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 25)), label: .init(text: NSLocalizedString("Quit", comment: ""))) // creating return button (returns to game start)
 
         
         exitText.position = CGPoint(x: -160, y: -60)
@@ -143,7 +143,7 @@ class SettingScene: SKScene {
     }
     
     func createPopup(){
-        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode(text: "Deseja sair do Jogo?")) // creating return button (returns to game start)
+        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode(text: NSLocalizedString("QuitConfirmation", comment: ""))) // creating return button (returns to game start)
         
         popupBackGround.image?.size = CGSize(width: 1334, height: 750)
         popupBackGround.position = CGPoint(x: 0, y: 0)
@@ -151,7 +151,7 @@ class SettingScene: SKScene {
         popupBackGround.label?.position = CGPoint(x: 0, y: 40)
         self.addChild(popupBackGround)
         
-        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode(text: "Voltar ao jogo"))
+        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode(text: NSLocalizedString("Back", comment: "")))
         label.image?.position = CGPoint(x: 0, y: 50)
         label.image?.zPosition = 2
         label.image?.size = CGSize(width: 160, height: 17)
@@ -162,7 +162,7 @@ class SettingScene: SKScene {
         
         addChild(label)
         
-        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode(text: "Sair"))
+        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode(text: NSLocalizedString("QuitConfirmed", comment: "")))
         confirm.image?.size = CGSize(width: 80.51, height: 27.84)
         confirm.position = CGPoint(x: 80, y: -15)
         confirm.zPosition = 2
