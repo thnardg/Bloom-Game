@@ -35,7 +35,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
-    var canJump = true
+    var canTouch = true
     
     var notOnboarding: Bool{
         get{
@@ -46,7 +46,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
     
-    var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
+    var nextLevel = NextLevel(CGPoint(x: 18574.99, y: 2134.626))
 
     //Pedras Flutuantes 01
     let rock1 = SKSpriteNode(imageNamed: "rock1")
@@ -124,10 +124,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func setValueFalseForSomeSeconds() {//this function is for block the player to run or walk for 5 seconds
         //it is for the time to the ball goes out of the screen
-            canJump = false //he cant jump too
+            canTouch = false //he cant jump too
             Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
                 //after 5 seconds everything works like its to be
-                self?.canJump = true
+                self?.canTouch = true
                 self?.connectVirtualController()
             }
         }
@@ -404,9 +404,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         /// Camera position setup
         cameraBounds()
         
-        print(checkCount)
-
-        
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
         rainEmitter.position.y = (camera?.position.y ?? player.position.y) + 190
@@ -510,15 +507,16 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         let touchLocation = touch.location(in: self)
         
         if jumpButton.contains(touchLocation) {
-            if canJump{
+            if canTouch{
                 jumpCharacter()
             }
         }
         
         else if returnButton.contains(touchLocation){ // if clicking the return button
-            let gameScene = SKScene(fileNamed: "SettingScene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
-            
+            if canTouch{
+                let gameScene = SKScene(fileNamed: "SettingScene")
+                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+            }
         }
     }
     
@@ -559,6 +557,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             checkpoint.removeFromParent()
         case "nextLevel-player":
             prepareToGoToNextScene()
+            player.xScale = 1
         default:
             break
         }
