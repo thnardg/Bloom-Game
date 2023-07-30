@@ -47,9 +47,27 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
 
+    //Pedras Flutuantes 01
+    let rock1 = SKSpriteNode(imageNamed: "rock1")
+    let rock2 = SKSpriteNode(imageNamed: "rock2")
     
+    //Pedras Flutuantes 02
+    let stone1 = SKSpriteNode(imageNamed: "stone1")
+    let stone2 = SKSpriteNode(imageNamed: "stone2")
+    let stone3 = SKSpriteNode(imageNamed: "stone1")
+    let stone4 = SKSpriteNode(imageNamed: "stone2")
+            
+    //Montanhas
+    let mount1 = SKSpriteNode(imageNamed: "mount1")
+    let mount2 = SKSpriteNode(imageNamed: "mount2")
     
+    let parallaxSpeed1x: CGFloat = 0.8
+    let parallaxSpeed2x: CGFloat = 0.9
+    let parallaxSpeed3x: CGFloat = 0.98
     
+    let parallaxSpeed1y: CGFloat = 0.6
+    let parallaxSpeed2y: CGFloat = 0.8
+    let parallaxSpeed3y: CGFloat = 1.0
     
     
     
@@ -138,7 +156,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func jumpCharacter() {
         //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
         
-        let height = (player.size.height * 0.88) * 2
+        let height = (player.size.height * 0.88) * 4
         
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
@@ -263,6 +281,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     
     
+    
     //main Functions
     override func didMove(to view: SKView) { // loaded when reaching the level
         
@@ -316,7 +335,39 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         self.addChild(checkpoint) // adding checkpoints to scene
         self.addChild(nextLevel) // adding next level light
         
-
+        //Adcionando as pedras na scene
+        self.addChild(rock1)
+        self.addChild(rock2)
+        self.addChild(stone1)
+        self.addChild(stone2)
+        self.addChild(stone3)
+        self.addChild(stone4)
+        self.addChild(mount1)
+        self.addChild(mount2)
+        
+        //Configurando o tamanho das pedras
+        rock1.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 3)
+        rock2.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 3)
+        
+        stone1.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
+        stone2.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
+        stone3.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
+        stone4.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
+        
+        mount1.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
+        mount2.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
+        
+        //Configurando a poisção do Z
+        rock1.zPosition = -1
+        rock2.zPosition = -1
+        
+        stone1.zPosition = -2
+        stone2.zPosition = -2
+        stone3.zPosition = -2
+        stone4.zPosition = -2
+        
+        mount1.zPosition = -3
+        mount2.zPosition = -3
         
     }
     
@@ -406,6 +457,35 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             
             blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
         } /// End of Death settings
+        
+        //Variavel atualizando e armazenando a posição da camera
+        let cameraXPosition = cameraNode!.position.x
+        let cameraYPosition = cameraNode!.position.y
+        
+        //Configurando a posição das pedras de acordo com o eixo X da camera
+        rock1.position.x = cameraXPosition * parallaxSpeed1x
+        rock2.position.x = cameraXPosition * parallaxSpeed1x + rock2.size.width
+        
+        stone1.position.x = cameraXPosition * parallaxSpeed2x
+        stone2.position.x = cameraXPosition * parallaxSpeed2x + 500
+        stone3.position.x = cameraXPosition * parallaxSpeed2x + 1000
+        stone4.position.x = cameraXPosition * parallaxSpeed2x + 1500
+        
+        mount1.position.x = cameraXPosition * parallaxSpeed3x
+        mount2.position.x = cameraXPosition * parallaxSpeed3x + 300
+        
+        //Configurando a posição das pedras de acordo com o eixo Y da camera
+        rock1.position.y = cameraYPosition * parallaxSpeed1y
+        rock2.position.y = cameraYPosition * parallaxSpeed1y + rock2.size.width
+        
+        stone1.position.y = cameraYPosition * parallaxSpeed2y
+        stone2.position.y = cameraYPosition * parallaxSpeed2y
+        stone1.position.y = cameraYPosition * parallaxSpeed2y - 300
+        stone2.position.y = cameraYPosition * parallaxSpeed2y
+       
+        mount1.position.y = cameraYPosition * parallaxSpeed3y - 70
+        mount2.position.y = cameraYPosition * parallaxSpeed3y - 70
+        
     }
     
     override func sceneDidLoad() {
