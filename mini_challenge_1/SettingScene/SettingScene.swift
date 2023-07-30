@@ -26,7 +26,7 @@ class SettingScene: SKScene {
     var confirm: SkButtonNode!
     var cancel: SkButtonNode!
     var popupBackGround: SkButtonNode!
-    var label:SKLabelNode!
+    var label:SkButtonNode!
     
     
     override func didMove(to view: SKView) {
@@ -143,27 +143,28 @@ class SettingScene: SKScene {
     }
     
     func createPopup(){
-        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "popup"), label: SKLabelNode()) // creating return button (returns to game start)
+        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode()) // creating return button (returns to game start)
         
-        popupBackGround.image?.size = CGSize(width: 400, height: 200)
+        popupBackGround.image?.size = CGSize(width: 1334, height: 750)
         popupBackGround.position = CGPoint(x: 0, y: 0)
         popupBackGround.zPosition = 1
         self.addChild(popupBackGround)
         
-        label = SKLabelNode(text: "Tem Certeza?")
-        label.position = CGPoint(x: 0, y: 50)
-        label.zPosition = 2
+        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode())
+        label.image?.position = CGPoint(x: 0, y: 50)
+        label.image?.zPosition = 2
+        label.image?.size = CGSize(width: 160, height: 17)
         addChild(label)
         
-        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "reset"), label: SKLabelNode(text: "sim"))
-        confirm.image?.size = CGSize(width: 80, height: 40)
-        confirm.position = CGPoint(x: -80, y: -50)
+        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode())
+        confirm.image?.size = CGSize(width: 80.51, height: 27.84)
+        confirm.position = CGPoint(x: 80, y: -15)
         confirm.zPosition = 2
         addChild(confirm)
         
-        cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "reset"), label: SKLabelNode(text: "nao"))
-        cancel.image?.size = CGSize(width: 80, height: 40)
-        cancel.position = CGPoint(x: 80, y: -50)
+        cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "cancelPopup"), label: SKLabelNode())
+        cancel.image?.size = CGSize(width: 150, height: 28.84)
+        cancel.position = CGPoint(x: -50, y: -15)
         cancel.zPosition = 2
         addChild(cancel)
     }
