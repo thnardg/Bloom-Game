@@ -40,11 +40,6 @@
 		2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */; };
 		2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F52A61E1410093EDC5 /* VisualEffects.swift */; };
 		2FF878F82A61E1540093EDC5 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F72A61E1540093EDC5 /* Control.swift */; };
-		31022FB82A68621400AB5828 /* IdleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB32A68621400AB5828 /* IdleState.swift */; };
-		31022FB92A68621400AB5828 /* JumpState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB42A68621400AB5828 /* JumpState.swift */; };
-		31022FBA2A68621400AB5828 /* MovingLeftState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB52A68621400AB5828 /* MovingLeftState.swift */; };
-		31022FBB2A68621400AB5828 /* MovingRightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB62A68621400AB5828 /* MovingRightState.swift */; };
-		31022FBC2A68621400AB5828 /* DeadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31022FB72A68621400AB5828 /* DeadState.swift */; };
 		31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31028D562A70264C005F8BA9 /* Checkpoints.swift */; };
 		310C27762A6EFEF400E7C4EE /* DoubleJumpNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */; };
 		310C27782A6F046D00E7C4EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310C27772A6F046D00E7C4EE /* Extensions.swift */; };
@@ -99,11 +94,6 @@
 		2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level01Scene.swift; sourceTree = "<group>"; };
 		2FF878F52A61E1410093EDC5 /* VisualEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
 		2FF878F72A61E1540093EDC5 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
-		31022FB32A68621400AB5828 /* IdleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdleState.swift; sourceTree = "<group>"; };
-		31022FB42A68621400AB5828 /* JumpState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpState.swift; sourceTree = "<group>"; };
-		31022FB52A68621400AB5828 /* MovingLeftState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingLeftState.swift; sourceTree = "<group>"; };
-		31022FB62A68621400AB5828 /* MovingRightState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovingRightState.swift; sourceTree = "<group>"; };
-		31022FB72A68621400AB5828 /* DeadState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadState.swift; sourceTree = "<group>"; };
 		31028D562A70264C005F8BA9 /* Checkpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoints.swift; sourceTree = "<group>"; };
 		310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleJumpNode.swift; sourceTree = "<group>"; };
 		310C27772A6F046D00E7C4EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -216,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */,
-				317A86E92A68616C00BE2603 /* States */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -288,18 +277,6 @@
 				2F75307E2A72CA89001BC003 /* thunder.mp3 */,
 			);
 			path = Sounds;
-			sourceTree = "<group>";
-		};
-		317A86E92A68616C00BE2603 /* States */ = {
-			isa = PBXGroup;
-			children = (
-				31022FB72A68621400AB5828 /* DeadState.swift */,
-				31022FB32A68621400AB5828 /* IdleState.swift */,
-				31022FB42A68621400AB5828 /* JumpState.swift */,
-				31022FB52A68621400AB5828 /* MovingLeftState.swift */,
-				31022FB62A68621400AB5828 /* MovingRightState.swift */,
-			);
-			path = States;
 			sourceTree = "<group>";
 		};
 		B35DBDFA2A6B21720082F6A7 /* SettingScene */ = {
@@ -411,7 +388,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				31022FBA2A68621400AB5828 /* MovingLeftState.swift in Sources */,
 				2F3281902A61B89C00456E61 /* GameScene.swift in Sources */,
 				2FB5FA9D2A6EF17A003DA0E1 /* EndingTextScene.swift in Sources */,
 				2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */,
@@ -420,22 +396,18 @@
 				2FF878F82A61E1540093EDC5 /* Control.swift in Sources */,
 				2F3CE9892A61BBD2004F5FF0 /* IntroTextScene.swift in Sources */,
 				B32B4AAF2A61C68C00031DA0 /* PlayerNode.swift in Sources */,
-				31022FBB2A68621400AB5828 /* MovingRightState.swift in Sources */,
 				2FB5FAA12A6EF1A9003DA0E1 /* HeadphoneScene.swift in Sources */,
 				31028D572A70264C005F8BA9 /* Checkpoints.swift in Sources */,
 				B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */,
 				310C27782A6F046D00E7C4EE /* Extensions.swift in Sources */,
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
 				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
-				31022FB92A68621400AB5828 /* JumpState.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
 				2FB5FA992A6EF0A5003DA0E1 /* YellowCircleScene.swift in Sources */,
 				B35DBE052A6F3AB50082F6A7 /* InfoScene.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* BreathingFlowerScene.swift in Sources */,
-				31022FBC2A68621400AB5828 /* DeadState.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
 				B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */,
-				31022FB82A68621400AB5828 /* IdleState.swift in Sources */,
 				2F3CE98E2A61BC27004F5FF0 /* CircleGlowScene.swift in Sources */,
 				31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */,
 				2FB5FA972A6EEF77003DA0E1 /* SoundDesign.swift in Sources */,
