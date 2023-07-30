@@ -12,6 +12,7 @@ import GameplayKit
 import GameController
 
 var isReturningToScene = false
+var checkCount = UserDefaults.standard.integer(forKey: "check")
 
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     let onboardingKey = "usr_onboarding"
@@ -235,14 +236,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
 
     func stopWalkingAnimation() {
         player.removeAction(forKey: "walk")
-        player.texture = SKTexture(imageNamed: "im3")
+        player.texture = SKTexture(imageNamed: "Player_Idle_4")
     }
     
     func idleAnimation(){
         stopWalkingAnimation()
         if player.action(forKey: "idle") == nil {
             // Create the animation action and run it once
-            let idleAction = SKAction.repeatForever(.sequence([.fadeOut(withDuration: 1), .fadeIn(withDuration: 1)]))
+            let idleAction = SKAction.repeatForever(.animate(with: player.idleTextureSheet, timePerFrame: 0.5))
             player.run(idleAction, withKey: "idle")
         }
     }
@@ -274,6 +275,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         virtualController?.disconnect()
         checkpoint.position = checkpoint.locations.first!
         player.removeFromParent()
+        checkCount = 0
+        UserDefaults.standard.set(checkCount, forKey: "check")
         
         let gameScene = SKScene(fileNamed: "EndingTextScene")
            self.view?.presentScene(gameScene) // taking the player to the next scene
@@ -374,6 +377,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
+        
+        print(checkCount)
+
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -528,18 +534,28 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Handle the unique contact events
         switch contactIdentifier {
         case "checkpoint-player":
+            
             if checkpoint.locations.first == CGPoint(x: 556.577, y: -364.928){
                 notOnboarding = true
-                print("nao vai amis")
             }
             checkpoint.updateCheckpoint()
             checkpoint.removeFromParent()
-            addChild(checkpoint)
+            
             lightning()
+            checkCount += 1
+            UserDefaults.standard.set(checkCount, forKey: "check")
+            
+            if checkCount >= 4{
+                checkpoint.removeFromParent()
+            }else{
+                addChild(checkpoint)
+            }
+            
         case "ground-player":
             player.jumped = 1
         case "doubleJump-player":
             getDoubleJump()
+            checkpoint.removeFromParent()
         case "nextLevel-player":
             prepareToGoToNextScene()
         default:

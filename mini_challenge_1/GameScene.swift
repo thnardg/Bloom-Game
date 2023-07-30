@@ -15,12 +15,33 @@ class GameScene: SKScene {
         
         self.backgroundColor = .black
 
-        // Imagem de fundo:
-        self.scaleMode = .aspectFill
+        let circle = SKSpriteNode(imageNamed: "double_jumpbig") // Node da forma inicial
+        circle.size = CGSize(width: 30, height: 30)
+        circle.position = CGPoint(x: frame.midX, y: frame.midY + 50)
+        circle.addGlow(radius: 5)
+        addChild(circle)
+        
+        // Animação breathing:
+        let scaleUp = SKAction.scale(to: 1.0, duration: 3.5)
+        let scaleDown = SKAction.scale(to: 0.5, duration: 3.5)
+        let wait = SKAction.wait(forDuration: 1.0)
+        let sequence = SKAction.sequence([scaleDown, scaleUp, scaleDown, scaleUp, wait])
+        let repeatForever = SKAction.repeatForever(sequence)
+        circle.run(repeatForever)
+        
         let backgroundImage = SKSpriteNode(imageNamed: "Menu_fundox4.png")
-            backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
-            backgroundImage.zPosition = -1
-            addChild(backgroundImage)
+        backgroundImage.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        backgroundImage.zPosition = -1
+        
+        // Calculate scale factor to fit the screen while maintaining the aspect ratio
+        let widthScale = self.frame.width / backgroundImage.size.width
+        let heightScale = self.frame.height / backgroundImage.size.height
+        let scaleFactor = max(widthScale, heightScale)
+        
+        // Apply the scale factor to the background image
+        backgroundImage.setScale(scaleFactor)
+        
+        addChild(backgroundImage)
         
         // Música intro:
         SoundDesign.shared.playBackgroundMusic(filename: "intro-music.mp3")
