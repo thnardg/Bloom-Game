@@ -53,7 +53,6 @@
 		B32896E32A744591005FB1CE /* NextLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32896E22A744591005FB1CE /* NextLevel.swift */; };
 		B32B4AAF2A61C68C00031DA0 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */; };
 		B32B4AC82A65AD0E00031DA0 /* Level01Scene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */; };
-		B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32B4AC92A65B86100031DA0 /* Movimentation.swift */; };
 		B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */; };
 		B35DBE022A6D9E740082F6A7 /* SettingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B35DBE012A6D9E740082F6A7 /* SettingScene.sks */; };
 		B35DBE052A6F3AB50082F6A7 /* InfoScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35DBE042A6F3AB50082F6A7 /* InfoScene.swift */; };
@@ -113,7 +112,6 @@
 		B32896E22A744591005FB1CE /* NextLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLevel.swift; sourceTree = "<group>"; };
 		B32B4AAE2A61C68C00031DA0 /* PlayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlayerNode.swift; path = mini_challenge_1/Character/PlayerNode.swift; sourceTree = SOURCE_ROOT; };
 		B32B4AC72A65AD0E00031DA0 /* Level01Scene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level01Scene.sks; sourceTree = "<group>"; };
-		B32B4AC92A65B86100031DA0 /* Movimentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movimentation.swift; sourceTree = "<group>"; };
 		B35DBDFB2A6B21A10082F6A7 /* SettingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScene.swift; sourceTree = "<group>"; };
 		B35DBE012A6D9E740082F6A7 /* SettingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SettingScene.sks; sourceTree = "<group>"; };
 		B35DBE032A6DEC400082F6A7 /* mini_challenge_1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mini_challenge_1.entitlements; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				2FF878F52A61E1410093EDC5 /* VisualEffects.swift */,
-				B32B4AC92A65B86100031DA0 /* Movimentation.swift */,
 				2FB5FA962A6EEF77003DA0E1 /* SoundDesign.swift */,
 				310C27752A6EFEF400E7C4EE /* DoubleJumpNode.swift */,
 				310C27772A6F046D00E7C4EE /* Extensions.swift */,
@@ -415,7 +412,6 @@
 				B35DBE052A6F3AB50082F6A7 /* InfoScene.swift in Sources */,
 				2F3CE9902A61BC36004F5FF0 /* BreathingFlowerScene.swift in Sources */,
 				2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */,
-				B32B4ACA2A65B86100031DA0 /* Movimentation.swift in Sources */,
 				2F3CE98E2A61BC27004F5FF0 /* CircleGlowScene.swift in Sources */,
 				31F9F3C42A65DBB8009A3AF8 /* SKButtonNode.swift in Sources */,
 				2FB5FA972A6EEF77003DA0E1 /* SoundDesign.swift in Sources */,
@@ -580,7 +576,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = L4N6N49H26;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -610,7 +606,7 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KV78S9S54R;
+				DEVELOPMENT_TEAM = L4N6N49H26;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

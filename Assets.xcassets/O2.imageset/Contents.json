@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=Circulo frame 2_joy.png",
+      "filename" : "ball_Circulo_joy.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ball_Circulo_joy 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "ball_Circulo_joy 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

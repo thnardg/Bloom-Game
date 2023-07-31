@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Background_Novo 2.png",
+      "filename" : "Background_final.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Background_Novo 1.png",
+      "filename" : "Background_final 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Background_Novo.png",
+      "filename" : "Background_final 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

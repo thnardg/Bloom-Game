@@ -53,7 +53,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     let rock3 = SKSpriteNode(imageNamed: "rock1")
     let rock4 = SKSpriteNode(imageNamed: "rock2")
     let rock5 = SKSpriteNode(imageNamed: "rock1")
+    let rock5_1 = SKSpriteNode(imageNamed: "rock2")
     let rock6 = SKSpriteNode(imageNamed: "rock2")
+    let rock6_1 = SKSpriteNode(imageNamed: "rock1")
     let rock7 = SKSpriteNode(imageNamed: "rock1")
     let rock8 = SKSpriteNode(imageNamed: "rock2")
     
@@ -69,6 +71,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     //Montanhas
     let mount1 = SKSpriteNode(imageNamed: "mount1")
     let mount2 = SKSpriteNode(imageNamed: "mount2")
+    let mount3 = SKSpriteNode(imageNamed: "mount1")
     
     let parallaxSpeed1x: CGFloat = 0.8
     let parallaxSpeed2x: CGFloat = 0.9
@@ -213,7 +216,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func getDoubleJump(){
             doubleJumpNode.hasAcquired = true
-    //        notOnboarding = true
             player.jumpLimit = 2
             let label = SKLabelNode(text: NSLocalizedString("DJump", comment: ""))
             label.position = CGPoint(x: 16824.793, y: 470)
@@ -403,7 +405,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         self.addChild(rock3)
         self.addChild(rock4)
         self.addChild(rock5)
+        self.addChild(rock5_1)
         self.addChild(rock6)
+        self.addChild(rock6_1)
         self.addChild(rock7)
         self.addChild(rock8)
         
@@ -417,27 +421,31 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         self.addChild(mount1)
         self.addChild(mount2)
+        self.addChild(mount3)
         
         //Configurando o tamanho das pedras
         rock1.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
-        rock2.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock2.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 0.8)
         rock3.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
-        rock4.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock4.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 0.8)
         rock5.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
-        rock6.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock5_1.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 0.8)
+        rock6.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 0.8)
+        rock6_1.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
         rock7.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
-        rock8.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock8.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 0.8)
         
-        stone1.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone2.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone3.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone4.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone5.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone6.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
-        stone7.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone1.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone2.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone3.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone4.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone5.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone6.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
+        stone7.size = CGSize(width: frame.size.width / 6, height: frame.size.height / 3)
         
         mount1.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
         mount2.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
+        mount3.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
         
         //Configurando a poisção do Z
         rock1.zPosition = -1
@@ -445,7 +453,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         rock3.zPosition = -1
         rock4.zPosition = -1
         rock5.zPosition = -1
+        rock5_1.zPosition = -1
         rock6.zPosition = -1
+        rock6_1.zPosition = -1
         rock7.zPosition = -1
         rock8.zPosition = -1
         
@@ -459,6 +469,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         mount1.zPosition = -3
         mount2.zPosition = -3
+        mount3.zPosition = -3
         
     }
     
@@ -544,46 +555,52 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         let cameraYPosition = cameraNode!.position.y
         
         //Configurando a posição das pedras de acordo com o eixo X da camera
-        rock1.position.x = cameraXPosition * parallaxSpeed1x
-        rock2.position.x = cameraXPosition * parallaxSpeed1x + 800
-        rock3.position.x = cameraXPosition * parallaxSpeed1x + 1600
-        rock4.position.x = cameraXPosition * parallaxSpeed1x + 2400
-        rock5.position.x = cameraXPosition * parallaxSpeed1x + 3200
-        rock6.position.x = cameraXPosition * parallaxSpeed1x + 4000
-        rock7.position.x = cameraXPosition * parallaxSpeed1x + 4800
-        rock8.position.x = cameraXPosition * parallaxSpeed1x + 5600
+        rock1.position.x = cameraXPosition * parallaxSpeed1x - 300
+        rock2.position.x = cameraXPosition * parallaxSpeed1x + 500
+        rock3.position.x = cameraXPosition * parallaxSpeed1x + 1300
+        rock4.position.x = cameraXPosition * parallaxSpeed1x + 2100
+        rock5.position.x = cameraXPosition * parallaxSpeed1x + 2900
+        rock5_1.position.x = cameraXPosition * parallaxSpeed1x + 3000
+        rock6.position.x = cameraXPosition * parallaxSpeed1x + 3700
+        rock6_1.position.x = cameraXPosition * parallaxSpeed1x + 3800
+        rock7.position.x = cameraXPosition * parallaxSpeed1x + 4500
+        rock8.position.x = cameraXPosition * parallaxSpeed1x + 5300
         
-        stone1.position.x = cameraXPosition * parallaxSpeed2x
-        stone2.position.x = cameraXPosition * parallaxSpeed2x + 10
-        stone3.position.x = cameraXPosition * parallaxSpeed2x + 20
-        stone4.position.x = cameraXPosition * parallaxSpeed2x + 30
-        stone5.position.x = cameraXPosition * parallaxSpeed2x + 40
-        stone6.position.x = cameraXPosition * parallaxSpeed2x + 50
-        stone7.position.x = cameraXPosition * parallaxSpeed2x + 60
+        stone1.position.x = cameraXPosition * parallaxSpeed2x + 500
+        stone2.position.x = cameraXPosition * parallaxSpeed2x + 1200
+        stone3.position.x = cameraXPosition * parallaxSpeed2x + 2000
+        stone4.position.x = cameraXPosition * parallaxSpeed2x + 2800
+        stone5.position.x = cameraXPosition * parallaxSpeed2x + 3600
+        stone6.position.x = cameraXPosition * parallaxSpeed2x + 4400
+        stone7.position.x = cameraXPosition * parallaxSpeed2x + 5200
         
-        mount1.position.x = cameraXPosition * parallaxSpeed3x
-        mount2.position.x = cameraXPosition * parallaxSpeed3x + 300
+        mount1.position.x = cameraXPosition * parallaxSpeed3x - 200
+        mount2.position.x = cameraXPosition * parallaxSpeed3x + 100
+        mount3.position.x = cameraXPosition * parallaxSpeed3x + 400
         
         //Configurando a posição das pedras de acordo com o eixo Y da camera
-        rock1.position.y = cameraYPosition * parallaxSpeed1y
-        rock2.position.y = cameraYPosition * parallaxSpeed1y
-        rock3.position.y = cameraYPosition * parallaxSpeed1y
-        rock4.position.y = cameraYPosition * parallaxSpeed1y
-        rock5.position.y = cameraYPosition * parallaxSpeed1y
-        rock6.position.y = cameraYPosition * parallaxSpeed1y
-        rock7.position.y = cameraYPosition * parallaxSpeed1y
-        rock8.position.y = cameraYPosition * parallaxSpeed1y
+        rock1.position.y = cameraYPosition * parallaxSpeed1y - 250
+        rock2.position.y = cameraYPosition * parallaxSpeed1y - 300
+        rock3.position.y = cameraYPosition * parallaxSpeed1y - 100
+        rock4.position.y = cameraYPosition * parallaxSpeed1y + 50
+        rock5.position.y = cameraYPosition * parallaxSpeed1y + 150
+        rock5_1.position.y = cameraYPosition * parallaxSpeed1y + 800
+        rock6.position.y = cameraYPosition * parallaxSpeed1y + 150
+        rock6_1.position.y = cameraYPosition * parallaxSpeed1y + 800
+        rock7.position.y = cameraYPosition * parallaxSpeed1y + 50
+        rock8.position.y = cameraYPosition * parallaxSpeed1y + 150
         
-        stone1.position.y = cameraYPosition * parallaxSpeed2y
+        stone1.position.y = cameraYPosition * parallaxSpeed2y - 150
         stone2.position.y = cameraYPosition * parallaxSpeed2y
-        stone3.position.y = cameraYPosition * parallaxSpeed2y
-        stone4.position.y = cameraYPosition * parallaxSpeed2y
-        stone5.position.y = cameraYPosition * parallaxSpeed2y
-        stone6.position.y = cameraYPosition * parallaxSpeed2y
-        stone7.position.y = cameraYPosition * parallaxSpeed2y
+        stone3.position.y = cameraYPosition * parallaxSpeed2y + 150
+        stone4.position.y = cameraYPosition * parallaxSpeed2y + 150
+        stone5.position.y = cameraYPosition * parallaxSpeed2y + 150
+        stone6.position.y = cameraYPosition * parallaxSpeed2y + 150
+        stone7.position.y = cameraYPosition * parallaxSpeed2y + 150
        
         mount1.position.y = cameraYPosition * parallaxSpeed3y - 70
         mount2.position.y = cameraYPosition * parallaxSpeed3y - 70
+        mount3.position.y = cameraYPosition * parallaxSpeed3y - 70
         
     }
     

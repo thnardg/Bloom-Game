@@ -32,7 +32,7 @@ class InfoScene: SKScene {
         labelNode.numberOfLines = 0
         labelNode.preferredMaxLayoutWidth = size.width - 40 // Largura máxima para quebrar o texto
         labelNode.position = CGPoint(x: 0, y: frame.minY) // Posicione o texto abaixo da tela
-//        labelNode.position = CGPoint(x: 0, y: 0)
+
         addChild(labelNode)
         
         // Defina a ação de movimento para fazer os créditos subirem
