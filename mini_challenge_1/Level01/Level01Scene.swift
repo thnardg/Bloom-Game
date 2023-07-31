@@ -156,7 +156,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func jumpCharacter() {
-        //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
+        let jump = SKAction.animate(with: player.jumpTextureSheet, timePerFrame: player.animationFrameTime / 6)
+        let fall = SKAction.animate(with: [player.fallTextureSheet], timePerFrame: player.animationFrameTime / 6)
         
         let height = (player.size.height * 0.88) * 2
         
@@ -164,8 +165,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             if player.jumped == 2{
                 player.physicsBody?.isResting = true
             }
+            player.removeAllActions()
             player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: height))
             player.jumped += 1
+            player.run(.sequence([jump, .repeatForever(fall)]), withKey: "jump")
         }
     }
     
@@ -191,9 +194,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 returnButton.position.y = player.position.y + 150
                 jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50)
             } else {
-                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
-                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 2)]))
-                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
+                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
+                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0.5)]))
+                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
             }
         }
     }
@@ -227,7 +230,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         player.removeAction(forKey: "idle")
         player.alpha = 1
         // Check if the walk animation is already running
-        if player.action(forKey: "walk") == nil {
+        if player.action(forKey: "walk") == nil && player.action(forKey: "jump") == nil{
             // Create the animation action and run it once
             let moveAction = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 2.0))
             moveAction.speed = 0
@@ -242,7 +245,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func idleAnimation(){
         stopWalkingAnimation()
-        if player.action(forKey: "idle") == nil {
+        if player.action(forKey: "idle") == nil && player.action(forKey: "jump") == nil{
             // Create the animation action and run it once
             let idleAction = SKAction.repeatForever(.animate(with: player.idleTextureSheet, timePerFrame: 0.5))
             player.run(idleAction, withKey: "idle")
@@ -404,6 +407,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
+        print(player.jumped)
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -529,7 +533,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Sort the node names alphabetically to create a unique identifier for the contact
         let nodeNames = [contact.bodyA.node?.name, contact.bodyB.node?.name].compactMap { $0 }.sorted()
         let contactIdentifier = "\(nodeNames[0])-\(nodeNames[1])"
-        print(contactIdentifier)
 
         // Handle the unique contact events
         switch contactIdentifier {
@@ -553,6 +556,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             
         case "ground-player":
             player.jumped = 1
+            if player.action(forKey: "jump") != nil {
+                player.removeAllActions()
+                player.run(.animate(with: player.landTextureSheet, timePerFrame: player.animationFrameTime / 6), withKey: "jump")
+        }
         case "doubleJump-player":
             getDoubleJump()
             checkpoint.removeFromParent()
