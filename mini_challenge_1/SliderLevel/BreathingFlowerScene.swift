@@ -90,6 +90,7 @@ class BreathingFlowerScene: SKScene {
         audioWaveDown.position = CGPoint(x: frame.maxX - 60, y: frame.minY + 60)
         self.addChild(audioWaveUp)
         self.addChild(audioWaveDown)
+        
     }
     
     // Muda o tamanho da forma e o tom do som de acordo com o valor do slider:
