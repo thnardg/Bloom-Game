@@ -69,6 +69,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     let parallaxSpeed1y: CGFloat = 0.6
     let parallaxSpeed2y: CGFloat = 0.8
     let parallaxSpeed3y: CGFloat = 1.0
+
     
     
     
