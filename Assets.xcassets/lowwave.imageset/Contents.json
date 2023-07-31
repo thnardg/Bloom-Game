@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "low_wave.png",
+      "filename" : "Vector 4 (Stroke).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Vector 4 (Stroke) 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Vector 4 (Stroke) 1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

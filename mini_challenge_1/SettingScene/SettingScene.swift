@@ -188,13 +188,7 @@ class SettingScene: SKScene {
         addChild(cancel)
     }
     
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
-    ///
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -259,7 +253,7 @@ class SettingScene: SKScene {
             }
             
             if exitButton.contains(touchLocation){// if clicking the return menu button
-                //exit(0)
+
                 
                 createPopup()
                 isPopupOn.toggle()

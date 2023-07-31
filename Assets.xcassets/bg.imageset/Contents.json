@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "IMG_5068.png",
+      "filename" : "Menu_screen.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Menu_screen 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Menu_screen 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
