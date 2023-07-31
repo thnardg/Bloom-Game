@@ -226,6 +226,7 @@ class SettingScene: SKScene {
                 SoundDesign.shared.stopBackgroundMusic()
                 UserDefaults.resetDefaults()
                 checkpoint.removeFromParent()
+                player.removeFromParent()
                 checkpoint.locations = [
                     CGPoint(x: 556.577, y: -364.928),
                     CGPoint(x: 7575, y: -265.93),

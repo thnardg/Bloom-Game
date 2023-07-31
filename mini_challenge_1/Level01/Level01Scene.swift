@@ -115,14 +115,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func firstMove(){
-        let move = SKAction.moveTo(x: 150, duration: 25)
+        let move = SKAction.moveTo(x: 150, duration: 17)
         let moveAction = SKAction.run{
+            let movePlayer = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 0.4))
+            player.run(movePlayer)
             if let moveAction = player.action(forKey: "walk"){
                 moveAction.speed = self.moveSpeed
-                }
-
-            self.moveSpeed = 5
-            self.startWalkingAnimation()
+            }
         }
         let playerRemoveAction = SKAction.run {
             self.moveSpeed = 0
