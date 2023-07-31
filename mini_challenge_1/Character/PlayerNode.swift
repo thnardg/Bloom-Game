@@ -27,7 +27,16 @@ class PlayerNode: SKSpriteNode {
                             SKTexture(imageNamed: "Player_Idle_7"),
                             SKTexture(imageNamed: "Player_Idle_8"),
     ]
-    
+    let jumpTextureSheet = [SKTexture(imageNamed: "Player_jump_1"),
+                            SKTexture(imageNamed: "Player_jump_2"),
+                            SKTexture(imageNamed: "Player_jump_3"),
+    ]
+    let fallTextureSheet = SKTexture(imageNamed: "Player_jump_4")
+    let landTextureSheet = [SKTexture(imageNamed: "Player_jump_5"),
+                            SKTexture(imageNamed: "Player_jump_6"),
+                            SKTexture(imageNamed: "Player_jump_7"),
+                            SKTexture(imageNamed: "Player_jump_8"),
+    ]
     
     var jumpLimit: Int {
         get{
