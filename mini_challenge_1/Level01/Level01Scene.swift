@@ -331,7 +331,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func setControllerInputHandler(){
-        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil{
+        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil && canTouch{
             controllerInstance.physController.extendedGamepad?.valueChangedHandler = {
                 (gamepad: GCExtendedGamepad, element: GCControllerElement) in
                 if gamepad.leftThumbstick.xAxis.value != 0{
@@ -345,8 +345,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                     self.moveSpeed = 0
                     self.isUsingJoystick = false
                 }
-    }
-    }
+            }
+        }
     }
     
     //main Functions
@@ -502,9 +502,18 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         if GCController.controllers().count > 1{
             virtualController?.disconnect()
+            jumpButton.position = CGPoint(x: 0, y: -1000)
+            jumpButton.removeFromParent()
         }
         controllerInstance.updateController()
         setControllerInputHandler()
+        
+        if GCController.controllers().isEmpty{
+            virtualController?.connect()
+            if jumpButton.isChild(of: self) == false{
+                self.addChild(jumpButton)
+            }
+        }
         
         /// Controller
        // If the joystick is being used, update the player's position
@@ -585,13 +594,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         super.sceneDidLoad()
         
         physicsWorld.contactDelegate = self // setting the world physics
-        
-
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        
-        
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
