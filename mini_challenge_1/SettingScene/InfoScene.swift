@@ -19,58 +19,40 @@ class InfoScene: SKScene {
     }
     
     func criarTelaDeCreditos() {
-            // Texto dos créditos
-            let textoCreditos = """
-            
-               [NOME DO JOGO]
+        // Texto dos créditos
+        let textoCreditos = NSLocalizedString("Credits", comment: "")
+        
+        // Crie o nó de texto
+        let labelNode = SKLabelNode(fontNamed: "Sora")
+        labelNode.text = textoCreditos
+        labelNode.fontSize = 15
+        labelNode.fontColor = SKColor.white
+        labelNode.horizontalAlignmentMode = .center
+        labelNode.verticalAlignmentMode = .top
+        labelNode.numberOfLines = 0
+        labelNode.preferredMaxLayoutWidth = size.width - 40 // Largura máxima para quebrar o texto
+        labelNode.position = CGPoint(x: 0, y: frame.minY) // Posicione o texto abaixo da tela
 
-                iOS Developers:
-            
-                  -  Enrique Carvalho
-                  -  Jairo Pereira
-                  -  Lucas Nascimento
-                  -  Thayná Rodrigues
-
-            
-                Designer:
-            
-                  -  Maria Clara Guimarães
-            
-            
-                Esse jogo foi desenvolvido como atividade no Apple Developer
-                Academy / UCB, sob mentoria de Antônio Santos e Felipe Carvalho
-                e Coordenação de Jair Barbosa.
-            
-            
-                -
-                        
-            """
-
-            // Crie o nó de texto
-            let labelNode = SKLabelNode(fontNamed: "Sora")
-            labelNode.text = textoCreditos
-            labelNode.fontSize = 15
-            labelNode.fontColor = SKColor.white
-            labelNode.horizontalAlignmentMode = .center
-            labelNode.verticalAlignmentMode = .top
-            labelNode.numberOfLines = 0
-            labelNode.preferredMaxLayoutWidth = size.width - 40 // Largura máxima para quebrar o texto
-            labelNode.position = CGPoint(x: size.width / 2, y: size.height) // Posicione o texto abaixo da tela
-        labelNode.position = CGPoint(x: 0, y: 0)
-            addChild(labelNode)
-
-            // Defina a ação de movimento para fazer os créditos subirem
-            let subir = SKAction.moveBy(x: 0, y: size.height + labelNode.frame.size.height, duration: 30)
-
-            // Defina uma ação para remover os créditos da cena quando eles saírem da tela
-            let remover = SKAction.removeFromParent()
-
-            // Crie uma sequência de ações para primeiro subir e depois remover os créditos
-            let sequencia = SKAction.sequence([subir, remover])
-
-            // Execute a sequência de ações nos créditos
-            labelNode.run(sequencia)
+        addChild(labelNode)
+        
+        // Defina a ação de movimento para fazer os créditos subirem
+        let subir = SKAction.moveBy(x: 0, y: size.height + labelNode.frame.size.height, duration: 10)
+        print(labelNode.frame.size.height)
+        
+        // Defina uma ação para remover os créditos da cena quando eles saírem da tela
+        let remover = SKAction.removeFromParent()
+        
+        let voltar = SKAction.run {
+            let introTextScene = SKScene(fileNamed: "SettingScene")
+            self.view?.presentScene(introTextScene)
         }
+        
+        // Crie uma sequência de ações para primeiro subir e depois remover os créditos
+        let sequencia = SKAction.sequence([subir, remover, voltar])
+        
+        // Execute a sequência de ações nos créditos
+        labelNode.run(sequencia)
+    }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

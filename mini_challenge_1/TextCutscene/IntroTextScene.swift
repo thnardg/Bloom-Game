@@ -4,7 +4,7 @@ import GameplayKit
 class IntroTextScene: SKScene {
     
     private var label: SKLabelNode!
-    private var cutsceneText = ["Você é um grão", "No vazio você vê uma luz", "O que ela quer te dizer?"]
+    private var cutsceneText = [NSLocalizedString("Grain", comment: ""), NSLocalizedString("Light", comment: ""), NSLocalizedString("Tell", comment: "")]
     private var currentTextIndex = 0
     
     override func didMove(to view: SKView) {

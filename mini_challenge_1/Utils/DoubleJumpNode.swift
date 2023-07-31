@@ -21,7 +21,7 @@ class DoubleJumpNode: SKSpriteNode{
     }
     
     init(_ position: CGPoint){
-        super.init(texture: nil, color: .yellow, size: CGSize(width: 50, height: 50))
+        super.init(texture: SKTexture(imageNamed: "double_jumpbig"), color: .clear, size: CGSize(width: 50, height: 50))
         self.position = position
         
         configurePhysics()

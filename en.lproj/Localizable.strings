@@ -1,0 +1,57 @@
+/*
+  Localizable.strings
+  mini_challenge_1
+
+  Created by Enrique Carvalho on 27/07/23.
+  
+*/
+"Name" = "Bloom";
+"Start" = "Tap to begin";
+"Headphone" = "This game is better with headphones";
+"Grain" = "You're a grain";
+"Light" = "In the void, you see a light";
+"Tell" = "What is is trying to tell you?";
+"SFX" = "Sounds";
+"Music" = "Music";
+"Reset" = "Restart Game";
+"Overcome" = "You have overcome your fears";
+"Voice" = "Whose voice is this?";
+"Credits" = "
+            
+               Bloom
+
+                iOS Developers:
+            
+                  -  Enrique Carvalho
+                  -  Jairo Pereira
+                  -  Lucas Nascimento
+                  -  Thayná Rodrigues
+
+            
+                Designer:
+            
+                  -  Maria Clara Guimarães
+            
+            
+                This game has been developed as an activity at Apple Developer
+                Academy / UCB under mentorship of Antônio Santos and Felipe Carvalho
+                and under coordination of Jair Barbosa.
+            
+                
+                Acknowledgments:
+            
+                Music and SFX
+                  -  Tense Sad Piano by Ashot Danielyan at Pixabay
+                  -  Middle East by AlexiAction at Pixabay
+                  -  Artificial Emotions by TimKulig at Pixabay
+                  -  Epic storm by Placidplace at Pixabay
+                  -  Radio Static by Pixabay
+                  -  Thunder by Pixabay
+                  -  Humming Song by Pixabay
+            ";
+"Onboarding" = "Tap on the right to jump";
+"DJump" = "Double tap to jump higher";
+"Quit" = "Quit Game";
+"QuitConfirmation" = "Do you wish to quit the game?";
+"Back" = "Go back";
+"QuitConfirmed" = "Quit";

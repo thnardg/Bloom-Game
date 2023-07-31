@@ -8,13 +8,13 @@ class HeadphoneScene: SKScene {
         
         // Node Headphone:
         let headphone = SKSpriteNode(imageNamed: "phone")
-        headphone.size = CGSize(width: 60, height: 60)
+        headphone.size = CGSize(width: 80, height: 80)
         headphone.alpha = 0
-        headphone.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 50)
+        headphone.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 40)
         self.addChild(headphone)
         
         // Texto Headphone:
-        let avisoHeadphones = SKLabelNode(text: "Esse jogo fica melhor com fones de ouvido")
+        let avisoHeadphones = SKLabelNode(text: NSLocalizedString("Headphone", comment: ""))
         avisoHeadphones.fontName = "Sora"
         avisoHeadphones.fontSize = 18
         avisoHeadphones.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 50)

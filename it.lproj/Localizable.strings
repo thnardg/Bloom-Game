@@ -1,0 +1,57 @@
+/*
+  Localizable.strings
+  mini_challenge_1
+
+  Created by Enrique Carvalho on 27/07/23.
+  
+*/
+"Name" = "Bloom";
+"Start" = "Tocca per iniziare";
+"Headphone" = "Questo gioco è migliore con le cuffie";
+"Grain" = "Tu sei un granello";
+"Light" = "Nel vuoto vedi una luce";
+"Tell" = "Cosa vuole dirti?";
+"SFX" = "Effetti sonori";
+"Music" = "Musica";
+"Reset" = "Ricomincia il gioco";
+"Overcome" = "Hai superato le tue paure";
+"Voice" = "Di chi è questa voce?";
+"Credits" = "
+            
+               Bloom
+
+                Sviluppatori iOS:
+            
+                  -  Enrique Carvalho
+                  -  Jairo Pereira
+                  -  Lucas Nascimento
+                  -  Thayná Rodrigues
+
+            
+                Designer:
+            
+                  -  Maria Clara Guimarães
+            
+            
+                Questo gioco è stato sviluppato come attività all'Apple Developer
+                Academy / UCB, sotto la guida di Antônio Santos e Felipe Carvalho
+                e il coordinamento di Jair Barbosa.
+            
+                    
+                Ringraziamenti:
+                    
+                Musica ed effetti sonori
+                  -  Tense Sad Piano di Ashot Danielyan su Pixabay
+                  -  Middle East di AlexiAction su Pixabay
+                  -  Artificial Emotions di TimKulig su Pixabay
+                  -  Epic storm di Placidplace su Pixabay
+                  -  Radio Static su Pixabay
+                  -  Thunder su Pixabay
+                  -  Humming Song su Pixabay
+            ";
+"Onboarding" = "Tocca a destra per saltare";
+"DJump" = "Fai doppio tocco per saltare più in alto";
+"Quit" = "Esci dal gioco";
+"QuitConfirmation" = "Vuoi uscire dal gioco?";
+"Back" = "Torna al gioco";
+"QuitConfirmed" = "Esci";
