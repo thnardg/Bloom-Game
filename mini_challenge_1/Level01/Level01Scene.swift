@@ -109,7 +109,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func firstMove(){
         let move = SKAction.moveTo(x: 150, duration: 25)
         let moveAction = SKAction.run{
-            self.moveSpeed = 2
+            if let moveAction = player.action(forKey: "walk"){
+                moveAction.speed = self.moveSpeed
+                }
+
+            self.moveSpeed = 5
             self.startWalkingAnimation()
         }
         let playerRemoveAction = SKAction.run {
@@ -173,12 +177,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func connectVirtualController(){
-        let controlerConfig = GCVirtualController.Configuration()
-        controlerConfig.elements = [GCInputLeftThumbstick]
-        
-        let controller = GCVirtualController(configuration: controlerConfig)
-        controller.connect()
-        virtualController = controller
+            let controlerConfig = GCVirtualController.Configuration()
+            controlerConfig.elements = [GCInputLeftThumbstick]
+            
+            let controller = GCVirtualController(configuration: controlerConfig)
+            controller.connect()
+            virtualController = controller
         
         
     }
@@ -228,7 +232,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func startWalkingAnimation() {
         player.removeAction(forKey: "idle")
-        player.alpha = 1
         // Check if the walk animation is already running
         if player.action(forKey: "walk") == nil && player.action(forKey: "jump") == nil{
             // Create the animation action and run it once
@@ -253,8 +256,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
 
     func updatePlayerPosition() {
-        // Update the player's position based on the movement speed
-        player.position.x += self.moveSpeed
 
         // Update the player's facing direction based on moveSpeed
         if self.moveSpeed < 0 {
@@ -263,6 +264,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             player.xScale = 1
         }
         
+        // Update the player's position based on the movement speed
+        if moveSpeed < 0{
+            player.position.x -= (moveSpeed * -1)
+        } else {
+            player.position.x += self.moveSpeed
+        }
     }
     
     func prepareToGoToNextScene(){
@@ -314,6 +321,24 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
     }
     
+    func setControllerInputHandler(){
+        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil{
+            controllerInstance.physController.extendedGamepad?.valueChangedHandler = {
+                (gamepad: GCExtendedGamepad, element: GCControllerElement) in
+                if gamepad.leftThumbstick.xAxis.value != 0{
+                    self.moveSpeed = Double(gamepad.leftThumbstick.xAxis.value) * player.speed
+                    self.isUsingJoystick = true
+                }
+                if gamepad.buttonA.isPressed {
+                    self.jumpCharacter()
+                }
+                if gamepad.leftThumbstick.xAxis.value == 0 {
+                    self.moveSpeed = 0
+                    self.isUsingJoystick = false
+                }
+    }
+    }
+    }
     
     //main Functions
     override func didMove(to view: SKView) { // loaded when reaching the level
@@ -407,38 +432,43 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
-        print(player.jumped)
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
         rainEmitter.position.y = (camera?.position.y ?? player.position.y) + 190
         
         /// Controller Settings
+        
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
-        guard let controller = virtualController?.controller else {
-           return
-       }
-
-       // getting the joystick x value
-        let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-        moveSpeed = xAxisValue * player.speed //calculating the speed
+        
+        if let controller = virtualController?.controller {
+            // getting the joystick x value
+             let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+            moveSpeed = xAxisValue * player.speed //calculating the speed
+            
+            // If the joystick values are beyond the threshold, consider the joystick is being used
+            if abs(xAxisValue) != 0{
+                isUsingJoystick = true
+            } else {
+                isUsingJoystick = false
+            }
+        }
+        
         updatePlayerPosition() //applying the speed to the player
 
         if let moveAction = player.action(forKey: "walk"){
             if moveSpeed < 0{
-                moveSpeed -= moveSpeed * 2
-                moveAction.speed = moveSpeed
+                moveAction.speed = (moveSpeed * -1)
             } else {
                 moveAction.speed = moveSpeed
             }
+            }
+        
+        if GCController.controllers().count > 1{
+            virtualController?.disconnect()
         }
-
-       // If the joystick values are beyond the threshold, consider the joystick is being used
-       if abs(xAxisValue) != 0{
-           isUsingJoystick = true
-       } else {
-           isUsingJoystick = false
-       }
+        controllerInstance.updateController()
+        setControllerInputHandler()
         
         /// Controller
        // If the joystick is being used, update the player's position
