@@ -5,7 +5,6 @@
 //  Created by Thayna Rodrigues on 14/07/23.
 //
 import UIKit
-
 import Foundation
 import SpriteKit
 import GameplayKit
@@ -83,7 +82,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     
     // All Functions
-    
     func onboarding(){
         let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: ""))
         onboarding.position = CGPoint(x: 0, y: frame.maxY - 80)
