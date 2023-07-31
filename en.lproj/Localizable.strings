@@ -12,7 +12,7 @@
 "Light" = "In the void, you see a light";
 "Tell" = "What is is trying to tell you?";
 "SFX" = "Sounds";
-"Music" = "Music ";
+"Music" = "Music";
 "Reset" = "Restart Game";
 "Overcome" = "You have overcome your fears";
 "Voice" = "Whose voice is this?";
@@ -58,3 +58,7 @@
             ";
 "Onboarding" = "Tap on the right to jump";
 "DJump" = "Double tap to jump higher";
+"Quit" = "Quit Game";
+"QuitConfirmation" = "Do you wish to quit the game?";
+"Back" = "Go back";
+"QuitConfirmed" = "Quit";

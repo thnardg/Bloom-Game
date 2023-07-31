@@ -35,7 +35,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
     
-    var canJump = true
+    var canTouch = true
     
     var notOnboarding: Bool{
         get{
@@ -46,7 +46,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
     
-    var nextLevel = NextLevel(CGPoint(x: 18445, y: 2016))
+    var nextLevel = NextLevel(CGPoint(x: 18574.99, y: 2134.626))
 
     //Pedras Flutuantes 01
     let rock1 = SKSpriteNode(imageNamed: "rock1")
@@ -117,7 +117,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     func firstMove(){
         let move = SKAction.moveTo(x: 150, duration: 25)
         let moveAction = SKAction.run{
-            self.moveSpeed = 2
+            if let moveAction = player.action(forKey: "walk"){
+                moveAction.speed = self.moveSpeed
+                }
+
+            self.moveSpeed = 5
             self.startWalkingAnimation()
         }
         let playerRemoveAction = SKAction.run {
@@ -133,10 +137,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func setValueFalseForSomeSeconds() {//this function is for block the player to run or walk for 5 seconds
         //it is for the time to the ball goes out of the screen
-            canJump = false //he cant jump too
+            canTouch = false //he cant jump too
             Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
                 //after 5 seconds everything works like its to be
-                self?.canJump = true
+                self?.canTouch = true
                 self?.connectVirtualController()
             }
         }
@@ -164,7 +168,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
     
     func jumpCharacter() {
-        //player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 100))
+        let jump = SKAction.animate(with: player.jumpTextureSheet, timePerFrame: player.animationFrameTime / 6)
+        let fall = SKAction.animate(with: [player.fallTextureSheet], timePerFrame: player.animationFrameTime / 6)
         
         let height = (player.size.height * 0.88) * 2
         
@@ -172,18 +177,20 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             if player.jumped == 2{
                 player.physicsBody?.isResting = true
             }
+            player.removeAllActions()
             player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: height))
             player.jumped += 1
+            player.run(.sequence([jump, .repeatForever(fall)]), withKey: "jump")
         }
     }
     
     func connectVirtualController(){
-        let controlerConfig = GCVirtualController.Configuration()
-        controlerConfig.elements = [GCInputLeftThumbstick]
-        
-        let controller = GCVirtualController(configuration: controlerConfig)
-        controller.connect()
-        virtualController = controller
+            let controlerConfig = GCVirtualController.Configuration()
+            controlerConfig.elements = [GCInputLeftThumbstick]
+            
+            let controller = GCVirtualController(configuration: controlerConfig)
+            controller.connect()
+            virtualController = controller
         
         
     }
@@ -199,9 +206,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
                 returnButton.position.y = player.position.y + 150
                 jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50)
             } else {
-                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
-                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 2)]))
-                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 2)]))
+                camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
+                returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0.5)]))
+                jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
             }
         }
     }
@@ -233,9 +240,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func startWalkingAnimation() {
         player.removeAction(forKey: "idle")
-        player.alpha = 1
         // Check if the walk animation is already running
-        if player.action(forKey: "walk") == nil {
+        if player.action(forKey: "walk") == nil && player.action(forKey: "jump") == nil{
             // Create the animation action and run it once
             let moveAction = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 2.0))
             moveAction.speed = 0
@@ -250,7 +256,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func idleAnimation(){
         stopWalkingAnimation()
-        if player.action(forKey: "idle") == nil {
+        if player.action(forKey: "idle") == nil && player.action(forKey: "jump") == nil{
             // Create the animation action and run it once
             let idleAction = SKAction.repeatForever(.animate(with: player.idleTextureSheet, timePerFrame: 0.5))
             player.run(idleAction, withKey: "idle")
@@ -258,8 +264,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     }
 
     func updatePlayerPosition() {
-        // Update the player's position based on the movement speed
-        player.position.x += self.moveSpeed
 
         // Update the player's facing direction based on moveSpeed
         if self.moveSpeed < 0 {
@@ -268,6 +272,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             player.xScale = 1
         }
         
+        // Update the player's position based on the movement speed
+        if moveSpeed < 0{
+            player.position.x -= (moveSpeed * -1)
+        } else {
+            player.position.x += self.moveSpeed
+        }
     }
     
     func prepareToGoToNextScene(){
@@ -291,8 +301,52 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
            self.view?.presentScene(gameScene) // taking the player to the next scene
     }
     
+    func die(){
+        let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
+        blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
+        blackScreen.zPosition = 1 // putting it "on top" of the characeter
+        cameraNode?.addChild(blackScreen) // adding it as a child to player
+        
+        let fadeInBlack = SKAction.fadeIn(withDuration: 0.5)
+        let fadeOutBlack = SKAction.fadeOut(withDuration: 0.5)
+        let removeBlackScreen = SKAction.run{
+            blackScreen.removeFromParent()
+        }
+        
+        let respawn = SKAction.run { // defining the respawn action
+            if let playerCheckpoint = player.playerCheckpoint{
+                player.position = playerCheckpoint
+                self.cameraNode?.removeAllActions()
+                self.returnButton.removeAllActions()
+                self.returnButton.position = CGPoint(x: player.position.x - 350, y: player.position.y + 150)
+                self.camera?.position = playerCheckpoint
+                player.physicsBody?.isResting = true
+            }
+        }
+        
+        let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
+        
+        blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
+    }
     
-    
+    func setControllerInputHandler(){
+        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil{
+            controllerInstance.physController.extendedGamepad?.valueChangedHandler = {
+                (gamepad: GCExtendedGamepad, element: GCControllerElement) in
+                if gamepad.leftThumbstick.xAxis.value != 0{
+                    self.moveSpeed = Double(gamepad.leftThumbstick.xAxis.value) * player.speed
+                    self.isUsingJoystick = true
+                }
+                if gamepad.buttonA.isPressed {
+                    self.jumpCharacter()
+                }
+                if gamepad.leftThumbstick.xAxis.value == 0 {
+                    self.moveSpeed = 0
+                    self.isUsingJoystick = false
+                }
+    }
+    }
+    }
     
     //main Functions
     override func didMove(to view: SKView) { // loaded when reaching the level
@@ -414,39 +468,42 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         /// Camera position setup
         cameraBounds()
         
-        print(checkCount)
-
-        
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
         rainEmitter.position.y = (camera?.position.y ?? player.position.y) + 190
         
         /// Controller Settings
+        
         playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
-        guard let controller = virtualController?.controller else {
-           return
-       }
-
-       // getting the joystick x value
-        let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-        moveSpeed = xAxisValue * player.speed //calculating the speed
+        
+        if let controller = virtualController?.controller {
+            // getting the joystick x value
+             let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+            moveSpeed = xAxisValue * player.speed //calculating the speed
+            
+            // If the joystick values are beyond the threshold, consider the joystick is being used
+            if abs(xAxisValue) != 0{
+                isUsingJoystick = true
+            } else {
+                isUsingJoystick = false
+            }
+        }
+        
         updatePlayerPosition() //applying the speed to the player
 
         if let moveAction = player.action(forKey: "walk"){
             if moveSpeed < 0{
-                moveSpeed -= moveSpeed * 2
-                moveAction.speed = moveSpeed
+                moveAction.speed = (moveSpeed * -1)
             } else {
                 moveAction.speed = moveSpeed
             }
+            }
+        
+        if GCController.controllers().count > 1{
+            virtualController?.disconnect()
         }
-
-       // If the joystick values are beyond the threshold, consider the joystick is being used
-       if abs(xAxisValue) != 0{
-           isUsingJoystick = true
-       } else {
-           isUsingJoystick = false
-       }
+        controllerInstance.updateController()
+        setControllerInputHandler()
         
         /// Controller
        // If the joystick is being used, update the player's position
@@ -472,32 +529,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         /// Death
         if player.position.y < -1280 {
-            let blackScreen = SKSpriteNode(color: .black, size: CGSize(width: 1334, height: 750)) // setting the black fade
-            blackScreen.alpha = 0 // setting the alpha to 0 to allow fade in
-            blackScreen.zPosition = 1 // putting it "on top" of the characeter
-            player.addChild(blackScreen) // adding it as a child to player
-            
-            let fadeInBlack = SKAction.fadeIn(withDuration: 3)
-            let fadeOutBlack = SKAction.fadeOut(withDuration: 3)
-            let removeBlackScreen = SKAction.run{
-                blackScreen.removeFromParent()
-            }
-            
-            let respawn = SKAction.run { // defining the respawn action
-                if let playerCheckpoint = player.playerCheckpoint{
-                    player.position = playerCheckpoint
-                    self.camera?.position = playerCheckpoint
-                    player.physicsBody?.isResting = true
-                } else {
-                    player.position = CGPoint(x: 0, y: -200)
-                    self.camera?.position = player.position
-                    player.physicsBody?.isResting = true
-                }
-            }
-            
-            let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
-            
-            blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
+            die()
         } /// End of Death settings
         
         //Variavel atualizando e armazenando a posição da camera
@@ -563,15 +595,16 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         let touchLocation = touch.location(in: self)
         
         if jumpButton.contains(touchLocation) {
-            if canJump{
+            if canTouch{
                 jumpCharacter()
             }
         }
         
         else if returnButton.contains(touchLocation){ // if clicking the return button
-            let gameScene = SKScene(fileNamed: "SettingScene")
-               self.view?.presentScene(gameScene) // taking the player back to the start of the game
-            
+            if canTouch{
+                let gameScene = SKScene(fileNamed: "SettingScene")
+                self.view?.presentScene(gameScene) // taking the player back to the start of the game
+            }
         }
     }
     
@@ -583,7 +616,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Sort the node names alphabetically to create a unique identifier for the contact
         let nodeNames = [contact.bodyA.node?.name, contact.bodyB.node?.name].compactMap { $0 }.sorted()
         let contactIdentifier = "\(nodeNames[0])-\(nodeNames[1])"
-        print(contactIdentifier)
 
         // Handle the unique contact events
         switch contactIdentifier {
@@ -607,11 +639,16 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             
         case "ground-player":
             player.jumped = 1
+            if player.action(forKey: "jump") != nil {
+                player.removeAllActions()
+                player.run(.animate(with: player.landTextureSheet, timePerFrame: player.animationFrameTime / 6), withKey: "jump")
+        }
         case "doubleJump-player":
             getDoubleJump()
             checkpoint.removeFromParent()
         case "nextLevel-player":
             prepareToGoToNextScene()
+            player.xScale = 1
         default:
             break
         }

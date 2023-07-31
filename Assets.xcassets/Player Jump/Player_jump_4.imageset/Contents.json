@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "naisairj.png",
+      "filename" : "Player_jump_4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "naisairj 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

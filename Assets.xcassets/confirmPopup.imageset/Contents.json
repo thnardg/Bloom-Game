@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Cancelarcancel part 11.png",
+      "filename" : "sair.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "sair 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

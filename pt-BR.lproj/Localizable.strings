@@ -12,7 +12,7 @@
 "Light" = "No vazio você vê uma luz";
 "Tell" = "O que ela quer te dizer?";
 "SFX" = "Efeitos";
-"Music" = "Música";
+"Music" = "Música ";
 "Reset" = "Reiniciar Jogo";
 "Overcome" = "Você superou seus medos";
 "Voice" = "De quem é essa voz?";
@@ -58,3 +58,7 @@
             ";
 "Onboarding" = "Toque no lado direito para pular";
 "DJump" = "Toque 2x para pular mais alto";
+"Quit" = "Sair do Jogo";
+"QuitConfirmation" = "Deseja sair do Jogo";
+"Back" = "Voltar ao jogo";
+"QuitConfirmed" = "Sair";

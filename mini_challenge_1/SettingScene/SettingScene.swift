@@ -67,9 +67,12 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let sfxText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 100)), label: .init(text: NSLocalizedString("SFX", comment: "")))
+        let sfxText = SKLabelNode(text: NSLocalizedString("SFX", comment: ""))
+        sfxText.fontName = "Sora"
+        sfxText.fontSize = 18
+        sfxText.horizontalAlignmentMode = .left
         
-        sfxText.position = CGPoint(x: -190, y: 100)
+        sfxText.position = CGPoint(x: sfxButton.position.x + 20, y: sfxButton.position.y - 10)
         addChild(sfxText)
         
         
@@ -87,10 +90,12 @@ class SettingScene: SKScene {
         }
         
 
-        let musicText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 100)), label: .init(text: NSLocalizedString("Music", comment: "")))
-
+        let musicText = SKLabelNode(text: NSLocalizedString("Music", comment: ""))
+        musicText.fontName = "Sora"
+        musicText.fontSize = 18
+        musicText.horizontalAlignmentMode = .left
         
-        musicText.position = CGPoint(x: 7, y: 100)
+        musicText.position = CGPoint(x: musicButton.position.x + 20, y: musicButton.position.y - 10)
         addChild(musicText)
         
         
@@ -106,10 +111,12 @@ class SettingScene: SKScene {
         }
         
 
-        let resetText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 25)), label: .init(text: NSLocalizedString("Reset", comment: ""))) // creating return button (returns to game start)
-
+        let resetText = SKLabelNode(text: NSLocalizedString("Reset", comment: "")) // creating return button (returns to game start)
+        resetText.fontName = "Sora"
+        resetText.fontSize = 18
+        resetText.horizontalAlignmentMode = .left
         
-        resetText.position = CGPoint(x: -151, y: 20)
+        resetText.position = CGPoint(x: resetButton.position.x + 20, y: resetButton.position.y - 10)
         addChild(resetText)
         
         
@@ -135,31 +142,43 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
-        let exitText = SkButtonNode(image: .init(color: .clear, size: CGSize(width: 25, height: 25)), label: .init(text: NSLocalizedString("Sair do Jogo", comment: ""))) // creating return button (returns to game start)
-
+        let exitText = SKLabelNode(text: NSLocalizedString("Quit", comment: "")) // creating return button (returns to game start)
+        exitText.fontName = "Sora"
+        exitText.fontSize = 18
+        exitText.horizontalAlignmentMode = .left
         
-        exitText.position = CGPoint(x: -160, y: -60)
+        exitText.position = CGPoint(x: exitButton.position.x + 20, y: exitButton.position.y - 10)
         addChild(exitText)
     }
     
     func createPopup(){
-        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode()) // creating return button (returns to game start)
+        popupBackGround = SkButtonNode(image: SKSpriteNode(imageNamed: "backgroundPopup"), label: SKLabelNode(text: NSLocalizedString("QuitConfirmation", comment: ""))) // creating return button (returns to game start)
         
         popupBackGround.image?.size = CGSize(width: 1334, height: 750)
         popupBackGround.position = CGPoint(x: 0, y: 0)
         popupBackGround.zPosition = 1
+        popupBackGround.label?.position = CGPoint(x: 0, y: 40)
         self.addChild(popupBackGround)
         
-        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode())
+        label = SkButtonNode(image: SKSpriteNode(imageNamed: "textPopup"), label: SKLabelNode(text: NSLocalizedString("Back", comment: "")))
         label.image?.position = CGPoint(x: 0, y: 50)
         label.image?.zPosition = 2
-        label.image?.size = CGSize(width: 160, height: 17)
+        label.image?.size = CGSize(width: 160, height: 18)
+        label.label?.fontColor = .black
+        label.label?.zPosition = 2
+        label.label?.position = CGPoint(x: -50, y: -72)
+        label.label?.fontSize = 18
+        
         addChild(label)
         
-        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode())
+        confirm = SkButtonNode(image: SKSpriteNode(imageNamed: "confirmPopup"), label: SKLabelNode(text: NSLocalizedString("QuitConfirmed", comment: "")))
         confirm.image?.size = CGSize(width: 80.51, height: 27.84)
         confirm.position = CGPoint(x: 80, y: -15)
         confirm.zPosition = 2
+        confirm.label?.zPosition = 2
+        confirm.label?.color = .white
+        confirm.label?.position = CGPoint(x: 1, y: -7)
+        confirm.label?.fontSize = 18
         addChild(confirm)
         
         cancel = SkButtonNode(image: SKSpriteNode(imageNamed: "cancelPopup"), label: SKLabelNode())
@@ -217,6 +236,7 @@ class SettingScene: SKScene {
                 UserDefaults.standard.set(checkCount, forKey: "check")
                 checkpoint.position = checkpoint.locations.first!
                 let gameScene = SKScene(fileNamed: "GameScene")
+                player.xScale = 1
                 self.view?.presentScene(gameScene) // taking the player back to the start of the game
                 
             }
