@@ -51,13 +51,22 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     //Pedras Flutuantes 01
     let rock1 = SKSpriteNode(imageNamed: "rock1")
     let rock2 = SKSpriteNode(imageNamed: "rock2")
+    let rock3 = SKSpriteNode(imageNamed: "rock1")
+    let rock4 = SKSpriteNode(imageNamed: "rock2")
+    let rock5 = SKSpriteNode(imageNamed: "rock1")
+    let rock6 = SKSpriteNode(imageNamed: "rock2")
+    let rock7 = SKSpriteNode(imageNamed: "rock1")
+    let rock8 = SKSpriteNode(imageNamed: "rock2")
     
     //Pedras Flutuantes 02
     let stone1 = SKSpriteNode(imageNamed: "stone1")
     let stone2 = SKSpriteNode(imageNamed: "stone2")
     let stone3 = SKSpriteNode(imageNamed: "stone1")
     let stone4 = SKSpriteNode(imageNamed: "stone2")
-            
+    let stone5 = SKSpriteNode(imageNamed: "stone1")
+    let stone6 = SKSpriteNode(imageNamed: "stone2")
+    let stone7 = SKSpriteNode(imageNamed: "stone1")
+    
     //Montanhas
     let mount1 = SKSpriteNode(imageNamed: "mount1")
     let mount2 = SKSpriteNode(imageNamed: "mount2")
@@ -381,9 +390,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         //adding rain to the scene
         rainEmitter.particlePositionRange.dx = self.frame.width * 3
-        
-        
-        
+     
         
         
         self.addChild(rainEmitter) //adding rain to scene
@@ -395,21 +402,41 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         //Adcionando as pedras na scene
         self.addChild(rock1)
         self.addChild(rock2)
+        self.addChild(rock3)
+        self.addChild(rock4)
+        self.addChild(rock5)
+        self.addChild(rock6)
+        self.addChild(rock7)
+        self.addChild(rock8)
+        
         self.addChild(stone1)
         self.addChild(stone2)
         self.addChild(stone3)
         self.addChild(stone4)
+        self.addChild(stone5)
+        self.addChild(stone6)
+        self.addChild(stone7)
+        
         self.addChild(mount1)
         self.addChild(mount2)
         
         //Configurando o tamanho das pedras
-        rock1.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 3)
-        rock2.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 3)
+        rock1.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock2.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock3.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock4.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock5.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock6.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock7.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
+        rock8.size = CGSize(width: frame.size.width / 3, height: frame.size.height / 1)
         
-        stone1.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
-        stone2.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
-        stone3.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
-        stone4.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 4)
+        stone1.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone2.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone3.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone4.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone5.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone6.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
+        stone7.size = CGSize(width: frame.size.width / 4, height: frame.size.height / 2)
         
         mount1.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
         mount2.size = CGSize(width: frame.size.width / 1.4, height: frame.size.height / 1.4)
@@ -417,11 +444,20 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         //Configurando a poisção do Z
         rock1.zPosition = -1
         rock2.zPosition = -1
+        rock3.zPosition = -1
+        rock4.zPosition = -1
+        rock5.zPosition = -1
+        rock6.zPosition = -1
+        rock7.zPosition = -1
+        rock8.zPosition = -1
         
         stone1.zPosition = -2
         stone2.zPosition = -2
         stone3.zPosition = -2
         stone4.zPosition = -2
+        stone5.zPosition = -2
+        stone6.zPosition = -2
+        stone7.zPosition = -2
         
         mount1.zPosition = -3
         mount2.zPosition = -3
@@ -502,24 +538,42 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         //Configurando a posição das pedras de acordo com o eixo X da camera
         rock1.position.x = cameraXPosition * parallaxSpeed1x
-        rock2.position.x = cameraXPosition * parallaxSpeed1x + rock2.size.width
+        rock2.position.x = cameraXPosition * parallaxSpeed1x + 800
+        rock3.position.x = cameraXPosition * parallaxSpeed1x + 1600
+        rock4.position.x = cameraXPosition * parallaxSpeed1x + 2400
+        rock5.position.x = cameraXPosition * parallaxSpeed1x + 3200
+        rock6.position.x = cameraXPosition * parallaxSpeed1x + 4000
+        rock7.position.x = cameraXPosition * parallaxSpeed1x + 4800
+        rock8.position.x = cameraXPosition * parallaxSpeed1x + 5600
         
         stone1.position.x = cameraXPosition * parallaxSpeed2x
-        stone2.position.x = cameraXPosition * parallaxSpeed2x + 500
-        stone3.position.x = cameraXPosition * parallaxSpeed2x + 1000
-        stone4.position.x = cameraXPosition * parallaxSpeed2x + 1500
+        stone2.position.x = cameraXPosition * parallaxSpeed2x + 10
+        stone3.position.x = cameraXPosition * parallaxSpeed2x + 20
+        stone4.position.x = cameraXPosition * parallaxSpeed2x + 30
+        stone5.position.x = cameraXPosition * parallaxSpeed2x + 40
+        stone6.position.x = cameraXPosition * parallaxSpeed2x + 50
+        stone7.position.x = cameraXPosition * parallaxSpeed2x + 60
         
         mount1.position.x = cameraXPosition * parallaxSpeed3x
         mount2.position.x = cameraXPosition * parallaxSpeed3x + 300
         
         //Configurando a posição das pedras de acordo com o eixo Y da camera
         rock1.position.y = cameraYPosition * parallaxSpeed1y
-        rock2.position.y = cameraYPosition * parallaxSpeed1y + rock2.size.width
+        rock2.position.y = cameraYPosition * parallaxSpeed1y
+        rock3.position.y = cameraYPosition * parallaxSpeed1y
+        rock4.position.y = cameraYPosition * parallaxSpeed1y
+        rock5.position.y = cameraYPosition * parallaxSpeed1y
+        rock6.position.y = cameraYPosition * parallaxSpeed1y
+        rock7.position.y = cameraYPosition * parallaxSpeed1y
+        rock8.position.y = cameraYPosition * parallaxSpeed1y
         
         stone1.position.y = cameraYPosition * parallaxSpeed2y
         stone2.position.y = cameraYPosition * parallaxSpeed2y
-        stone1.position.y = cameraYPosition * parallaxSpeed2y - 300
-        stone2.position.y = cameraYPosition * parallaxSpeed2y
+        stone3.position.y = cameraYPosition * parallaxSpeed2y
+        stone4.position.y = cameraYPosition * parallaxSpeed2y
+        stone5.position.y = cameraYPosition * parallaxSpeed2y
+        stone6.position.y = cameraYPosition * parallaxSpeed2y
+        stone7.position.y = cameraYPosition * parallaxSpeed2y
        
         mount1.position.y = cameraYPosition * parallaxSpeed3y - 70
         mount2.position.y = cameraYPosition * parallaxSpeed3y - 70
