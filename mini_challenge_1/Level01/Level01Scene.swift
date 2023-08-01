@@ -10,9 +10,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-var isReturningToScene = false
-var checkCount = UserDefaults.standard.integer(forKey: "check")
-
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
     let onboardingKey = "usr_onboarding"
     
@@ -658,6 +655,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
             
         case "ground-player":
+            player.physicsBody?.isResting = true
             player.jumped = 1
             if player.action(forKey: "jump") != nil {
                 player.removeAllActions()
