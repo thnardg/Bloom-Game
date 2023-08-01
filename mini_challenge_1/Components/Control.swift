@@ -10,3 +10,5 @@ import Foundation
 var musicIsOn: Bool = true
 var sfx: Bool = true
 var alreadyPlayed: Bool = UserDefaults.standard.bool(forKey: "Data")
+var isReturningToScene = false
+var checkCount = UserDefaults.standard.integer(forKey: "check")

@@ -261,6 +261,8 @@ class SettingScene: SKScene {
             }
             if returnButton.contains(touchLocation){ // if clicking the return button
                 isReturningToScene = true
+                checkpoint.removeFromParent()
+                player.removeFromParent()
                 let gameScene = SKScene(fileNamed: "Level01Scene")
                 self.view?.presentScene(gameScene) // taking the player back to the start of the game
                 

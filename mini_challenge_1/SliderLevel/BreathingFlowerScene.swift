@@ -102,7 +102,7 @@ class BreathingFlowerScene: SKScene {
         sliderSound.run(SKAction.changePlaybackRate(to: Float(Double(rate)), duration: 0))
         
         // Adiciona um efeito de brilho quando o valor do slider fica entre 70 e 85:
-        if sender.value >= 70 && sender.value <= 85 {
+        if sender.value >= 85 && sender.value <= 100 {
             shape[0].addGlow(radius: 2)
             shape[1].addGlow(radius: 2)
             shape[2].addGlow(radius: 2)
@@ -118,7 +118,7 @@ class BreathingFlowerScene: SKScene {
     // Quando o player solta o slider na posição certa:
     @objc func sliderReleased(sender: UISlider) {
         
-        if sender.value >= 70 && sender.value <= 85 && !isLocked {
+        if sender.value >= 85 && sender.value <= 100 && !isLocked {
             isLocked = true
             slider.removeFromSuperview()
             audioWaveUp.removeFromParent()
