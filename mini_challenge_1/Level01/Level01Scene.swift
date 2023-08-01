@@ -398,7 +398,6 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         self.addChild(doubleJumpNode) // adding the node to scene
         self.addChild(checkpoint) // adding checkpoints to scene
         self.addChild(nextLevel) // adding next level light
-        
         //Adcionando as pedras na scene
         self.addChild(rock1)
         self.addChild(rock2)
