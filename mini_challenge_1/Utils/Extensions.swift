@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-extension UserDefaults {
+extension UserDefaults { // extension of UserDefaults for resetting it
     static func resetDefaults() {
         if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
@@ -16,7 +16,7 @@ extension UserDefaults {
     }
 }
 
-extension SKNode {
+extension SKNode { // func used maily for debug purposes, but also very useful for condition definitions
     func isChild(of parentNode: SKNode) -> Bool {
         return self.parent === parentNode
     }

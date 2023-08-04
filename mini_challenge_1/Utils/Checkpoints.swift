@@ -8,8 +8,6 @@
 import Foundation
 import SpriteKit
 
-var checkpoint = Checkpoint()
-
 class Checkpoint: SKSpriteNode{ // create checkpoint node
     let locationsKey = "locations"
     let checkLocKey = "checkpointLoc" // Userdef. Keys
@@ -57,13 +55,13 @@ class Checkpoint: SKSpriteNode{ // create checkpoint node
                 physicsBody = body
                 name = "checkpoint"
     }
-    func save(){
+    func save(){ // func used to encode CGPoint info and store it in UserDefaults
         if let encodedData = try? JSONEncoder().encode(locations) {
             UserDefaults.standard.set(encodedData, forKey: locationsKey)
         }
     }
     
-    func retrieve() -> [CGPoint]{
+    func retrieve() -> [CGPoint]{ // func used to decode CGPoint info and retrieve it from UserDefaults
         if let data = UserDefaults.standard.data(forKey: locationsKey),
             let savedItems = try? JSONDecoder().decode([CGPoint].self, from: data){
             return savedItems
