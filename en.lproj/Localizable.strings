@@ -5,6 +5,7 @@
   Created by Enrique Carvalho on 27/07/23.
   
 */
+// This is the localization file, each string phrase has a key, which comes before the "=" sign
 "Name" = "Bloom";
 "Start" = "Tap to begin";
 "Headphone" = "This game is better with headphones";
