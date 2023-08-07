@@ -9,7 +9,7 @@ class EndingTextScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        // Músicas e efeitos pra concluir o jogo:
+        // Music and sfx for the conclusion of the demo:
         SoundDesign.shared.fadeOutMusic(duration: 1.0) {
             SoundDesign.shared.fadeInMusic(filename: "happiness.mp3", duration: 2.0)
         }
@@ -19,6 +19,7 @@ class EndingTextScene: SKScene {
         
         self.backgroundColor = .black
 
+        // Adds the final cutscene text
         label = SKLabelNode(fontNamed: "Sora")
         label.fontSize = 18
         label.text = cutsceneText[currentTextIndex]
@@ -28,7 +29,7 @@ class EndingTextScene: SKScene {
         fadeLabelIn()
     }
     
-    // Cria um efeito de fade in no texto depois de 1 segundo de tela preta
+    // Creates a fade-in effect for the text
     private func fadeLabelIn() {
         label.alpha = 0
         let waitAction = SKAction.wait(forDuration: 1)
@@ -50,6 +51,7 @@ class EndingTextScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Skips the text if the player taps the screen
         if currentTextIndex < cutsceneText.count {
             label.removeAllActions()
             currentTextIndex += 1
