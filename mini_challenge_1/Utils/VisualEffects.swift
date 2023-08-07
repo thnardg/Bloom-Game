@@ -15,13 +15,15 @@ extension SKSpriteNode {
         effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
     }
     
+    
+    
     func removeGlow() {
-            for child in children {
-                if let effectNode = child as? SKEffectNode {
-                    effectNode.removeFromParent()
-                }
+        for child in children {
+            if let effectNode = child as? SKEffectNode {
+                effectNode.removeFromParent()
             }
         }
+    }
 }
 
 
@@ -44,7 +46,7 @@ extension SKScene{
         var strikePath: [SKShapeNode] = []
         var startPoint = startingFrom
         var endPoint = startPoint
-        let numberOfLines = isBranch ? 50 : 120
+        let numberOfLines = isBranch ? 50 : 100
         
         var idx = 0
         while idx < numberOfLines {
@@ -57,7 +59,7 @@ extension SKScene{
             if Int.random(in: 0 ... 100) == 1 {
                 let branchingStartPoint = endPoint
                 
-                let branchingAngle = CGFloat.random(in: -CGFloat.pi / 4 ... CGFloat.pi / 4) // the angle to make the branching look natural
+                let branchingAngle = CGFloat.random(in: -CGFloat.pi / 4 ... CGFloat.pi / 4) 
                 
                 strikePath.append(contentsOf: genrateLightningPath(startingFrom: branchingStartPoint, angle: branchingAngle, isBranch: true))
             }
