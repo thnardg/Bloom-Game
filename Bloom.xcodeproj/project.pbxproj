@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F105A3B2A785139002D5ED4 /* GameStartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2F105A3A2A785139002D5ED4 /* GameStartScene.sks */; };
 		2F2C56D22A719A5800333EC9 /* Sora-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2C56D02A719A4200333EC9 /* Sora-VariableFont_wght.ttf */; };
 		2F2C56D32A719A6600333EC9 /* UbuntuMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2C56D12A719A5100333EC9 /* UbuntuMono-Regular.ttf */; };
 		2F32818A2A61B89C00456E61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3281892A61B89C00456E61 /* AppDelegate.swift */; };
@@ -36,7 +37,7 @@
 		2FB5FAAE2A6EF61A003DA0E1 /* storm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2FB5FAA92A6EF619003DA0E1 /* storm.mp3 */; };
 		2FB5FAAF2A6EF61A003DA0E1 /* humming.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2FB5FAAA2A6EF61A003DA0E1 /* humming.mp3 */; };
 		2FB5FAB02A6EF61A003DA0E1 /* radio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2FB5FAAB2A6EF61A003DA0E1 /* radio.mp3 */; };
-		2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */; };
+		2FF878F22A61DE5C0093EDC5 /* GameStartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F12A61DE5C0093EDC5 /* GameStartScene.swift */; };
 		2FF878F42A61E10D0093EDC5 /* Level01Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */; };
 		2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F52A61E1410093EDC5 /* VisualEffects.swift */; };
 		2FF878F82A61E1540093EDC5 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF878F72A61E1540093EDC5 /* Control.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F105A3A2A785139002D5ED4 /* GameStartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStartScene.sks; sourceTree = "<group>"; };
 		2F2C56D02A719A4200333EC9 /* Sora-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sora-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		2F2C56D12A719A5100333EC9 /* UbuntuMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-Regular.ttf"; sourceTree = "<group>"; };
 		2F2C56D42A719AF000333EC9 /* mini-challenge-1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "mini-challenge-1-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -90,7 +92,7 @@
 		2FB5FAA92A6EF619003DA0E1 /* storm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = storm.mp3; sourceTree = "<group>"; };
 		2FB5FAAA2A6EF61A003DA0E1 /* humming.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = humming.mp3; sourceTree = "<group>"; };
 		2FB5FAAB2A6EF61A003DA0E1 /* radio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = radio.mp3; sourceTree = "<group>"; };
-		2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHUD.swift; sourceTree = "<group>"; };
+		2FF878F12A61DE5C0093EDC5 /* GameStartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStartScene.swift; sourceTree = "<group>"; };
 		2FF878F32A61E10D0093EDC5 /* Level01Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level01Scene.swift; sourceTree = "<group>"; };
 		2FF878F52A61E1410093EDC5 /* VisualEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
 		2FF878F72A61E1540093EDC5 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
@@ -227,7 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				31F9F3C32A65DBB8009A3AF8 /* SKButtonNode.swift */,
-				2FF878F12A61DE5C0093EDC5 /* GameHUD.swift */,
+				2FF878F12A61DE5C0093EDC5 /* GameStartScene.swift */,
+				2F105A3A2A785139002D5ED4 /* GameStartScene.sks */,
 			);
 			path = HUD;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				2F3CE9942A61BC6C004F5FF0 /* CircleGlowScene.sks in Resources */,
 				2F3CE98B2A61BBDB004F5FF0 /* IntroTextScene.sks in Resources */,
 				6E1A7FC52A6B011D005E410F /* LevelTileSet.sks in Resources */,
+				2F105A3B2A785139002D5ED4 /* GameStartScene.sks in Resources */,
 				316EA1D82A72E99B009761C3 /* Localizable.strings in Resources */,
 				B32896DE2A70B749005FB1CE /* Rain.sks in Resources */,
 				2FB5FAA62A6EF5B6003DA0E1 /* happiness.mp3 in Resources */,
@@ -401,7 +405,7 @@
 				B35DBDFC2A6B21A10082F6A7 /* SettingScene.swift in Sources */,
 				310C27782A6F046D00E7C4EE /* Extensions.swift in Sources */,
 				2FF878F62A61E1410093EDC5 /* VisualEffects.swift in Sources */,
-				2FF878F22A61DE5C0093EDC5 /* GameHUD.swift in Sources */,
+				2FF878F22A61DE5C0093EDC5 /* GameStartScene.swift in Sources */,
 				2F3281922A61B89C00456E61 /* GameViewController.swift in Sources */,
 				3142C8942A77ED3500B6A450 /* Controller.swift in Sources */,
 				2FB5FA992A6EF0A5003DA0E1 /* YellowCircleScene.swift in Sources */,
@@ -572,9 +576,11 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4N6N49H26;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bloom;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -585,12 +591,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "thayna.mini-challenge-1";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "Bloom-mini-challenge-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -602,9 +611,11 @@
 				CODE_SIGN_ENTITLEMENTS = mini_challenge_1/mini_challenge_1.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4N6N49H26;
+				DEVELOPMENT_TEAM = HX623XK8T6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "mini-challenge-1-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bloom;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.adventure-games";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -615,12 +626,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "thayna.mini-challenge-1";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "Bloom-mini-challenge-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

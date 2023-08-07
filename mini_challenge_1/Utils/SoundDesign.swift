@@ -4,12 +4,12 @@ class SoundDesign {
     
     static let shared = SoundDesign()
     
-    private var backgroundMusicPlayer: AVAudioPlayer? // Reprodutor de música de fundo
-    private var soundEffectPlayer: AVAudioPlayer? // Reprodutor de efeito sonoro
+    private var backgroundMusicPlayer: AVAudioPlayer? // background music player
+    private var soundEffectPlayer: AVAudioPlayer? // sfx player
     
     private init() {}
     
-    // Função para adicionar uma música de fundo:
+    // Adds the background music
     func playBackgroundMusic(filename: String) {
         guard let music = Bundle.main.url(forResource: filename, withExtension: nil) else {
             print("Arquivo da música de fundo não encontrado.")
@@ -17,10 +17,10 @@ class SoundDesign {
         }
         
         do {
-            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: music) // Inicializa o reprodutor com o URL do arquivo de música
-            backgroundMusicPlayer?.numberOfLoops = -1 // Coloca a música em loop infinito
-            backgroundMusicPlayer?.volume = 0.03 // Volume em 3%
-            backgroundMusicPlayer?.play() // Inicia a música
+            backgroundMusicPlayer = try AVAudioPlayer(contentsOf: music) // initialize the audioplayer
+            backgroundMusicPlayer?.numberOfLoops = -1 // sets the audio to loop forever
+            backgroundMusicPlayer?.volume = 0.03 // sets the volume at 3%
+            backgroundMusicPlayer?.play() // plays the music
             
             
             
@@ -29,7 +29,7 @@ class SoundDesign {
         }
     }
     
-    // Função para adicionar efeitos sonoros:
+    // Adds the sound effects
     func playSoundEffect(filename: String) {
         guard let sound = Bundle.main.url(forResource: filename, withExtension: nil) else {
             print("Arquivo de efeito sonoro não encontrado.")
@@ -39,8 +39,8 @@ class SoundDesign {
         do {
             soundEffectPlayer = try AVAudioPlayer(contentsOf: sound)
             soundEffectPlayer?.numberOfLoops = -1
-            soundEffectPlayer?.volume = 0.05 // Volume em 5%
-            soundEffectPlayer?.prepareToPlay() // Deixa o som preparado para tocar. Diminui possíveis delays
+            soundEffectPlayer?.volume = 0.05 // Volume at 5%
+            soundEffectPlayer?.prepareToPlay() // prepares the sfx to play. Makes if less likely to delay
             soundEffectPlayer?.play()
         } catch {
             print("Erro ao reproduzir o efeito sonoro: \(error.localizedDescription)")
@@ -59,27 +59,27 @@ class SoundDesign {
             backgroundMusicPlayer?.numberOfLoops = -1
             backgroundMusicPlayer?.volume = 0
             backgroundMusicPlayer?.play()
-            backgroundMusicPlayer?.setVolume(0.03, fadeDuration: duration) // Determina o volume do fade-in e a duração
+            backgroundMusicPlayer?.setVolume(0.03, fadeDuration: duration) // setup for the fade-in (volume and duration)
             
         } catch {
             print("Erro ao reproduzir a música de fundo: \(error.localizedDescription)")
         }
     }
     
-    // Efeito de fade-out da música (recebe um parâmetro opcional para checar se o efeito foi concluído):
+    // Fade-out effect (option parameter to check if the effect was completed)
     func fadeOutMusic(duration: TimeInterval, completion: (() -> Void)?) {
         guard let player = backgroundMusicPlayer else { return }
         player.setVolume(0, fadeDuration: duration)
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { // Obriga a próxima ação esperar a conclusão do fade-out.
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { // forces the next action to wait for the completion of the fade-out effect
             completion?()
         }
     }
     
-    // Efeito de fade-out do efeito sonoro (recebe um parâmetro opcional para checar se o efeito foi concluído):
+    // Fade-out effect (option parameter to check if the effect was completed)
     func fadeOutSoundEffect(duration: TimeInterval, completion: (() -> Void)?) {
         guard let player = soundEffectPlayer else { return }
         player.setVolume(0, fadeDuration: duration)
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { // Obriga a próxima ação esperar a conclusão do fade-out.
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) { // forces the next action to wait for the completion of the fade-out effect
             completion?()
         }
     }

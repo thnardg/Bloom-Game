@@ -3,13 +3,14 @@
   mini_challenge_1
 
   Created by Enrique Carvalho on 27/07/23.
-  
 */
+
+// This is the localization file, each string phrase has a key, which comes before the "=" sign
 "Name" = "Bloom";
 "Start" = "Toque para iniciar";
 "Headphone" = "Esse jogo fica melhor com fones de ouvido";
 "Grain" = "Você é um grão";
-"Light" = "No vazio você vê uma luz";
+"Light" = "No vazio, você vê uma luz";
 "Tell" = "O que ela quer te dizer?";
 "SFX" = "Efeitos";
 "Music" = "Música ";
@@ -48,13 +49,6 @@
                   -  Radio Static por Pixabay
                   -  Thunder por Pixabay
                   -  Humming Song por Pixabay
-                        
-                Testers
-                  -
-                  -
-                  -
-                  -
-                  -
             ";
 "Onboarding" = "Toque no lado direito para pular";
 "DJump" = "Toque 2x para pular mais alto";

@@ -220,6 +220,7 @@ class SettingScene: SKScene {
                 SoundDesign.shared.stopBackgroundMusic()
                 UserDefaults.resetDefaults()
                 checkpoint.removeFromParent()
+                player.removeFromParent()
                 checkpoint.locations = [
                     CGPoint(x: 556.577, y: -364.928),
                     CGPoint(x: 7575, y: -265.93),
@@ -260,6 +261,8 @@ class SettingScene: SKScene {
             }
             if returnButton.contains(touchLocation){ // if clicking the return button
                 isReturningToScene = true
+                checkpoint.removeFromParent()
+                player.removeFromParent()
                 let gameScene = SKScene(fileNamed: "Level01Scene")
                 self.view?.presentScene(gameScene) // taking the player back to the start of the game
                 

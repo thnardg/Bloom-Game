@@ -3,17 +3,17 @@ import SpriteKit
 class HeadphoneScene: SKScene {
     
     override func didMove(to view: SKView) {
-        // Cor do background.
+        // Background color
         self.backgroundColor = .black
         
-        // Node Headphone:
+        // Headphone node:
         let headphone = SKSpriteNode(imageNamed: "phone")
         headphone.size = CGSize(width: 80, height: 80)
         headphone.alpha = 0
         headphone.position = CGPoint(x: self.frame.midX, y: self.frame.midY + 40)
         self.addChild(headphone)
         
-        // Texto Headphone:
+        // Headphone text warning:
         let avisoHeadphones = SKLabelNode(text: NSLocalizedString("Headphone", comment: ""))
         avisoHeadphones.fontName = "Sora"
         avisoHeadphones.fontSize = 18
@@ -21,15 +21,15 @@ class HeadphoneScene: SKScene {
         avisoHeadphones.alpha = 0
         self.addChild(avisoHeadphones)
         
-        // Fade-in e Fade-out
+        // Fade-in and Fade-out effects
         let fadeInAction = SKAction.fadeIn(withDuration: 2.0)
         let fadeOutAction = SKAction.fadeOut(withDuration: 2.0)
         let sequenceAction = SKAction.sequence([fadeInAction, SKAction.wait(forDuration: 1.0), fadeOutAction])
         
-        // Animação:
+        // Sequence action:
         headphone.run(sequenceAction)
         avisoHeadphones.run(sequenceAction, completion: {
-            // Próxima cena:
+            // Goes to the next scene
             let introTextScene = SKScene(fileNamed: player.playerCheckpoint != CGPoint(x: 0.0, y: 0.0) ? "Level01Scene" : "IntroTextScene")
             self.view?.presentScene(introTextScene)
         })
@@ -39,6 +39,7 @@ class HeadphoneScene: SKScene {
 
         let introTextScene = SKScene(fileNamed: player.playerCheckpoint != CGPoint(x: 0.0, y: 0.0) ? "Level01Scene" : "IntroTextScene")
             self.view?.presentScene(introTextScene)
+        // Changes from intro song to the level main theme song and the storm sfx
         SoundDesign.shared.stopSoundEffect()
         SoundDesign.shared.stopBackgroundMusic()
         SoundDesign.shared.playSoundEffect(filename: "storm.mp3")

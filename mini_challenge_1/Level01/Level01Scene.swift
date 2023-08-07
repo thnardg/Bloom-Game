@@ -11,11 +11,8 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-var isReturningToScene = false
-var checkCount = UserDefaults.standard.integer(forKey: "check")
-
 class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer level
-    let onboardingKey = "usr_onboarding"
+    let onboardingKey = "usr_onboarding" // UserDefs. key
     
     // defining buttons
     var virtualController: GCVirtualController?
@@ -31,13 +28,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     var moveSpeed:Double = 0.0
     
     // defining level camera
-    var cameraNode: SKCameraNode?
+    var cameraNode: SKCameraNode? // defining a camera for the scene
     
-    var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281))
+    var doubleJumpNode = DoubleJumpNode(CGPoint(x: 16824.793, y: 427.281)) // setting a double jump node
     
     var canTouch = true
     
-    var notOnboarding: Bool{
+    var notOnboarding: Bool{ // a kind of onboarding boolean, set this way to take advantage of userdefaults
         get{
             UserDefaults.standard.bool(forKey: onboardingKey)
         }
@@ -86,18 +83,18 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     // All Functions
     
-    func onboarding(){
-        let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: ""))
-        onboarding.position = CGPoint(x: 0, y: frame.maxY - 80)
-        onboarding.fontName = "Sora"
-        onboarding.fontSize = 14
-        onboarding.alpha = 0
-        cameraNode?.addChild(onboarding)
+    func onboarding(){ // if the player is playing for the first time, run this
+        let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: "")) // the jump tutorial text
+        onboarding.position = CGPoint(x: 0, y: frame.maxY - 80) //
+        onboarding.fontName = "Sora" //
+        onboarding.fontSize = 14 // its configurations
+        onboarding.alpha = 0 //
+        cameraNode?.addChild(onboarding) // set to follow the camera
         
-        let waitAction = SKAction.wait(forDuration: 7)
-        let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)])
+        let waitAction = SKAction.wait(forDuration: 7) // wait before displaying the onboarding
+        let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)]) // a custom action for the text to appear and disappear after a while
         
-        onboarding.run((.sequence([waitAction, fadeInOutAction])))
+        onboarding.run((.sequence([waitAction, fadeInOutAction]))) // running the onboarding
         
         setValueFalseForSomeSeconds() //calling the function that stops the player movimentation for 5 seconds
         
@@ -117,24 +114,20 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         light.run(sequence)
     }
     
-    func firstMove(){
-        let move = SKAction.moveTo(x: 150, duration: 25)
+    func firstMove(){ // in case the player's onboarding, a little cutscene
+        let move = SKAction.moveTo(x: 150, duration: 17) // moving the node
         let moveAction = SKAction.run{
-            if let moveAction = player.action(forKey: "walk"){
-                moveAction.speed = self.moveSpeed
-                }
-
-            self.moveSpeed = 5
-            self.startWalkingAnimation()
-        }
+            let movePlayer = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 0.4))
+            player.run(movePlayer)
+        } // setting a walk action for the player to execute while moving the node
         let playerRemoveAction = SKAction.run {
             self.moveSpeed = 0
             player.removeAllActions()
             self.stopWalkingAnimation()
             self.idleAnimation()
-        }
+        } // stopping the player so that gameplay is on
         player.run(.sequence([
-            .group([move, moveAction]), playerRemoveAction]), withKey: "sequence")
+            .group([move, moveAction]), playerRemoveAction]), withKey: "sequence") // running all animations
         
     }
     
@@ -172,9 +165,9 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     func jumpCharacter() {
         let jump = SKAction.animate(with: player.jumpTextureSheet, timePerFrame: player.animationFrameTime / 6)
-        let fall = SKAction.animate(with: [player.fallTextureSheet], timePerFrame: player.animationFrameTime / 6)
+        let fall = SKAction.animate(with: [player.fallTextureSheet], timePerFrame: player.animationFrameTime / 6) // setting the jump animation
         
-        let height = (player.size.height * 0.88) * 2
+        let height = (player.size.height * 0.88) * 2 // defining the jump height
         
         if player.jumped <= player.jumpLimit {
             if player.jumped == 2{
@@ -183,7 +176,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             player.removeAllActions()
             player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: height))
             player.jumped += 1
-            player.run(.sequence([jump, .repeatForever(fall)]), withKey: "jump")
+            player.run(.sequence([jump, .repeatForever(fall)]), withKey: "jump") // running the jump animation
         }
     }
     
@@ -198,17 +191,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
-    func cameraBounds() {
-        let leftBoundary = 63.308
+    func cameraBounds() { // setting the camera limit on the left of the map
+        let leftBoundary = 63.308 // the position where the camera stops going left
         
-        if let camera = cameraNode{
-            if player.position.x < leftBoundary{
-                cameraNode?.position.x = 63.308
-                cameraNode?.position.y = player.position.y
-                returnButton.position.x = -286.692
-                returnButton.position.y = player.position.y + 150
-                jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50)
-            } else {
+        if let camera = cameraNode{ // safely unwrapping the camera
+            if player.position.x < leftBoundary{ // setting the limit
+                cameraNode?.position.x = 63.308 //
+                cameraNode?.position.y = player.position.y //
+                returnButton.position.x = -286.692 // the camera's behavior
+                returnButton.position.y = player.position.y + 150 //
+                jumpButton.position = CGPoint(x: camera.position.x + 280 , y: camera.position.y - 50) //
+            } else { // freeing the camera movement
                 camera.run(.group([.moveTo(x: player.position.x, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
                 returnButton?.run(.group([.moveTo(x: player.position.x - 350, duration: 0.25), .moveTo(y: player.position.y + 150, duration: 0.5)]))
                 jumpButton?.run(.group([.moveTo(x: player.position.x + 280, duration: 0.25), .moveTo(y: player.position.y, duration: 0.5)]))
@@ -216,52 +209,51 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
     }
     
-    func getDoubleJump(){
-            doubleJumpNode.hasAcquired = true
-            player.jumpLimit = 2
-            let label = SKLabelNode(text: NSLocalizedString("DJump", comment: ""))
-            label.position = CGPoint(x: 16824.793, y: 470)
-            label.fontName = "Sora"
-            label.fontSize = 14
-            label.alpha = 0
-            let labelBg = SKSpriteNode(texture: SKTexture(imageNamed: "LabelBg"))
-            labelBg.size = CGSize(width: label.frame.size.width + 20, height: label.frame.size.height + 10)
-            labelBg.position = CGPoint(x: label.position.x, y: 475)
-            labelBg.zPosition = -1
-            labelBg.alpha = 0
+    func getDoubleJump(){ // ran after the player begins contact with the double jump node
+            doubleJumpNode.hasAcquired = true // setting the node's property to true
+            player.jumpLimit = 2 // increasing the player jump limit
+            let label = SKLabelNode(text: NSLocalizedString("DJump", comment: "")) //
+            label.position = CGPoint(x: 16824.793, y: 470) //
+            label.fontName = "Sora" // setting a message to inform the player of the double jump
+            label.fontSize = 14 //
+            label.alpha = 0 //
+            let labelBg = SKSpriteNode(texture: SKTexture(imageNamed: "LabelBg")) // setting a background for the message
+            labelBg.size = CGSize(width: label.frame.size.width + 20, height: label.frame.size.height + 10) //
+            labelBg.position = CGPoint(x: label.position.x, y: 475) //
+            labelBg.zPosition = -1 //
+            labelBg.alpha = 0 //
             
-            self.addChild(labelBg)
-            self.addChild(label)
+            self.addChild(labelBg) //
+            self.addChild(label) // adding the message and it's background in the scene
             
-            let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)])
+            let fadeInOutAction = SKAction.sequence([.fadeIn(withDuration: 1), .wait(forDuration: 4), .fadeOut(withDuration: 1)]) // configuring an appear-disappear animation
             
-            label.run(fadeInOutAction)
-            labelBg.run(fadeInOutAction)
+            label.run(fadeInOutAction) // running the animation for both the label and its bg
+            labelBg.run(fadeInOutAction) //
             
         }
     
     func startWalkingAnimation() {
-        player.removeAction(forKey: "idle")
-        // Check if the walk animation is already running
-        if player.action(forKey: "walk") == nil && player.action(forKey: "jump") == nil{
-            // Create the animation action and run it once
-            let moveAction = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 2.0))
-            moveAction.speed = 0
-            player.run(moveAction, withKey: "walk")
+        player.removeAction(forKey: "idle") // removing any idle animations attached to the player
+        
+        if player.action(forKey: "walk") == nil && player.action(forKey: "jump") == nil{ // Check if the walk animation is already running
+            let moveAction = SKAction.repeatForever(.animate(with: player.textureSheet, timePerFrame: 2.0)) // Create the animation action and putting it on repeat
+            moveAction.speed = 0 // setting the speed to 0, it will later match to the player's moveSpeed
+            player.run(moveAction, withKey: "walk") // running it
         }
     }
 
     func stopWalkingAnimation() {
-        player.removeAction(forKey: "walk")
-        player.texture = SKTexture(imageNamed: "Player_Idle_4")
+        player.removeAction(forKey: "walk") // removing any walk animations
+        player.texture = SKTexture(imageNamed: "Player_Idle_4") // setting the player's texture to its standard one
     }
     
     func idleAnimation(){
-        stopWalkingAnimation()
-        if player.action(forKey: "idle") == nil && player.action(forKey: "jump") == nil{
-            // Create the animation action and run it once
+        stopWalkingAnimation() // stopping any walking animations
+        if player.action(forKey: "idle") == nil && player.action(forKey: "jump") == nil{ // if the player is not already idle or jumping
             let idleAction = SKAction.repeatForever(.animate(with: player.idleTextureSheet, timePerFrame: 0.5))
-            player.run(idleAction, withKey: "idle")
+            // Create the animation action
+            player.run(idleAction, withKey: "idle") // running it
         }
     }
 
@@ -328,32 +320,33 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         let fadeOutRemove = SKAction.sequence([fadeOutBlack, removeBlackScreen])
         
-        blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove]))
+        blackScreen.run(.sequence([fadeInBlack, respawn, fadeOutRemove])) // running all actions in case of death
     }
     
-    func setControllerInputHandler(){
-        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil{
-            controllerInstance.physController.extendedGamepad?.valueChangedHandler = {
+    func setControllerInputHandler(){ // defining the controller button functions
+        if controllerInstance.physController.extendedGamepad?.valueChangedHandler == nil && canTouch{ // if not onboarding and not pressing anything
+            controllerInstance.physController.extendedGamepad?.valueChangedHandler = { // setting a gamepad-element tuple for button recognition and action running
                 (gamepad: GCExtendedGamepad, element: GCControllerElement) in
-                if gamepad.leftThumbstick.xAxis.value != 0{
+                if gamepad.leftThumbstick.xAxis.value != 0{ // moving the character on analog move
                     self.moveSpeed = Double(gamepad.leftThumbstick.xAxis.value) * player.speed
                     self.isUsingJoystick = true
                 }
-                if gamepad.buttonA.isPressed {
+                if gamepad.buttonA.isPressed { // making the character jump on a button press
                     self.jumpCharacter()
                 }
-                if gamepad.leftThumbstick.xAxis.value == 0 {
+                if gamepad.leftThumbstick.xAxis.value == 0 { // stopping the character in case the analog is set to center
                     self.moveSpeed = 0
                     self.isUsingJoystick = false
                 }
-    }
-    }
+            }
+        }
     }
     
     //main Functions
     override func didMove(to view: SKView) { // loaded when reaching the level
+        physicsWorld.contactDelegate = self // setting the world physics
         
-        if isReturningToScene == false{
+        if isReturningToScene == false{ // set to avoid crashes
             if let playerCheckpoint = player.playerCheckpoint{
                 player.position = playerCheckpoint
                 if playerCheckpoint == CGPoint(x: 0, y: 0){
@@ -380,10 +373,10 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         createButtons()
         
-        if !notOnboarding{
+        if !notOnboarding{ // running onboarding
             onboarding()
         } else {
-            connectVirtualController()
+            connectVirtualController() // set to connect the controller directly instead of waiting for the onboarding
         }
 
         //to hide the jump button
@@ -502,7 +495,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         updatePlayerPosition() //applying the speed to the player
 
-        if let moveAction = player.action(forKey: "walk"){
+        if let moveAction = player.action(forKey: "walk"){ // if the player's walking, adjust the animation speed to match the player's
             if moveSpeed < 0{
                 moveAction.speed = (moveSpeed * -1)
             } else {
@@ -510,11 +503,20 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
             }
         
-        if GCController.controllers().count > 1{
+        if GCController.controllers().count > 1{ // if a physical controller is detected, disconnect the virtual one
             virtualController?.disconnect()
+            jumpButton.position = CGPoint(x: 0, y: -1000)
+            jumpButton.removeFromParent()
         }
-        controllerInstance.updateController()
-        setControllerInputHandler()
+        controllerInstance.updateController() // running the controller update in the gamescene's
+        setControllerInputHandler() // recognizing the controller buttons and attaching functions to them
+        
+        if GCController.controllers().isEmpty{ // if the physical controller is disconnected reconnect the virtual one
+            virtualController?.connect()
+            if jumpButton.isChild(of: self) == false{
+                self.addChild(jumpButton)
+            }
+        }
         
         /// Controller
        // If the joystick is being used, update the player's position
@@ -597,17 +599,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
     }
     
-    override func sceneDidLoad() {
-        super.sceneDidLoad()
-        
-        physicsWorld.contactDelegate = self // setting the world physics
-        
-
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
        
-        
         guard let touch = touches.first else { return }
         let touchLocation = touch.location(in: self)
         
@@ -637,14 +630,13 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         // Handle the unique contact events
         switch contactIdentifier {
         case "checkpoint-player":
-            
             if checkpoint.locations.first == CGPoint(x: 556.577, y: -364.928){
-                notOnboarding = true
+                notOnboarding = true // after getting the firs checkpoint, cancel the onboarding
             }
-            checkpoint.updateCheckpoint()
-            checkpoint.removeFromParent()
+            checkpoint.updateCheckpoint() // set checkpoint location to next
+            checkpoint.removeFromParent() // remove the checkpoint from parent
             
-            lightning()
+            lightning() // set the lightning
             checkCount += 1
             UserDefaults.standard.set(checkCount, forKey: "check")
             
@@ -655,14 +647,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             }
             
         case "ground-player":
-            player.jumped = 1
-            if player.action(forKey: "jump") != nil {
-                player.removeAllActions()
-                player.run(.animate(with: player.landTextureSheet, timePerFrame: player.animationFrameTime / 6), withKey: "jump")
+            player.physicsBody?.isResting = true // set to avoid a bug where the player would fly when touching a corner
+            player.jumped = 1 // resetting the jumped so that the player can jump again
+            if player.action(forKey: "jump") != nil { // if the player is jumping
+                player.removeAllActions() // remove jump action
+                player.run(.animate(with: player.landTextureSheet, timePerFrame: player.animationFrameTime / 6), withKey: "jump") // start land action
         }
-        case "doubleJump-player":
-            getDoubleJump()
-            checkpoint.removeFromParent()
+        case "doubleJump-player": // ran when touching the node
+            getDoubleJump() // setting the double jump logic
         case "nextLevel-player":
             prepareToGoToNextScene()
             player.xScale = 1
