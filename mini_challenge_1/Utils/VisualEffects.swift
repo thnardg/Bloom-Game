@@ -1,7 +1,7 @@
 
 import SpriteKit
 
-// Cria um efeito de brilho para ser aplicado em qualquer SKSpriteNode.
+// Creates a glow effect to be applied at any skspritenode
 extension SKSpriteNode {
     func addGlow(radius: Float) {
         let effectNode = SKEffectNode()
@@ -103,14 +103,14 @@ extension SKScene{
     
     
     func lightning(){
-        let thunder = SKAudioNode(fileNamed: "thunder.mp3") // Trovões
+        let thunder = SKAudioNode(fileNamed: "thunder.mp3") // thunder sound effect
         let random = Int.random(in: -1 ... 1)
         let path = genrateLightningPath(startingFrom: CGPoint(x: player.position.x + CGFloat(random), y: (camera?.position.y ?? player.position.y) + 230), angle: CGFloat(100), isBranch: true )
         lightningStrike(throughPath: path, maxFlickeringTimes: 3)
         
         flashTheScreen(nTimes: 4)
-        // Adicionar o efeito sonoro de trovão:
         
+        // adds the thunder sound effect
         self.addChild(thunder)
        
         

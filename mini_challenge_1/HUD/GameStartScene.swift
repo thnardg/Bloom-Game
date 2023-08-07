@@ -14,12 +14,12 @@ class GameStartScene: SKScene {
         icon.position = CGPoint(x: frame.midX, y: frame.midY)
         addChild(icon)
         
-        // Fade-in e Fade-out
+        // Fade-in and Fade-out
         let fadeInAction = SKAction.fadeIn(withDuration: 1.0)
         let fadeOutAction = SKAction.fadeOut(withDuration: 1.0)
         let sequenceAction = SKAction.sequence([fadeInAction, SKAction.wait(forDuration: 0.3), fadeOutAction, SKAction.wait(forDuration: 0.3)])
         
-        // Animação:
+        // Sequence action for the animation:
         icon.run(sequenceAction, completion: {
             if let skView = self.view {
                 skView.presentScene(SKScene(fileNamed: "GameScene")!, transition: SKTransition.fade(withDuration: 0.8))
