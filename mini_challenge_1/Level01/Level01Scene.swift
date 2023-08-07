@@ -532,6 +532,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             let action = SKAction.run {
                 self.doubleJumpNode.removeFromParent()
             }
+            
             if doubleJumpNode.hasAcquired{
                 self.doubleJumpNode.removeFromParent()
             } else {
@@ -637,12 +638,14 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             checkpoint.removeFromParent() // remove the checkpoint from parent
             
             lightning() // set the lightning
-            checkCount += 1
-            UserDefaults.standard.set(checkCount, forKey: "check")
+            checkCount += 1 //counting the checkpoints
+            UserDefaults.standard.set(checkCount, forKey: "check") //saving the data
             
+            //it's for never adding another node for checkpoint before the last checkpoint
             if checkCount >= 4{
                 checkpoint.removeFromParent()
             }else{
+                //case there are less than 4 checkpoints
                 addChild(checkpoint)
             }
             
@@ -656,8 +659,8 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         case "doubleJump-player": // ran when touching the node
             getDoubleJump() // setting the double jump logic
         case "nextLevel-player":
-            prepareToGoToNextScene()
-            player.xScale = 1
+            prepareToGoToNextScene() //function that reset userDefaults and prepare to go to the net scene
+            player.xScale = 1 //changing the side of the character when it starts again
         default:
             break
         }

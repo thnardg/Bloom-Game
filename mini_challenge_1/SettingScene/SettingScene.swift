@@ -58,7 +58,7 @@ class SettingScene: SKScene {
         }else{
             sfxButton = SkButtonNode(image: SKSpriteNode(imageNamed: "sfxOff"), label: SKLabelNode()) // creating return button (returns to game start)
         }
-           
+           //setting the sfx button
         sfxButton.image?.size = CGSize(width: 30, height: 30)
         
         sfxButton.position = CGPoint(x: -250, y: 100)
@@ -67,6 +67,7 @@ class SettingScene: SKScene {
             addChild(button) // adding return button to scene's node tree
         }
         
+        //setting the sfx text
         let sfxText = SKLabelNode(text: NSLocalizedString("SFX", comment: ""))
         sfxText.fontName = "Sora"
         sfxText.fontSize = 18

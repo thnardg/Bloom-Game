@@ -25,7 +25,7 @@ class Controller{ // class used for defining a physical controller
             }
         }
         }else{
-        physController = GCController()
+            physController = GCController()
         }
         }
     

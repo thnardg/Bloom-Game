@@ -15,19 +15,21 @@ extension SKSpriteNode {
         effectNode.filter = CIFilter(name: "CIGaussianBlur", parameters: ["inputRadius":radius])
     }
     
+    
+    
     func removeGlow() {
-            for child in children {
-                if let effectNode = child as? SKEffectNode {
-                    effectNode.removeFromParent()
-                }
+        for child in children {
+            if let effectNode = child as? SKEffectNode {
+                effectNode.removeFromParent()
             }
         }
+    }
 }
 
 
 //create the storm effects
 extension SKScene{
-    func createLine(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
+    func initialLIne(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
         let pathToDraw = CGMutablePath()
         pathToDraw.move(to: pointA)
         pathToDraw.addLine(to: pointB)
@@ -37,15 +39,18 @@ extension SKScene{
         line.strokeColor = .white
         return line
     }
+    
+    
+    
     func genrateLightningPath(startingFrom: CGPoint, angle: CGFloat, isBranch: Bool) -> [SKShapeNode] {
         var strikePath: [SKShapeNode] = []
         var startPoint = startingFrom
         var endPoint = startPoint
-        let numberOfLines = isBranch ? 50 : 120
+        let numberOfLines = isBranch ? 50 : 100
         
         var idx = 0
         while idx < numberOfLines {
-            strikePath.append(createLine(pointA: startPoint, pointB: endPoint))
+            strikePath.append(initialLIne(pointA: startPoint, pointB: endPoint))
             startPoint = endPoint
             let r = CGFloat(10)
             endPoint.y -= r * cos(angle) + CGFloat.random(in: -10 ... 10)
@@ -54,7 +59,7 @@ extension SKScene{
             if Int.random(in: 0 ... 100) == 1 {
                 let branchingStartPoint = endPoint
                 
-                let branchingAngle = CGFloat.random(in: -CGFloat.pi / 4 ... CGFloat.pi / 4) // the angle to make the branching look natural
+                let branchingAngle = CGFloat.random(in: -CGFloat.pi / 4 ... CGFloat.pi / 4) 
                 
                 strikePath.append(contentsOf: genrateLightningPath(startingFrom: branchingStartPoint, angle: branchingAngle, isBranch: true))
             }
@@ -63,8 +68,9 @@ extension SKScene{
         return strikePath
     }
     
+    
+    
     func lightningStrike(throughPath: [SKShapeNode], maxFlickeringTimes: Int) {
-       
         let fadeTime = TimeInterval(CGFloat.random(in: 0.005 ... 0.03))
         let waitAction = SKAction.wait(forDuration: 0.05)
         let reduceAlphaAction = SKAction.fadeAlpha(to: 0.0, duration: fadeTime)
@@ -83,42 +89,24 @@ extension SKScene{
             line.run(SKAction.sequence(seq))
             self.addChild(line)
         }
-        
-    }
-    
-    
-    
-    func flashTheScreen(nTimes: Int) {
-        let lightUpScreenAction = SKAction.run { self.backgroundColor = UIColor.gray }
-        let waitAction = SKAction.wait(forDuration: 0.05)
-        let dimScreenAction = SKAction.run { self.backgroundColor = .darkGray}
-        
-        var flashActionSeq: [SKAction] = []
-        for _ in 1 ... nTimes + 1 {
-            flashActionSeq.append(contentsOf: [lightUpScreenAction, waitAction, dimScreenAction, waitAction])
-        }
-        self.run(SKAction.sequence(flashActionSeq))
     }
     
     
     
     func lightning(){
-        let thunder = SKAudioNode(fileNamed: "thunder.mp3") // thunder sound effect
+        let lightning = SKAudioNode(fileNamed: "thunder.mp3") // thunder sound effect
         let random = Int.random(in: -1 ... 1)
         let path = genrateLightningPath(startingFrom: CGPoint(x: player.position.x + CGFloat(random), y: (camera?.position.y ?? player.position.y) + 230), angle: CGFloat(100), isBranch: true )
         lightningStrike(throughPath: path, maxFlickeringTimes: 3)
         
-        flashTheScreen(nTimes: 4)
-        
         // adds the thunder sound effect
-        self.addChild(thunder)
+        self.addChild(lightning)
        
         
            let changeVolumeAction = SKAction.changeVolume(to: 0.2, duration: 0)
 
-           thunder.run(changeVolumeAction)
+           lightning.run(changeVolumeAction)
     }
-    
 }
 
 
