@@ -65,7 +65,7 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let headphoneScene = SKScene(fileNamed: "HeadphoneScene")
-        self.view?.presentScene(headphoneScene)
+        let introTextScene = SKScene(fileNamed: "IntroTextScene")
+        self.view?.presentScene(introTextScene)
     }
 }

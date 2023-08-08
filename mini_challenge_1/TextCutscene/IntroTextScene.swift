@@ -9,6 +9,11 @@ class IntroTextScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        SoundDesign.shared.stopSoundEffect()
+        SoundDesign.shared.stopBackgroundMusic()
+        SoundDesign.shared.playSoundEffect(filename: "storm.mp3")
+        SoundDesign.shared.fadeInMusic(filename: "medo.mp3", duration: 3.0)
+        
         self.backgroundColor = .black
 
         label = SKLabelNode(fontNamed: "Sora")
