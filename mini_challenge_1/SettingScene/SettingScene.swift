@@ -238,49 +238,48 @@ class SettingScene: SKScene {
             }
             
             if sfxButton.contains(touchLocation){
-                sfx.toggle()
+                sfx.toggle() //toggle the image of the button
                 
                 if sfx == true{
-                    musicButton.removeFromParent()
-                    sfxButton.removeFromParent()
-                    createButtons()
-                    SoundDesign.shared.unmuteSoundEffet()
+                    musicButton.removeFromParent() //remove the last shape do add the new
+                    sfxButton.removeFromParent() //remove the last shape do add the new
+                    createButtons() //calling the function that creates the button
+                    SoundDesign.shared.unmuteSoundEffet() //unmuting the sound effect
                 }else{
-                    musicButton.removeFromParent()
-                    sfxButton.removeFromParent()
-                    createButtons()
-                    SoundDesign.shared.muteSoundEffect()
+                    musicButton.removeFromParent() //remove the last shape do add the new
+                    sfxButton.removeFromParent() //remove the last shape do add the new
+                    createButtons() //calling the function that creates the button
+                    SoundDesign.shared.muteSoundEffect() //muting the sound effect
                 }
             }
             
             if exitButton.contains(touchLocation){// if clicking the return menu button
 
                 
-                createPopup()
+                createPopup() //
                 isPopupOn.toggle()
                 
             }
             if returnButton.contains(touchLocation){ // if clicking the return button
-                isReturningToScene = true
-                checkpoint.removeFromParent()
-                player.removeFromParent()
-                let gameScene = SKScene(fileNamed: "Level01Scene")
+                isReturningToScene = true //to know when it's returning to levelScene
+                checkpoint.removeFromParent() //removing checkpoints to the scene
+                player.removeFromParent() //removing the player to the scene
+                let gameScene = SKScene(fileNamed: "Level01Scene") //loading the levelScene
                 self.view?.presentScene(gameScene) // taking the player back to the start of the game
-                
             }
             
-            if informationButton.contains(touchLocation){
-                let gameScene = SKScene(fileNamed: "InfoScene")
+            if informationButton.contains(touchLocation){ //showing the credits
+                let gameScene = SKScene(fileNamed: "InfoScene") //loading the informationScene
                 self.view?.presentScene(gameScene)
-                
             }
-        }else{
             
+        }else{
             if confirm.contains(touchLocation){
-                exit(0)
+                exit(0) //exit the game
             }
             if cancel.contains(touchLocation){
-                isPopupOn.toggle()
+                isPopupOn.toggle() //leaving the popup to confirm to left the game
+                //removing all the popup shape
                 popupBackGround.removeFromParent()
                 label.removeFromParent()
                 confirm.removeFromParent()
