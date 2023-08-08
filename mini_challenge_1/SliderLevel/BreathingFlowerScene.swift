@@ -20,6 +20,15 @@ class BreathingFlowerScene: SKScene {
             SoundDesign.shared.fadeInMusic(filename: "medo.mp3", duration: 3.0)
         }
         
+        // Label with instructions for the slider:
+        let flowerLabel = SKLabelNode(text: NSLocalizedString("Flower", comment: ""))
+        flowerLabel.fontName = "Sora"
+        flowerLabel.fontSize = 15
+        flowerLabel.position = CGPoint(x: frame.midX, y: frame.maxY - 60)
+        addChild(flowerLabel)
+        let flowerLabelSequence = SKAction.sequence([SKAction.wait(forDuration: 8), SKAction.fadeOut(withDuration: 2)])
+        flowerLabel.run(flowerLabelSequence)
+        
         // Generates a flower with 4 shape nodes
         for i in 0..<4 {
             let medoAsset = SKSpriteNode(imageNamed: "medo")
