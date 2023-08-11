@@ -29,26 +29,26 @@ extension SKSpriteNode {
 
 //create the storm effects
 extension SKScene{
-    func initialLIne(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
-        let pathToDraw = CGMutablePath()
-        pathToDraw.move(to: pointA)
-        pathToDraw.addLine(to: pointB)
-        let line = SKShapeNode()
+    func initialLIne(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode { //initial line of the lightning
+        let pathToDraw = CGMutablePath() //initial path of the line
+        pathToDraw.move(to: pointA) //line A, that goes to line B
+        pathToDraw.addLine(to: pointB) //line B
+        let line = SKShapeNode() //linePaht
         line.path = pathToDraw
         line.glowWidth = 1
-        line.strokeColor = .white
-        return line
+        line.strokeColor = .white //color of the line
+        return line //returning the line to add to scene
     }
     
     
     
     func genrateLightningPath(startingFrom: CGPoint, angle: CGFloat, isBranch: Bool) -> [SKShapeNode] {
-        var strikePath: [SKShapeNode] = []
+        var strikePath: [SKShapeNode] = [] //array of paths
         var startPoint = startingFrom
         var endPoint = startPoint
-        let numberOfLines = isBranch ? 50 : 100
+        let numberOfLines = isBranch ? 50 : 90 //limits of lines
         
-        var idx = 0
+        var idx = 0 
         while idx < numberOfLines {
             strikePath.append(initialLIne(pointA: startPoint, pointB: endPoint))
             startPoint = endPoint
