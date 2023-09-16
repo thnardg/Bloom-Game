@@ -15,7 +15,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     let onboardingKey = "usr_onboarding" // UserDefs. key
     
     // defining buttons
-    var virtualController: GCVirtualController?
+    //var virtualController: GCVirtualController?
     var jumpButton: SkButtonNode!
     var returnButton: SkButtonNode!
     
@@ -26,6 +26,21 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
      let rainEmitter = SKEmitterNode(fileNamed: "Rain.sks")!
     
     var moveSpeed:Double = 0.0
+    
+    //joystick
+    let velocityMultiplier: CGFloat = 0.12
+    
+    enum NodesZPosition: CGFloat {
+      case background, player, joystick
+    }
+    //calling the analogJoystick, here we add the position of the joystick and return it
+    lazy var analogJoystick: AnalogJoystick = {
+      let js = AnalogJoystick(diameter: 100, colors: nil, images: (substrate: #imageLiteral(resourceName: "jSubstrate"), stick: #imageLiteral(resourceName: "jStick")))
+        js.position = CGPoint(x: self.frame.width * -0.40 + js.radius + 45, y: self.frame.height * -0.45 + js.radius + 45)
+      js.zPosition = NodesZPosition.joystick.rawValue
+      return js
+    }()
+    
     
     // defining level camera
     var cameraNode: SKCameraNode? // defining a camera for the scene
@@ -83,6 +98,17 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     // All Functions
     
+    //new joystick
+    func setupJoystick() {
+        cameraNode?.addChild(analogJoystick)
+      
+          analogJoystick.trackingHandler = { [unowned self] data in
+            player.position = CGPoint(x: player.position.x + (data.velocity.x * self.velocityMultiplier),
+                                      y: player.position.y + 0/*(data.velocity.y * self.velocityMultiplier)*/)
+            player.zRotation = data.angular * 0
+          }
+    }
+    
     func onboarding(){ // if the player is playing for the first time, run this
         let onboarding = SKLabelNode(text: NSLocalizedString("Onboarding", comment: "")) // the jump tutorial text
         onboarding.position = CGPoint(x: 0, y: frame.maxY - 80) //
@@ -137,7 +163,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { [weak self] timer in
                 //after 5 seconds everything works like its to be
                 self?.canTouch = true
-                self?.connectVirtualController()
+               // self?.connectVirtualController()
             }
         }
         
@@ -179,17 +205,15 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             player.run(.sequence([jump, .repeatForever(fall)]), withKey: "jump") // running the jump animation
         }
     }
-    
-    func connectVirtualController(){
-            let controlerConfig = GCVirtualController.Configuration()
-            controlerConfig.elements = [GCInputLeftThumbstick]
-            
-            let controller = GCVirtualController(configuration: controlerConfig)
-            controller.connect()
-            virtualController = controller
-        
-        
-    }
+    //virtual controller joystick
+//    func connectVirtualController(){
+//            let controlerConfig = GCVirtualController.Configuration()
+//            controlerConfig.elements = [GCInputLeftThumbstick]
+//
+//            let controller = GCVirtualController(configuration: controlerConfig)
+//            controller.connect()
+//            virtualController = controller
+//    }
     
     func cameraBounds() { // setting the camera limit on the left of the map
         let leftBoundary = 63.308 // the position where the camera stops going left
@@ -267,11 +291,11 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         }
         
         // Update the player's position based on the movement speed
-        if moveSpeed < 0{
-            player.position.x -= (moveSpeed * -1)
-        } else {
-            player.position.x += self.moveSpeed
-        }
+//        if moveSpeed < 0{
+//            player.position.x -= (moveSpeed * -1)
+//        } else {
+//            player.position.x += self.moveSpeed
+//        }
     }
     
     func prepareToGoToNextScene(){
@@ -285,7 +309,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
             CGPoint(x: 10077.53, y: -175.077),
             CGPoint(x: 16824.793, y: 427.281)
         ]
-        virtualController?.disconnect()
+        //virtualController?.disconnect()
         checkpoint.position = checkpoint.locations.first!
         player.removeFromParent()
         checkCount = 0
@@ -344,6 +368,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
     
     //main Functions
     override func didMove(to view: SKView) { // loaded when reaching the level
+        
         physicsWorld.contactDelegate = self // setting the world physics
         
         if isReturningToScene == false{ // set to avoid crashes
@@ -376,9 +401,12 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         if !notOnboarding{ // running onboarding
             onboarding()
         } else {
-            connectVirtualController() // set to connect the controller directly instead of waiting for the onboarding
+            //connectVirtualController() // set to connect the controller directly instead of waiting for the onboarding
+            
         }
 
+        setupJoystick()
+        
         //to hide the jump button
         jumpButton.isHidden = true
         
@@ -466,11 +494,16 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         mount2.zPosition = -3
         mount3.zPosition = -3
         
+        
+        
+       
     }
     
     override func update(_ currentTime: TimeInterval) { // func that updates the game scene at each frame
         /// Camera position setup
         cameraBounds()
+        
+        moveSpeed = analogJoystick.data.velocity.x
         
         ///rain settings
         rainEmitter.position.x = camera?.position.x ?? player.position.x
@@ -478,33 +511,43 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         
         /// Controller Settings
         
-        playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
+       // playerPosx = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value ?? 0))
         
-        if let controller = virtualController?.controller {
-            // getting the joystick x value
-             let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
-            moveSpeed = xAxisValue * player.speed //calculating the speed
-            
-            // If the joystick values are beyond the threshold, consider the joystick is being used
-            if abs(xAxisValue) != 0{
-                isUsingJoystick = true
-            } else {
-                isUsingJoystick = false
-            }
+//        if let controller = virtualController?.controller {
+//            // getting the joystick x value
+//             let xAxisValue = CGFloat(controller.extendedGamepad?.leftThumbstick.xAxis.value ?? 0.0)
+//            moveSpeed = xAxisValue * player.speed //calculating the speed
+//
+//            // If the joystick values are beyond the threshold, consider the joystick is being used
+//            if abs(xAxisValue) != 0{
+//                isUsingJoystick = true
+//            } else {
+//                isUsingJoystick = false
+//            }
+//        }
+        
+        if analogJoystick.data.velocity.x != 0{
+            isUsingJoystick = true
+        }else{
+            isUsingJoystick = false
         }
+        
+        print(analogJoystick.data.velocity)
+        
         
         updatePlayerPosition() //applying the speed to the player
 
         if let moveAction = player.action(forKey: "walk"){ // if the player's walking, adjust the animation speed to match the player's
-            if moveSpeed < 0{
-                moveAction.speed = (moveSpeed * -1)
-            } else {
-                moveAction.speed = moveSpeed
-            }
+                if moveSpeed < 0{
+                    moveAction.speed = (moveSpeed * -1) / 4
+                } else {
+                    moveAction.speed = moveSpeed / 4
+                }
             }
         
-        if GCController.controllers().count > 1{ // if a physical controller is detected, disconnect the virtual one
-            virtualController?.disconnect()
+        if GCController.controllers().count > 0{ // if a physical controller is detected, disconnect the virtual one
+          //  virtualController?.disconnect()
+            analogJoystick.removeFromParent()
             jumpButton.position = CGPoint(x: 0, y: -1000)
             jumpButton.removeFromParent()
         }
@@ -512,7 +555,7 @@ class Level01Scene: SKScene, SKPhysicsContactDelegate { // first platformer leve
         setControllerInputHandler() // recognizing the controller buttons and attaching functions to them
         
         if GCController.controllers().isEmpty{ // if the physical controller is disconnected reconnect the virtual one
-            virtualController?.connect()
+           // virtualController?.connect()
             if jumpButton.isChild(of: self) == false{
                 self.addChild(jumpButton)
             }
